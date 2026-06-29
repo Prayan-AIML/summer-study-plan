@@ -6,118 +6,181 @@
 <title>My Summer Study Plan · 29 Jun – 5 Jul 2026</title>
 <style>
   :root{
-    --bg:#f6f7f9; --card:#ffffff; --ink:#1c1d1f; --muted:#6b6f76; --line:#e7e9ee;
-    --sdg:#185FA5; --sdgbg:#E6F1FB;
-    --stan:#534AB7; --stanbg:#EEEDFE;
-    --agora:#0F6E56; --agorabg:#E1F5EE;
-    --bril:#854F0B; --brilbg:#FAEEDA;
-    --earth:#3B6D11; --earthbg:#EAF3DE;
-    --smith:#993556; --smithbg:#FBEAF0;
-    --debate:#993C1D; --debatebg:#FAECE7;
-    --relax:#37506B; --relaxbg:#EAEEF3;
-    --meal:#5F5E5A; --mealbg:#F1EFE8;
-    --comp:#A32D2D; --compbg:#FCEBEB;
+    --bg:#f4f5f7; --card:#ffffff; --ink:#16181d; --muted:#6b7280; --faint:#9aa0aa; --line:#e6e8ec;
+    --sdg:#2563eb; --sdgbg:#eaf1ff;
+    --stan:#7c3aed; --stanbg:#f2ecfe;
+    --agora:#0d9488; --agorabg:#e3f5f1;
+    --bril:#d97706; --brilbg:#fdf1e0;
+    --earth:#16a34a; --earthbg:#e6f7ec;
+    --smith:#db2777; --smithbg:#fceaf2;
+    --debate:#c2410c; --debatebg:#fcebe2;
+    --relax:#475569; --relaxbg:#eceff3;
+    --meal:#6b7280; --mealbg:#f0f1f3;
+    --comp:#dc2626; --compbg:#fde9e9;
   }
   *{box-sizing:border-box}
+  html{-webkit-font-smoothing:antialiased}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.5;padding:24px}
-  .wrap{max-width:1240px;margin:0 auto}
-  h1{font-size:24px;font-weight:600;margin:0 0 4px}
-  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
-  .banner{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:14px 18px;margin-bottom:18px;font-size:14px}
+    line-height:1.55;padding:28px 22px 60px}
+  .wrap{max-width:1280px;margin:0 auto}
+  .head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px;margin-bottom:6px}
+  h1{font-size:27px;font-weight:700;margin:0;letter-spacing:-.4px}
+  .range{color:var(--muted);font-size:14px}
+  .meta{color:var(--faint);font-size:13px;margin:0 0 20px}
+  .banner{background:linear-gradient(0deg,#fff,#fff) padding-box,var(--card);
+    border:1px solid var(--line);border-left:4px solid var(--comp);border-radius:12px;
+    padding:13px 18px;margin-bottom:22px;font-size:13.5px;color:#3a3f46}
   .banner b{color:var(--comp)}
-  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-  .chip{font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--line)}
-  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(132px,1fr));
-    grid-template-rows:46px repeat(18,38px);
-    background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .corner{grid-column:1;grid-row:1;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .dayhead{grid-row:1;border-bottom:1px solid var(--line);border-left:1px solid var(--line);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px}
-  .dayhead .dn{font-weight:600}
-  .dayhead .dd{color:var(--muted);font-size:12px}
-  .dayhead.today{background:#fff8e6}
-  .dayhead.race{background:var(--compbg)}
-  .dayhead.race .dd{color:var(--comp)}
-  .tlabel{grid-column:1;font-size:11px;color:var(--muted);text-align:right;
-    padding-right:6px;transform:translateY(-7px)}
-  .slotline{grid-column:2/9;border-bottom:1px solid #f1f2f5}
-  .vline{border-left:1px solid var(--line)}
-  .ev{margin:2px 3px;border-radius:7px;padding:5px 7px;overflow:hidden;
-    font-size:11.5px;border-left:3px solid;display:block;text-decoration:none;color:inherit}
-  a.ev:hover{filter:brightness(.97);box-shadow:0 1px 4px rgba(0,0,0,.12)}
-  .ev .t{font-weight:600;line-height:1.25;display:block}
-  .ev .s{color:var(--muted);font-size:10.5px;line-height:1.25;display:block;margin-top:1px}
-  .ev .lk{font-size:9.5px;opacity:.8;margin-top:2px;display:block}
-  .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .panel h2{font-size:16px;margin:0 0 10px;font-weight:600}
-  .panel ul{margin:0;padding-left:18px}
-  .panel li{font-size:13.5px;margin-bottom:6px}
-  .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:5px;margin-right:6px;font-weight:600}
-  @media(max-width:900px){.panels{grid-template-columns:1fr}
-    .cal{grid-template-columns:48px repeat(7,minmax(108px,1fr))}
-    body{padding:12px}}
+
+  .section-title{font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+    color:var(--faint);margin:26px 0 12px}
+
+  .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:6px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+  .pcard .nm{font-size:13.5px;font-weight:650;display:flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .pcard .pct{font-size:22px;font-weight:700;margin:7px 0 2px;letter-spacing:-.5px}
+  .bar{height:7px;border-radius:6px;background:#eef0f3;overflow:hidden;margin:4px 0 8px}
+  .bar > i{display:block;height:100%;border-radius:6px}
+  .pcard .left{font-size:11.5px;color:var(--muted);line-height:1.4}
+
+  .legend{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 14px}
+  .chip{font-size:11.5px;padding:3px 11px;border-radius:20px;font-weight:600;border:1px solid transparent}
+
+  .calwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px;overflow-x:auto}
+  .cal{display:grid;grid-template-columns:54px repeat(7,minmax(150px,1fr));
+    grid-template-rows:54px repeat(18,40px);min-width:1100px}
+  .corner{grid-column:1;grid-row:1}
+  .dayhead{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-size:13px;border-bottom:1px solid var(--line);gap:1px}
+  .dayhead .dn{font-weight:680;letter-spacing:.2px}
+  .dayhead .dd{color:var(--faint);font-size:12px}
+  .dayhead.today{position:relative}
+  .dayhead.today .dn{color:var(--sdg)}
+  .dayhead.today::after{content:"TODAY";position:absolute;bottom:4px;font-size:8.5px;font-weight:700;
+    letter-spacing:.6px;color:#fff;background:var(--sdg);padding:1px 6px;border-radius:8px}
+  .dayhead.today .dd{visibility:hidden}
+  .dayhead.race .dn{color:var(--comp)}
+  .dayhead.race .dd{color:var(--comp);font-weight:600}
+  .tlabel{grid-column:1;font-size:10.5px;color:var(--faint);text-align:right;
+    padding-right:8px;transform:translateY(-6px)}
+  .slotline{grid-column:2/9;border-top:1px solid #f1f2f5}
+  .vline{border-left:1px solid #f1f2f5;grid-row:2/20}
+  .ev{margin:2px 4px;border-radius:9px;padding:6px 9px;overflow:hidden;
+    font-size:11.5px;display:block;text-decoration:none;color:inherit;
+    border:1px solid transparent;transition:transform .08s,box-shadow .12s}
+  a.ev{cursor:pointer}
+  a.ev:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(20,24,33,.13);z-index:5;position:relative}
+  .ev .t{font-weight:680;line-height:1.25;display:block;letter-spacing:-.1px}
+  .ev .s{font-size:10.5px;line-height:1.3;display:block;margin-top:2px;opacity:.92}
+  .ev .lk{font-size:9.5px;font-weight:600;opacity:.85;margin-top:3px;display:flex;align-items:center;gap:3px}
+
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .panel h2{font-size:15.5px;margin:0 0 4px;font-weight:680;display:flex;align-items:center;gap:8px}
+  .panel .hint{font-size:12px;color:var(--faint);margin:0 0 12px}
+  .panel ul{margin:0;padding-left:2px;list-style:none}
+  .panel li{font-size:13px;margin-bottom:9px;padding-left:18px;position:relative;line-height:1.5}
+  .panel li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--line)}
+  .panel li.ok::before{background:var(--earth)}
+  .tag{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:6px;margin-right:5px;font-weight:700;vertical-align:1px}
+  .reslist a{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:inherit;
+    padding:9px 11px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;transition:background .12s,border-color .12s}
+  .reslist a:hover{background:#fafbfc;border-color:#d7dae0}
+  .reslist .ic{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;
+    justify-content:center;font-size:14px;font-weight:700}
+  .reslist .rt{font-size:13px;font-weight:650;line-height:1.25}
+  .reslist .rd{font-size:11.5px;color:var(--muted);line-height:1.35;margin-top:1px}
+  .full{grid-column:1/3}
+  @media(max-width:880px){.panels{grid-template-columns:1fr}.full{grid-column:1}body{padding:18px 12px 50px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>My summer study plan</h1>
-  <p class="sub">Mon 29 Jun – Sun 5 Jul 2026 · daily 11:30 – 20:30 · 5h study + 1h debate prep + 2h relax</p>
+  <div class="head">
+    <h1>My summer study plan</h1>
+    <span class="range">Mon 29 Jun – Sun 5 Jul 2026</span>
+  </div>
+  <p class="meta">Daily window 11:30 – 20:30 · 5h study + 1h debate prep + 2h relax · lunch 2:00 · dinner 7:30</p>
 
   <div class="banner">
-    <b>Two finish lines:</b> all 6 courses done by <b>Sun 5 Jul</b>, and the
-    <b>ISDS Ironperson Triathlon</b> (a debate contest — quiz, extempore &amp; comprehension)
-    on <b>Sun 5 Jul, 4–7 PM IST</b>, online &amp; proctored. Debate prep runs daily through Sat 4 Jul.
+    <b>Two finish lines.</b> Courses wrapped by <b>Sun 5 Jul</b>, and the <b>ISDS Ironperson Triathlon</b>
+    — a debate contest (current-affairs quiz · extempore speaking · comprehension) — on
+    <b>Sun 5 Jul, 4:00–7:00 PM IST</b>, online &amp; proctored. SDG Academy is the heaviest course so it's
+    front-loaded; Brilliant is self-paced, so it's the safe overflow if a day runs long.
   </div>
 
-  <div class="legend" id="legend"></div>
-  <div class="cal" id="cal"></div>
+  <div class="section-title">Where you actually stand</div>
+  <div class="pcards" id="pcards"></div>
 
+  <div class="section-title">This week</div>
+  <div class="legend" id="legend"></div>
+  <div class="calwrap"><div class="cal" id="cal"></div></div>
+
+  <div class="section-title">The detail</div>
   <div class="panels">
     <div class="panel">
-      <h2>What's left in each course</h2>
+      <h2>Exactly what's left in each course</h2>
+      <p class="hint">Pulled live from your accounts today.</p>
       <ul>
-        <li><span class="tag" style="background:var(--sdgbg);color:var(--sdg)">SDG Academy</span> Resume + finish all modules (you've missed a few suggested dates — just push through).</li>
-        <li><span class="tag" style="background:var(--stanbg);color:var(--stan)">Stanford Math</span> Continue "How to Learn Math" from where you left off.</li>
-        <li><span class="tag" style="background:var(--agorabg);color:var(--agora)">UNICEF Agora</span> Course intro + Modules 1–2 + assessment.</li>
-        <li><span class="tag" style="background:var(--brilbg);color:var(--bril)">Brilliant</span> Finish Level 2 (Loops) then remaining levels of Thinking in Code.</li>
-        <li><span class="tag" style="background:var(--earthbg);color:var(--earth)">Earth School</span> All quests, start to finish.</li>
-        <li><span class="tag" style="background:var(--smithbg);color:var(--smith)">Smithsonian</span> Work through the full Early Human Diets collection (short).</li>
+        <li><span class="tag" style="background:var(--sdgbg);color:var(--sdg)">SDG Academy · 9%</span>
+          0 of 7 modules done. Do Modules 1→7 + End of Course. Mon–Fri this week.</li>
+        <li class="ok"><span class="tag" style="background:var(--stanbg);color:var(--stan)">Stanford Math · 24%</span>
+          Done: Myths, Math &amp; Mindset. Left: Mistakes &amp; Speed · Number Flexibility · Number Patterns · Math in Life.</li>
+        <li><span class="tag" style="background:var(--agorabg);color:var(--agora)">UNICEF Agora</span>
+          Intro + Modules 1–5 + final evaluation/certificate. Fri–Sat.</li>
+        <li><span class="tag" style="background:var(--brilbg);color:var(--bril)">Brilliant · L2/9</span>
+          Finish Level 2, then Levels 3–9 (Branching → Building Programs). No deadline — overflow ok.</li>
+        <li><span class="tag" style="background:var(--earthbg);color:var(--earth)">Earth School</span>
+          All 10 steps (Electrify Transport, Decarbonize Grid, …): short videos + quizzes. Sun AM.</li>
+        <li><span class="tag" style="background:var(--smithbg);color:var(--smith)">Smithsonian</span>
+          Early Human Diets collection — webcast + activities. Sun AM, ~1h.</li>
       </ul>
     </div>
+
+    <div class="panel">
+      <h2>Debate prep — the 3 ISDS sections</h2>
+      <p class="hint">1h every day (5–6 PM), rotating focus, full mock on Sat.</p>
+      <ul>
+        <li><span class="tag" style="background:var(--debatebg);color:var(--debate)">Sec 1 · Quiz</span>
+          World + India current affairs. Skim headlines daily; note 3 issues with both-sides arguments.</li>
+        <li><span class="tag" style="background:var(--debatebg);color:var(--debate)">Sec 2 · Extempore</span>
+          Impromptu speaking. Use PEEL (Point–Evidence–Explain–Link); 1 min prep, 3 min speak, record yourself.</li>
+        <li><span class="tag" style="background:var(--debatebg);color:var(--debate)">Sec 3 · Comprehension</span>
+          Read + listen under time. Practice with editorials &amp; TED talks; write a 3-line summary fast.</li>
+        <li class="ok"><span class="tag" style="background:var(--debatebg);color:var(--debate)">Sat 4 Jul</span>
+          Full mock of all three, then rest. Race 4–7 PM Sun.</li>
+      </ul>
+    </div>
+
+    <div class="panel full">
+      <h2>Debate resources <span style="font-weight:400;font-size:12px;color:var(--faint)">— click to open</span></h2>
+      <p class="hint">Official ISDS guides plus free practice material for each section.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px" id="reslist"></div>
+    </div>
+
     <div class="panel">
       <h2>TV picks for your 2h relax</h2>
+      <p class="hint">Built from your taste — The Rookie, High Potential, 9-1-1.</p>
       <ul>
-        <li><b>The Middle</b> — your pick; easy family-sitcom comfort watch.</li>
+        <li><b>The Middle</b> — your pick; easy family-sitcom comfort.</li>
         <li><b>9-1-1</b> — keep going, you're midway.</li>
         <li><b>Elsbeth</b> — quirky detective, very <i>High Potential</i> energy.</li>
-        <li><b>Castle</b> — crime + banter, if you liked The Rookie's charm.</li>
-        <li><b>Brooklyn Nine-Nine</b> — cop comedy, light between study blocks.</li>
+        <li><b>Castle</b> — crime + banter, like The Rookie's charm.</li>
+        <li><b>Brooklyn Nine-Nine</b> — light cop comedy between blocks.</li>
         <li><b>Psych</b> / <b>9-1-1: Lone Star</b> — backups if you finish early.</li>
       </ul>
     </div>
+
     <div class="panel">
-      <h2>Debate prep focus (ISDS triathlon)</h2>
+      <h2>Honest notes</h2>
+      <p class="hint">So nothing blindsides you.</p>
       <ul>
-        <li><b>Section 1 – Quiz:</b> read world + Indian current affairs daily; note 3 issues/day.</li>
-        <li><b>Section 2 – Extempore:</b> 1–2 min prep, 3 min speak; drill argument + rebuttal.</li>
-        <li><b>Section 3 – Comprehension:</b> timed reading + listening passages, fast note-taking.</li>
-        <li><b>Sat 4 Jul:</b> full mock of all three, then rest before race day.</li>
-      </ul>
-    </div>
-    <div class="panel">
-      <h2>Daily rhythm</h2>
-      <ul>
-        <li>11:30–14:00 · Study block 1 (2.5h)</li>
-        <li>14:00–14:30 · Lunch</li>
-        <li>14:30–17:00 · Study block 2 (2.5h)</li>
-        <li>17:00–18:00 · Debate prep (1h)</li>
-        <li>18:00–19:30 · Relax / TV</li>
-        <li>19:30–20:00 · Dinner</li>
-        <li>20:00–20:30 · Relax / TV</li>
+        <li><b>SDG Academy's real exam is Jul 21</b>, not Jul 5 — so if any course slips, let it be SDG's last modules, not your debate prep.</li>
+        <li><b>Brilliant has no deadline</b> — it's the buffer. Push Levels 5–9 only after the graded courses are safe.</li>
+        <li><b>Check your ISDS registration &amp; eligibility</b> — the public page lists a 25 Jun deadline and grades 7–9. Confirm you're in.</li>
+        <li><b>Earth School &amp; Smithsonian are public &amp; light</b> — leave them for Sunday morning before the race.</li>
       </ul>
     </div>
   </div>
@@ -132,93 +195,124 @@ const C = {
   earth:{n:"Earth School",link:"https://ed.ted.com/earth-school",v:"earth"},
   smith:{n:"Smithsonian",link:"https://learninglab.si.edu/collections/human-evolution-early-human-diets/j63BHbKo54Mj7rjK",v:"smith"},
 };
-// lines: 11:30=2, +1 per 30 min
-function L(t){const[h,m]=t.split(":").map(Number);return 2+((h*60+m)-(11*60+30))/30;}
-function studyEv(c,sub,a,b){return{v:c.v,t:c.n,s:sub,link:c.link,a:L(a),b:L(b)};}
-function ev(v,t,s,a,b){return{v,t,s,a:L(a),b:L(b)};}
+const progress=[
+  {v:"sdg",n:"SDG Academy",pct:9,left:"0/7 modules done"},
+  {v:"stan",n:"Stanford Math",pct:24,left:"2/6 sections done"},
+  {v:"agora",n:"UNICEF Agora",pct:2,left:"Intro + 5 modules left"},
+  {v:"bril",n:"Brilliant",pct:21,left:"Level 2 of 9"},
+  {v:"earth",n:"Earth School",pct:0,left:"10 steps · public"},
+  {v:"smith",n:"Smithsonian",pct:0,left:"1 collection · public"},
+];
+const resources=[
+  {ic:"📘",t:"ISDS Debating Guides",d:"Official hub: WSDC format, argument & adjudication guides",u:"https://indianschoolsdebatingsociety.com/debating-guides/",v:"debate"},
+  {ic:"🦾",t:"How to be an Iron Person",d:"Exactly this event's skill — covering multiple roles",u:"https://www.debatingforeveryone.com/resources/how-to-debate/how-to-be-an-iron-person",v:"debate"},
+  {ic:"🎓",t:"Cambridge Union Intro to Debating",d:"PDF: argumentation & public-speaking fundamentals",u:"http://cambridgeschools.cus.org/cambridge_schools_bp_debating_guide_2013.pdf",v:"debate"},
+  {ic:"🌐",t:"WSDC Format Overview",d:"How world-schools debate is structured",u:"http://betterdebatemanual.wixsite.com/better/wsdc",v:"debate"},
+  {ic:"🎤",t:"NSDA Self-Guided Learning",d:"Free extempore drills & champion speech breakdowns",u:"https://www.speechanddebate.org/self-guided-student-learning/",v:"debate"},
+  {ic:"🗂️",t:"NSDA Topics & Motions",d:"Practice motions for extempore — Section 2",u:"https://www.speechanddebate.org/topics/",v:"debate"},
+  {ic:"📰",t:"BBC News",d:"Daily world current affairs — Section 1 quiz",u:"https://www.bbc.com/news",v:"sdg"},
+  {ic:"📰",t:"The Hindu — Editorials",d:"India + world analysis, great for arguments",u:"https://www.thehindu.com/opinion/editorial/",v:"agora"},
+];
 
-const lunch = ev("meal","Lunch","","14:00","14:30");
-const dinner= ev("meal","Dinner","","19:30","20:00");
-function debate(s){return ev("debate","Debate prep",s,"17:00","18:00");}
-function relax(s){return ev("relax","Relax / TV",s,"18:00","19:30");}
-function relax2(s){return ev("relax","Relax / TV",s,"20:00","20:30");}
+function L(t){const[h,m]=t.split(":").map(Number);return 2+((h*60+m)-(11*60+30))/30;}
+const lunch =v=>({v:"meal",t:"Lunch",s:"",a:L("14:00"),b:L("14:30")});
+const dinner=v=>({v:"meal",t:"Dinner",s:"",a:L("19:30"),b:L("20:00")});
+const SE=(c,s,a,b)=>({v:c.v,t:c.n,s,link:c.link,a:L(a),b:L(b)});
+const EV=(v,t,s,a,b,link)=>({v,t,s,a:L(a),b:L(b),link});
 
 const days = [
   {dn:"Mon",dd:"29 Jun",cls:"today",evs:[
-    studyEv(C.sdg,"Modules 1–2 (resume)","11:30","14:00"),lunch,
-    studyEv(C.stan,"Welcome + Lesson 1","14:30","17:00"),
-    debate("Current affairs: read + note 3 world issues"),
-    relax("The Middle · S1 E1–3"),dinner,relax2("9-1-1 · continue")]},
+    SE(C.sdg,"Module 1: SDG Framework & Agenda 2030 — videos, readings, discussion","11:30","14:00"),
+    lunch(),
+    SE(C.bril,"Finish Level 2: Nesting → Combining Loops → Level Review","14:30","17:00"),
+    EV("debate","Debate setup","Read ISDS guides + Iron-Person guide · scan world news, note 3 issues","17:00","18:00"),
+    EV("relax","Relax / TV","The Middle · S1 E1–3","18:00","19:30"),dinner(),
+    EV("relax","Relax / TV","9-1-1 · continue","20:00","20:30")]},
   {dn:"Tue",dd:"30 Jun",evs:[
-    studyEv(C.agora,"Intro + Module 1","11:30","14:00"),lunch,
-    studyEv(C.bril,"Finish Level 2: Loops","14:30","17:00"),
-    debate("Extempore: 3 impromptu speeches"),
-    relax("The Middle · S1 E4–6"),dinner,relax2("9-1-1 · continue")]},
+    SE(C.sdg,"Module 2: Transformation Pathways to Success","11:30","14:00"),lunch(),
+    SE(C.stan,"Section 3: Mistakes and Speed","14:30","17:00"),
+    EV("debate","Sec 2 · Extempore","PEEL structure + 3 timed speeches (1m prep / 3m speak)","17:00","18:00"),
+    EV("relax","Relax / TV","The Middle · S1 E4–6","18:00","19:30"),dinner(),
+    EV("relax","Relax / TV","Castle · pilot","20:00","20:30")]},
   {dn:"Wed",dd:"1 Jul",evs:[
-    studyEv(C.sdg,"Modules 3–4","11:30","14:00"),lunch,
-    studyEv(C.earth,"Quests 1–3","14:30","17:00"),
-    debate("Comprehension: timed reading + listening"),
-    relax("Elsbeth · pilot"),dinner,relax2("The Middle · S1 E7")]},
+    SE(C.sdg,"Module 3: Government and the SDGs","11:30","14:00"),lunch(),
+    SE(C.bril,"Level 3: Branching + Level 4: Designing Programs","14:30","17:00"),
+    EV("debate","Sec 1 · Quiz","5 global topics: climate · conflicts · economy · AI/tech · India & world","17:00","18:00"),
+    EV("relax","Relax / TV","9-1-1 · continue","18:00","19:30"),dinner(),
+    EV("relax","Relax / TV","Elsbeth · pilot","20:00","20:30")]},
   {dn:"Thu",dd:"2 Jul",evs:[
-    studyEv(C.stan,"Lessons 2–3","11:30","14:00"),lunch,
-    studyEv(C.agora,"Module 2 + assessment","14:30","17:00"),
-    debate("Quiz drills + key global issues"),
-    relax("9-1-1 · continue"),dinner,relax2("Castle · pilot")]},
+    SE(C.sdg,"Module 4: SDG Financing + Module 5: Business Sector","11:30","14:00"),lunch(),
+    SE(C.stan,"Sections 4–6: Number Flexibility · Patterns · Math in Life → FINISH","14:30","17:00"),
+    EV("debate","Sec 3 · Comprehension","2 editorials + 1 TED talk · timed notes + 3-line summary","17:00","18:00"),
+    EV("relax","Relax / TV","The Middle · S1 E7–8","18:00","19:30"),dinner(),
+    EV("relax","Relax / TV","Brooklyn 99 · pilot","20:00","20:30")]},
   {dn:"Fri",dd:"3 Jul",evs:[
-    studyEv(C.sdg,"Modules 5–6 (finish)","11:30","14:00"),lunch,
-    studyEv(C.earth,"Quests 4–6 (finish)","14:30","17:00"),
-    debate("Extempore + rebuttal drills"),
-    relax("The Middle · S1 E8–9"),dinner,relax2("Brooklyn 99 · pilot")]},
+    SE(C.sdg,"Module 6: Civil Society + Module 7: Global Partnerships + End → FINISH","11:30","14:00"),lunch(),
+    SE(C.agora,"Intro + Module 1 + Module 2","14:30","17:00"),
+    EV("debate","Sec 2 · Extempore","Rebuttal drills on NSDA practice motions","17:00","18:00"),
+    EV("relax","Relax / TV","The Middle · S1 E9–10","18:00","19:30"),dinner(),
+    EV("relax","Relax / TV","9-1-1 · continue","20:00","20:30")]},
   {dn:"Sat",dd:"4 Jul",evs:[
-    studyEv(C.bril,"Finish Thinking in Code","11:30","14:00"),lunch,
-    studyEv(C.smith,"Human Diets collection (full)","14:30","17:00"),
-    debate("FULL MOCK: quiz + extempore + comprehension"),
-    relax("The Middle · finish S1"),dinner,relax2("Early night · rest before race")]},
+    SE(C.agora,"Modules 3, 4, 5 + Final evaluation → FINISH","11:30","14:00"),lunch(),
+    SE(C.bril,"Levels 5–7 (push as far as you can)","14:30","17:00"),
+    EV("debate","FULL MOCK","20m quiz + 1 extempore + 1 comprehension, then rest","17:00","18:00"),
+    EV("relax","Relax / TV","The Middle · finish S1","18:00","19:30"),dinner(),
+    EV("relax","Wind down","Early night — rest before race","20:00","20:30")]},
   {dn:"Sun",dd:"5 Jul",cls:"race",evs:[
-    ev("sdg","Course catch-up","Finish anything pending","11:30","14:00"),lunch,
-    ev("relax","Light review + setup","Test proctoring software & internet","14:30","15:30"),
-    ev("comp","🎤 ISDS Ironperson Triathlon","Quiz · Extempore · Comprehension","16:00","19:00"),
-    ev("relax","Decompress","",  "19:00","19:30"),dinner,relax2("Celebrate! 🎉")]},
+    SE(C.earth,"Earth School — all 10 steps (videos + quizzes) → FINISH","11:30","13:00"),
+    SE(C.smith,"Smithsonian — Early Human Diets collection → FINISH","13:00","14:00"),
+    lunch(),
+    EV("relax","Pre-race setup","Light review + test proctoring software & internet","14:30","15:30"),
+    EV("comp","🎤 ISDS Ironperson Triathlon","Quiz · Extempore · Comprehension (4–7 PM IST)","16:00","19:00"),
+    EV("relax","Decompress","","19:00","19:30"),dinner(),
+    EV("relax","Celebrate 🎉","Brilliant L8–9 later — it's self-paced","20:00","20:30")]},
 ];
 
 const NAMES={sdg:"SDG Academy",stan:"Stanford Math",agora:"UNICEF Agora",bril:"Brilliant",
-  earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Relax / TV",
-  meal:"Meals",comp:"Competition"};
+  earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Relax / TV",meal:"Meals",comp:"Competition"};
+const cv=v=>getComputedStyle(document.documentElement).getPropertyValue('--'+v).trim();
 
+// progress cards
+const pc=document.getElementById("pcards");
+progress.forEach(p=>{const d=document.createElement("div");d.className="pcard";
+  d.innerHTML='<div class="nm"><span class="dot" style="background:var(--'+p.v+')"></span>'+p.n+'</div>'+
+    '<div class="pct" style="color:var(--'+p.v+')">'+p.pct+'%</div>'+
+    '<div class="bar"><i style="width:'+Math.max(p.pct,3)+'%;background:var(--'+p.v+')"></i></div>'+
+    '<div class="left">'+p.left+'</div>';pc.appendChild(d);});
+
+// calendar
 const cal=document.getElementById("cal");
 const corner=document.createElement("div");corner.className="corner";cal.appendChild(corner);
-days.forEach((d,i)=>{
-  const h=document.createElement("div");h.className="dayhead"+(d.cls?" "+d.cls:"");
+days.forEach((d,i)=>{const h=document.createElement("div");h.className="dayhead"+(d.cls?" "+d.cls:"");
   h.style.gridColumn=(i+2);
-  h.innerHTML='<span class="dn">'+d.dn+'</span><span class="dd">'+d.dd+'</span>';
-  cal.appendChild(h);
-});
-const hours=["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
-hours.forEach(t=>{const lab=document.createElement("div");lab.className="tlabel";
-  lab.style.gridRow=L(t);const[h]=t.split(":");let hh=+h;const ap=hh>=12?"pm":"am";
-  hh=hh%12||12;lab.textContent=hh+" "+ap;cal.appendChild(lab);});
-for(let r=2;r<=19;r++){const ln=document.createElement("div");ln.className="slotline";
+  h.innerHTML='<span class="dn">'+d.dn+'</span><span class="dd">'+d.dd+'</span>';cal.appendChild(h);});
+["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"].forEach(t=>{
+  const lab=document.createElement("div");lab.className="tlabel";lab.style.gridRow=L(t);
+  let[h]=t.split(":");h=+h;const ap=h>=12?"pm":"am";h=h%12||12;lab.textContent=h+ap;cal.appendChild(lab);});
+for(let r=2;r<=20;r++){const ln=document.createElement("div");ln.className="slotline";
   ln.style.gridRow=r+"/"+(r+1);cal.appendChild(ln);}
-for(let c=2;c<=8;c++){const v=document.createElement("div");v.className="vline";
-  v.style.gridColumn=c;v.style.gridRow="2/20";cal.appendChild(v);}
-days.forEach((d,i)=>{
-  d.evs.forEach(e=>{
-    const el=document.createElement(e.link?"a":"div");el.className="ev";
-    el.style.gridColumn=(i+2);el.style.gridRow=e.a+"/"+e.b;
-    el.style.background="var(--"+e.v+"bg)";el.style.borderLeftColor="var(--"+e.v+")";
-    el.style.color="var(--"+e.v+")";
-    let html='<span class="t">'+e.t+'</span>';
-    if(e.s)html+='<span class="s">'+e.s+'</span>';
-    if(e.link){el.href=e.link;el.target="_blank";el.rel="noopener";
-      html+='<span class="lk">↗ open course</span>';}
-    el.innerHTML=html;cal.appendChild(el);
-  });
-});
+for(let c=2;c<=8;c++){const v=document.createElement("div");v.className="vline";v.style.gridColumn=c;cal.appendChild(v);}
+days.forEach((d,i)=>{d.evs.forEach(e=>{
+  const el=document.createElement(e.link?"a":"div");el.className="ev";
+  el.style.gridColumn=(i+2);el.style.gridRow=e.a+"/"+e.b;
+  el.style.background="var(--"+e.v+"bg)";el.style.color="var(--"+e.v+")";
+  el.style.borderColor=e.v==="comp"?"var(--comp)":"transparent";
+  let html='<span class="t">'+e.t+'</span>';
+  if(e.s)html+='<span class="s">'+e.s+'</span>';
+  if(e.link){el.href=e.link;el.target="_blank";el.rel="noopener";html+='<span class="lk">↗ open</span>';}
+  el.innerHTML=html;cal.appendChild(el);});});
+
+// legend
 const order=["sdg","stan","agora","bril","earth","smith","debate","relax","meal","comp"];
 const lg=document.getElementById("legend");
 order.forEach(v=>{const c=document.createElement("span");c.className="chip";
-  c.style.background="var(--"+v+"bg)";c.style.color="var(--"+v+")";
-  c.style.borderColor="var(--"+v+")";c.textContent=NAMES[v];lg.appendChild(c);});
+  c.style.background="var(--"+v+"bg)";c.style.color="var(--"+v+")";c.textContent=NAMES[v];lg.appendChild(c);});
+
+// resources
+const rl=document.getElementById("reslist");
+resources.forEach(r=>{const a=document.createElement("a");a.href=r.u;a.target="_blank";a.rel="noopener";
+  a.innerHTML='<span class="ic" style="background:var(--'+r.v+'bg);color:var(--'+r.v+')">'+r.ic+'</span>'+
+    '<span><span class="rt">'+r.t+'</span><span class="rd">'+r.d+'</span></span>';rl.appendChild(a);});
 </script>
 </body>
 </html>
