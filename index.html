@@ -536,7 +536,8 @@ function ringAlarm(a){
   ov.innerHTML='<div class="ovcard"><h3>⏰ '+(a.label||'Time to study')+'</h3>'+
     '<p>The beeping stops only when you take a webcam photo at your laptop.</p>'+
     '<div id="camArea"></div>'+
-    '<button class="btn pri" id="openCam">Open camera</button></div>';
+    '<button class="btn pri" id="openCam">Open camera</button>'+
+    '<p style="font-size:10.5px;color:var(--faint);margin:9px 0 0">No popup appears? Click <b>Allow</b> on the camera request under the address bar — or tap the 📷 / site-info icon in the address bar → Camera → Allow.</p></div>';
   host.appendChild(ov);
   ov.querySelector('#openCam').onclick=async()=>{
     const area=ov.querySelector('#camArea');
@@ -557,7 +558,13 @@ function ringAlarm(a){
         img.onclick=()=>ov.remove();
       };
     }catch(err){
-      area.innerHTML='<p style="color:var(--comp);font-size:12px">Camera blocked. Allow camera access in your browser to dismiss the alarm.</p>';
+      area.innerHTML='<p style="color:var(--comp);font-size:12.5px;line-height:1.5">No camera access yet. Click the <b>📷 camera icon</b> at the right of the address bar (or the site-info icon left of the URL → <b>Camera</b>), choose <b>Allow</b>, then hit <b>Try again</b>.</p>';
+      const retry=ov.querySelector('#openCam');retry.textContent='Try again';
+      const esc=document.createElement('div');
+      esc.style.cssText='margin-top:10px;font-size:11px;color:var(--faint);cursor:pointer;text-decoration:underline';
+      esc.textContent='No camera on this device? Stop alarm';
+      esc.onclick=()=>{stopRing();ov.remove();};
+      ov.querySelector('.ovcard').appendChild(esc);
     }
   };
 }
