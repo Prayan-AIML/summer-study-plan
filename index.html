@@ -35,6 +35,18 @@
     border-radius:14px;padding:12px 16px;margin-bottom:18px}
   .cheer .msg{font-size:14px;font-weight:700}
   .cheer .sub{font-size:12px;color:var(--muted);font-weight:500}
+  .nowbig{background:var(--card);border:2px solid var(--accent);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+  .nowbig .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent)}
+  .nowbig .bt{font-size:21px;font-weight:800;margin:6px 0 4px;letter-spacing:-.4px}
+  .nowbig .bs{font-size:14px;color:var(--muted);font-weight:500;line-height:1.5}
+  .nowbig .tm{font-size:13px;color:var(--faint);font-weight:600;margin-top:8px}
+  .nowbig .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .nowbig .acts .btn{text-decoration:none}
+  .nowsmall{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:12px}
+  .nowsmall .lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--faint)}
+  .nowsmall .bt{font-size:15px;font-weight:700;margin-top:3px}
+  .restlist .ri{padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .restlist .ri:last-child{border-bottom:none}
   .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px}
   .tab{flex:1;min-width:110px;border:none;background:transparent;color:var(--muted);font-family:inherit;
     font-size:13.5px;font-weight:600;padding:10px 8px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -162,15 +174,19 @@
   </div>
 
   <div class="tabs">
-    <button class="tab on" data-v="schedule">🗓️ Schedule</button>
+    <button class="tab on" data-v="now">⭐ Now</button>
+    <button class="tab" data-v="schedule">🗓️ Schedule</button>
     <button class="tab" data-v="todo">✅ To-do</button>
     <button class="tab" data-v="notes">✍️ Notes</button>
     <button class="tab" data-v="iron">🏆 Ironperson</button>
     <button class="tab" data-v="alarm">⏰ Alarm</button>
   </div>
 
+  <!-- NOW -->
+  <div class="view on" id="v-now"></div>
+
   <!-- SCHEDULE -->
-  <div class="view on" id="v-schedule">
+  <div class="view" id="v-schedule">
     <div class="sect">Live progress — fills as you tick off videos in the To-do tab</div>
     <div class="pcards" id="pcards"></div>
     <div class="sect">This week — click a block to open that course</div>
@@ -364,10 +380,9 @@ const days=[
 ];
 
 /* tabs */
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');document.getElementById('v-'+b.dataset.v).classList.add('on');});
+function switchTab(name){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.v===name));
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+name));if(name==='now')renderNow();}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.v));
 
 /* calendar */
 const cal=document.getElementById('cal');
@@ -580,6 +595,43 @@ function ringAlarm(a){try{audioCtx=audioCtx||new (window.AudioContext||window.we
       esc.textContent='Stop alarm';esc.onclick=()=>{stopRing();ov.remove();};ov.querySelector('.ovcard').appendChild(esc);}};
 }
 function stopRing(){clearInterval(beepTimer);}
+
+/* ---- "Right now" view ---- */
+function blockStart(b){return 690+(b.a-2)*30;}
+function blockEnd(b){return 690+(b.b-2)*30;}
+function fmtMin(min){let h=Math.floor(min/60),m=min%60;const ap=h>=12?'pm':'am';h=h%12||12;return h+(m?':'+String(m).padStart(2,'0'):'')+ap;}
+function parseDay(dd){const[a,mon]=dd.split(' ');return new Date(2026,{Jun:5,Jul:6}[mon],+a);}
+function renderNow(){
+  const host=document.getElementById('v-now');const n=new Date();const nm=n.getHours()*60+n.getMinutes();
+  let idx=days.findIndex(d=>{const t=parseDay(d.dd);return t.getMonth()===n.getMonth()&&t.getDate()===n.getDate();});
+  let mode='live';
+  if(idx<0){if(n<parseDay(days[0].dd)){idx=0;mode='preview';}else{idx=days.length-1;mode='after';}}
+  const day=days[idx];
+  const cur=mode==='live'?day.evs.find(b=>nm>=blockStart(b)&&nm<blockEnd(b)):null;
+  const next=mode==='after'?null:day.evs.find(b=>blockStart(b)>nm);
+  let mainBlock=null,lab='',note='';
+  if(mode==='preview'){mainBlock=day.evs[0];lab='Your week starts soon';note='first block on Monday';}
+  else if(cur){mainBlock=cur;lab='Happening now';}
+  else if(next){mainBlock=next;lab='Up next';note='starts '+fmtMin(blockStart(next));}
+  let html='<div class="sect">⭐ Right now · '+day.dn+' '+day.dd+' · '+fmtMin(nm)+'</div>';
+  if(!mainBlock){html+='<div class="nowbig"><div class="lab">All done</div><div class="bt">That\'s a wrap 🎉</div><div class="bs">No more blocks today — rest up, you earned it.</div></div>';}
+  else{const b=mainBlock;const range=fmtMin(blockStart(b))+'–'+fmtMin(blockEnd(b));
+    html+='<div class="nowbig" style="border-color:var(--'+b.v+')"><div class="lab" style="color:var(--'+b.v+')">'+lab+'</div>'+
+      '<div class="bt">'+b.t+'</div>'+(b.s?'<div class="bs">'+b.s+'</div>':'')+
+      '<div class="tm">'+range+(note?' · '+note:'')+'</div><div class="acts">'+
+      '<button class="btn pri" id="nowStartBtn">▶ Start (photo check-in)</button>'+
+      (b.link?'<a class="btn" href="'+b.link+'" target="_blank" rel="noopener">↗ Open course</a>':'')+
+      '<button class="btn" id="nowTodoBtn">✅ Today\'s checklist</button></div></div>';}
+  if(next&&mainBlock!==next){html+='<div class="nowsmall"><div class="lab">Then</div><div class="bt">'+next.t+'</div>'+
+    '<div class="bs" style="font-size:13px;color:var(--muted)">'+fmtMin(blockStart(next))+' · '+(next.s||'')+'</div></div>';}
+  const rest=mode==='after'?[]:day.evs.filter(b=>blockStart(b)>=nm);
+  if(rest.length){html+='<div class="sect">Rest of '+(mode==='preview'?'Monday':'today')+'</div><div class="nowsmall restlist">';
+    rest.forEach(b=>html+='<div class="ri"><b style="color:var(--'+b.v+')">'+fmtMin(blockStart(b))+'</b> · '+b.t+'</div>');html+='</div>';}
+  host.innerHTML=html;
+  const sb=document.getElementById('nowStartBtn');if(sb&&mainBlock)sb.onclick=()=>{switchTab('alarm');ringAlarm({label:mainBlock.t});};
+  const tb=document.getElementById('nowTodoBtn');if(tb)tb.onclick=()=>switchTab('todo');
+}
+renderNow();setInterval(renderNow,30000);
 </script>
 </body>
 </html>
