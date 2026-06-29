@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Summer Study Plan · 29 Jun – 5 Jul 2026</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1c1d1f; --muted:#6b6f76; --line:#e7e9ee;
+    --sdg:#185FA5; --sdgbg:#E6F1FB;
+    --stan:#534AB7; --stanbg:#EEEDFE;
+    --agora:#0F6E56; --agorabg:#E1F5EE;
+    --bril:#854F0B; --brilbg:#FAEEDA;
+    --earth:#3B6D11; --earthbg:#EAF3DE;
+    --smith:#993556; --smithbg:#FBEAF0;
+    --debate:#993C1D; --debatebg:#FAECE7;
+    --relax:#37506B; --relaxbg:#EAEEF3;
+    --meal:#5F5E5A; --mealbg:#F1EFE8;
+    --comp:#A32D2D; --compbg:#FCEBEB;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;padding:24px}
+  .wrap{max-width:1240px;margin:0 auto}
+  h1{font-size:24px;font-weight:600;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .banner{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 18px;margin-bottom:18px;font-size:14px}
+  .banner b{color:var(--comp)}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .chip{font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--line)}
+  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(132px,1fr));
+    grid-template-rows:46px repeat(18,38px);
+    background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .corner{grid-column:1;grid-row:1;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dayhead{grid-row:1;border-bottom:1px solid var(--line);border-left:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px}
+  .dayhead .dn{font-weight:600}
+  .dayhead .dd{color:var(--muted);font-size:12px}
+  .dayhead.today{background:#fff8e6}
+  .dayhead.race{background:var(--compbg)}
+  .dayhead.race .dd{color:var(--comp)}
+  .tlabel{grid-column:1;font-size:11px;color:var(--muted);text-align:right;
+    padding-right:6px;transform:translateY(-7px)}
+  .slotline{grid-column:2/9;border-bottom:1px solid #f1f2f5}
+  .vline{border-left:1px solid var(--line)}
+  .ev{margin:2px 3px;border-radius:7px;padding:5px 7px;overflow:hidden;
+    font-size:11.5px;border-left:3px solid;display:block;text-decoration:none;color:inherit}
+  a.ev:hover{filter:brightness(.97);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .ev .t{font-weight:600;line-height:1.25;display:block}
+  .ev .s{color:var(--muted);font-size:10.5px;line-height:1.25;display:block;margin-top:1px}
+  .ev .lk{font-size:9.5px;opacity:.8;margin-top:2px;display:block}
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .panel h2{font-size:16px;margin:0 0 10px;font-weight:600}
+  .panel ul{margin:0;padding-left:18px}
+  .panel li{font-size:13.5px;margin-bottom:6px}
+  .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:5px;margin-right:6px;font-weight:600}
+  @media(max-width:900px){.panels{grid-template-columns:1fr}
+    .cal{grid-template-columns:48px repeat(7,minmax(108px,1fr))}
+    body{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>My summer study plan</h1>
+  <p class="sub">Mon 29 Jun – Sun 5 Jul 2026 · daily 11:30 – 20:30 · 5h study + 1h debate prep + 2h relax</p>
+
+  <div class="banner">
+    <b>Two finish lines:</b> all 6 courses done by <b>Sun 5 Jul</b>, and the
+    <b>ISDS Ironperson Triathlon</b> (a debate contest — quiz, extempore &amp; comprehension)
+    on <b>Sun 5 Jul, 4–7 PM IST</b>, online &amp; proctored. Debate prep runs daily through Sat 4 Jul.
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div class="cal" id="cal"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <h2>What's left in each course</h2>
+      <ul>
+        <li><span class="tag" style="background:var(--sdgbg);color:var(--sdg)">SDG Academy</span> Resume + finish all modules (you've missed a few suggested dates — just push through).</li>
+        <li><span class="tag" style="background:var(--stanbg);color:var(--stan)">Stanford Math</span> Continue "How to Learn Math" from where you left off.</li>
+        <li><span class="tag" style="background:var(--agorabg);color:var(--agora)">UNICEF Agora</span> Course intro + Modules 1–2 + assessment.</li>
+        <li><span class="tag" style="background:var(--brilbg);color:var(--bril)">Brilliant</span> Finish Level 2 (Loops) then remaining levels of Thinking in Code.</li>
+        <li><span class="tag" style="background:var(--earthbg);color:var(--earth)">Earth School</span> All quests, start to finish.</li>
+        <li><span class="tag" style="background:var(--smithbg);color:var(--smith)">Smithsonian</span> Work through the full Early Human Diets collection (short).</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>TV picks for your 2h relax</h2>
+      <ul>
+        <li><b>The Middle</b> — your pick; easy family-sitcom comfort watch.</li>
+        <li><b>9-1-1</b> — keep going, you're midway.</li>
+        <li><b>Elsbeth</b> — quirky detective, very <i>High Potential</i> energy.</li>
+        <li><b>Castle</b> — crime + banter, if you liked The Rookie's charm.</li>
+        <li><b>Brooklyn Nine-Nine</b> — cop comedy, light between study blocks.</li>
+        <li><b>Psych</b> / <b>9-1-1: Lone Star</b> — backups if you finish early.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Debate prep focus (ISDS triathlon)</h2>
+      <ul>
+        <li><b>Section 1 – Quiz:</b> read world + Indian current affairs daily; note 3 issues/day.</li>
+        <li><b>Section 2 – Extempore:</b> 1–2 min prep, 3 min speak; drill argument + rebuttal.</li>
+        <li><b>Section 3 – Comprehension:</b> timed reading + listening passages, fast note-taking.</li>
+        <li><b>Sat 4 Jul:</b> full mock of all three, then rest before race day.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>Daily rhythm</h2>
+      <ul>
+        <li>11:30–14:00 · Study block 1 (2.5h)</li>
+        <li>14:00–14:30 · Lunch</li>
+        <li>14:30–17:00 · Study block 2 (2.5h)</li>
+        <li>17:00–18:00 · Debate prep (1h)</li>
+        <li>18:00–19:30 · Relax / TV</li>
+        <li>19:30–20:00 · Dinner</li>
+        <li>20:00–20:30 · Relax / TV</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const C = {
+  sdg:{n:"SDG Academy",link:"https://learning.edx.org/course/course-v1:SDGAcademyX+SDG001+3T2025/home",v:"sdg"},
+  stan:{n:"Stanford Math",link:"https://learning.edx.org/course/course-v1:StanfordOnline+GSE-YEDUC115-S+1T2020/home",v:"stan"},
+  agora:{n:"UNICEF Agora",link:"https://agora.unicef.org/course/view.php?id=7214",v:"agora"},
+  bril:{n:"Brilliant",link:"https://brilliant.org/courses/thinking-in-code/",v:"bril"},
+  earth:{n:"Earth School",link:"https://ed.ted.com/earth-school",v:"earth"},
+  smith:{n:"Smithsonian",link:"https://learninglab.si.edu/collections/human-evolution-early-human-diets/j63BHbKo54Mj7rjK",v:"smith"},
+};
+// lines: 11:30=2, +1 per 30 min
+function L(t){const[h,m]=t.split(":").map(Number);return 2+((h*60+m)-(11*60+30))/30;}
+function studyEv(c,sub,a,b){return{v:c.v,t:c.n,s:sub,link:c.link,a:L(a),b:L(b)};}
+function ev(v,t,s,a,b){return{v,t,s,a:L(a),b:L(b)};}
+
+const lunch = ev("meal","Lunch","","14:00","14:30");
+const dinner= ev("meal","Dinner","","19:30","20:00");
+function debate(s){return ev("debate","Debate prep",s,"17:00","18:00");}
+function relax(s){return ev("relax","Relax / TV",s,"18:00","19:30");}
+function relax2(s){return ev("relax","Relax / TV",s,"20:00","20:30");}
+
+const days = [
+  {dn:"Mon",dd:"29 Jun",cls:"today",evs:[
+    studyEv(C.sdg,"Modules 1–2 (resume)","11:30","14:00"),lunch,
+    studyEv(C.stan,"Welcome + Lesson 1","14:30","17:00"),
+    debate("Current affairs: read + note 3 world issues"),
+    relax("The Middle · S1 E1–3"),dinner,relax2("9-1-1 · continue")]},
+  {dn:"Tue",dd:"30 Jun",evs:[
+    studyEv(C.agora,"Intro + Module 1","11:30","14:00"),lunch,
+    studyEv(C.bril,"Finish Level 2: Loops","14:30","17:00"),
+    debate("Extempore: 3 impromptu speeches"),
+    relax("The Middle · S1 E4–6"),dinner,relax2("9-1-1 · continue")]},
+  {dn:"Wed",dd:"1 Jul",evs:[
+    studyEv(C.sdg,"Modules 3–4","11:30","14:00"),lunch,
+    studyEv(C.earth,"Quests 1–3","14:30","17:00"),
+    debate("Comprehension: timed reading + listening"),
+    relax("Elsbeth · pilot"),dinner,relax2("The Middle · S1 E7")]},
+  {dn:"Thu",dd:"2 Jul",evs:[
+    studyEv(C.stan,"Lessons 2–3","11:30","14:00"),lunch,
+    studyEv(C.agora,"Module 2 + assessment","14:30","17:00"),
+    debate("Quiz drills + key global issues"),
+    relax("9-1-1 · continue"),dinner,relax2("Castle · pilot")]},
+  {dn:"Fri",dd:"3 Jul",evs:[
+    studyEv(C.sdg,"Modules 5–6 (finish)","11:30","14:00"),lunch,
+    studyEv(C.earth,"Quests 4–6 (finish)","14:30","17:00"),
+    debate("Extempore + rebuttal drills"),
+    relax("The Middle · S1 E8–9"),dinner,relax2("Brooklyn 99 · pilot")]},
+  {dn:"Sat",dd:"4 Jul",evs:[
+    studyEv(C.bril,"Finish Thinking in Code","11:30","14:00"),lunch,
+    studyEv(C.smith,"Human Diets collection (full)","14:30","17:00"),
+    debate("FULL MOCK: quiz + extempore + comprehension"),
+    relax("The Middle · finish S1"),dinner,relax2("Early night · rest before race")]},
+  {dn:"Sun",dd:"5 Jul",cls:"race",evs:[
+    ev("sdg","Course catch-up","Finish anything pending","11:30","14:00"),lunch,
+    ev("relax","Light review + setup","Test proctoring software & internet","14:30","15:30"),
+    ev("comp","🎤 ISDS Ironperson Triathlon","Quiz · Extempore · Comprehension","16:00","19:00"),
+    ev("relax","Decompress","",  "19:00","19:30"),dinner,relax2("Celebrate! 🎉")]},
+];
+
+const NAMES={sdg:"SDG Academy",stan:"Stanford Math",agora:"UNICEF Agora",bril:"Brilliant",
+  earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Relax / TV",
+  meal:"Meals",comp:"Competition"};
+
+const cal=document.getElementById("cal");
+const corner=document.createElement("div");corner.className="corner";cal.appendChild(corner);
+days.forEach((d,i)=>{
+  const h=document.createElement("div");h.className="dayhead"+(d.cls?" "+d.cls:"");
+  h.style.gridColumn=(i+2);
+  h.innerHTML='<span class="dn">'+d.dn+'</span><span class="dd">'+d.dd+'</span>';
+  cal.appendChild(h);
+});
+const hours=["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
+hours.forEach(t=>{const lab=document.createElement("div");lab.className="tlabel";
+  lab.style.gridRow=L(t);const[h]=t.split(":");let hh=+h;const ap=hh>=12?"pm":"am";
+  hh=hh%12||12;lab.textContent=hh+" "+ap;cal.appendChild(lab);});
+for(let r=2;r<=19;r++){const ln=document.createElement("div");ln.className="slotline";
+  ln.style.gridRow=r+"/"+(r+1);cal.appendChild(ln);}
+for(let c=2;c<=8;c++){const v=document.createElement("div");v.className="vline";
+  v.style.gridColumn=c;v.style.gridRow="2/20";cal.appendChild(v);}
+days.forEach((d,i)=>{
+  d.evs.forEach(e=>{
+    const el=document.createElement(e.link?"a":"div");el.className="ev";
+    el.style.gridColumn=(i+2);el.style.gridRow=e.a+"/"+e.b;
+    el.style.background="var(--"+e.v+"bg)";el.style.borderLeftColor="var(--"+e.v+")";
+    el.style.color="var(--"+e.v+")";
+    let html='<span class="t">'+e.t+'</span>';
+    if(e.s)html+='<span class="s">'+e.s+'</span>';
+    if(e.link){el.href=e.link;el.target="_blank";el.rel="noopener";
+      html+='<span class="lk">↗ open course</span>';}
+    el.innerHTML=html;cal.appendChild(el);
+  });
+});
+const order=["sdg","stan","agora","bril","earth","smith","debate","relax","meal","comp"];
+const lg=document.getElementById("legend");
+order.forEach(v=>{const c=document.createElement("span");c.className="chip";
+  c.style.background="var(--"+v+"bg)";c.style.color="var(--"+v+")";
+  c.style.borderColor="var(--"+v+")";c.textContent=NAMES[v];lg.appendChild(c);});
+</script>
+</body>
+</html>
