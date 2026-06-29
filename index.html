@@ -26,215 +26,227 @@
   *{box-sizing:border-box}
   html{-webkit-font-smoothing:antialiased}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    line-height:1.55;padding:24px 20px 70px}
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;padding:24px 20px 70px}
   .wrap{max-width:1280px;margin:0 auto}
   h1{font-size:26px;font-weight:800;margin:0;letter-spacing:-.5px}
   .range{color:var(--muted);font-size:13.5px;font-weight:500}
   .toprow{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:14px}
-
-  /* encouragement strip */
   .cheer{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:12px 16px;margin-bottom:18px}
-  .cheer .ring{flex:none}
-  .cheer .msg{font-size:14px;font-weight:600}
+  .cheer .msg{font-size:14px;font-weight:700}
   .cheer .sub{font-size:12px;color:var(--muted);font-weight:500}
-
-  /* tabs */
-  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;background:var(--card);
-    border:1px solid var(--line);border-radius:14px;padding:6px}
-  .tab{flex:1;min-width:120px;border:none;background:transparent;color:var(--muted);
-    font-family:inherit;font-size:14px;font-weight:600;padding:10px 12px;border-radius:10px;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;gap:7px;transition:background .12s,color .12s}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px}
+  .tab{flex:1;min-width:110px;border:none;background:transparent;color:var(--muted);font-family:inherit;
+    font-size:13.5px;font-weight:600;padding:10px 8px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
   .tab:hover{color:var(--ink);background:var(--bg)}
   .tab.on{background:var(--accent);color:#fff}
-  .tab .em{font-size:15px}
-  .view{display:none}
-  .view.on{display:block;animation:fade .2s ease}
+  .view{display:none}.view.on{display:block;animation:fade .2s ease}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
   .sect{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--faint);margin:24px 0 12px}
-
-  /* progress cards */
   .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
   .pcard .nm{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
   .dot{width:9px;height:9px;border-radius:50%;flex:none}
   .pcard .pct{font-size:21px;font-weight:800;margin:7px 0 3px;letter-spacing:-.5px}
-  .bar{height:7px;border-radius:6px;background:#eef0f3;overflow:hidden;margin-bottom:8px}
-  .bar>i{display:block;height:100%;border-radius:6px}
-  .pcard .left{font-size:11.5px;color:var(--muted);font-weight:500;line-height:1.4}
-
-  /* calendar */
+  .bar{height:7px;border-radius:6px;background:#eef0f3;overflow:hidden;margin-bottom:6px}
+  .bar>i{display:block;height:100%;border-radius:6px;transition:width .25s}
+  .pcard .left{font-size:11px;color:var(--muted);font-weight:500;line-height:1.4}
   .legend{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 14px}
   .chip{font-size:11.5px;padding:3px 11px;border-radius:20px;font-weight:600}
   .calwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px;overflow-x:auto}
-  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(158px,1fr));
-    grid-template-rows:52px repeat(19,42px);min-width:1180px}
+  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(158px,1fr));grid-template-rows:52px repeat(19,42px);min-width:1180px}
   .corner{grid-column:1;grid-row:1}
-  .dayhead{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    font-size:13px;border-bottom:1px solid var(--line);gap:2px}
-  .dayhead .dn{font-weight:800;letter-spacing:.2px}
-  .dayhead .dd{color:var(--faint);font-size:11.5px;font-weight:600}
+  .dayhead{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;border-bottom:1px solid var(--line);gap:2px}
+  .dayhead .dn{font-weight:800}.dayhead .dd{color:var(--faint);font-size:11.5px;font-weight:600}
   .dayhead.today .dn{color:var(--accent)}
-  .dayhead.today .badge{font-size:8.5px;font-weight:800;letter-spacing:.5px;color:#fff;
-    background:var(--accent);padding:1px 7px;border-radius:8px;margin-top:1px}
-  .dayhead.race .dn{color:var(--comp)}
-  .dayhead.race .dd{color:var(--comp)}
-  .tlabel{grid-column:1;font-size:11px;color:var(--muted);font-weight:600;text-align:right;
-    padding-right:9px;transform:translateY(-8px)}
-  .slotline{grid-column:2/9;border-top:1px solid #f0f1f4}
-  .slotline.hr{border-top:1px solid #e4e6ea}
+  .dayhead.today .badge{font-size:8.5px;font-weight:800;letter-spacing:.5px;color:#fff;background:var(--accent);padding:1px 7px;border-radius:8px;margin-top:1px}
+  .dayhead.race .dn{color:var(--comp)}.dayhead.race .dd{color:var(--comp)}
+  .tlabel{grid-column:1;font-size:11px;color:var(--muted);font-weight:600;text-align:right;padding-right:9px;transform:translateY(-8px)}
+  .slotline{grid-column:2/9;border-top:1px solid #f0f1f4}.slotline.hr{border-top:1px solid #e4e6ea}
   .vline{border-left:1px solid #f0f1f4;grid-row:2/21}
-  .ev{margin:2px 4px;border-radius:9px;padding:6px 9px 7px;overflow:hidden;
-    font-size:11.5px;display:block;text-decoration:none;color:inherit;border:1px solid transparent}
-  a.ev{cursor:pointer}
-  a.ev:hover{box-shadow:0 4px 14px rgba(20,24,33,.15);z-index:5;position:relative}
-  .ev .tt{font-weight:700;line-height:1.2;display:block;letter-spacing:-.1px}
-  .ev .ss{font-size:10px;line-height:1.32;display:block;margin-top:2px;opacity:.95}
+  .ev{margin:2px 4px;border-radius:9px;padding:6px 9px 7px;overflow:hidden;font-size:11.5px;display:block;text-decoration:none;color:inherit;border:1px solid transparent}
+  a.ev{cursor:pointer}a.ev:hover{box-shadow:0 4px 14px rgba(20,24,33,.15);z-index:5;position:relative}
+  .ev .tt{font-weight:700;line-height:1.2;display:block}.ev .ss{font-size:10px;line-height:1.32;display:block;margin-top:2px;opacity:.95}
   .ev .lk{font-size:9.5px;font-weight:700;margin-top:3px;display:inline-block}
-
   /* to-do */
   .tododay{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 4px;margin-bottom:12px}
-  .tododay h3{font-size:14px;font-weight:700;margin:8px 14px 4px;display:flex;justify-content:space-between}
+  .tododay h3{font-size:14px;font-weight:700;margin:10px 14px 2px;display:flex;justify-content:space-between}
   .tododay h3 .cnt{font-size:12px;color:var(--faint);font-weight:600}
-  .todo{display:flex;gap:11px;align-items:flex-start;padding:9px 14px;border-radius:10px;cursor:pointer}
+  .blockhdr{font-size:11px;font-weight:700;color:var(--muted);margin:8px 14px 2px;display:flex;align-items:center;gap:7px}
+  .todo{display:flex;gap:11px;align-items:flex-start;padding:6px 14px 6px 26px;border-radius:10px;cursor:pointer}
   .todo:hover{background:var(--bg)}
-  .todo input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex:none;cursor:pointer}
-  .todo .body{font-size:13px;line-height:1.4}
+  .todo input{margin-top:2px;width:16px;height:16px;accent-color:var(--accent);flex:none;cursor:pointer}
+  .todo .body{font-size:12.5px;line-height:1.35}
   .todo .ttl{font-weight:600}
-  .todo .desc{font-size:11.5px;color:var(--muted);font-weight:500}
-  .todo .pill{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:6px;margin-right:6px;vertical-align:1px}
+  .todo .desc{font-size:11px;color:var(--muted);font-weight:500}
+  .todo.std{padding-left:14px}
   .todo.done .ttl,.todo.done .desc{text-decoration:line-through;opacity:.5}
-
+  .nowpill{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:var(--comp);padding:0 6px;border-radius:7px;margin-left:6px;vertical-align:1px}
+  .pill{display:inline-block;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:6px;margin-right:6px;vertical-align:1px}
   /* notes */
   .ncards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-  .ncard{background:#fffdf5;border:1px solid #ece6d2;border-radius:14px;padding:16px 18px;
-    box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .ncard{background:#fffdf5;border:1px solid #ece6d2;border-radius:14px;padding:16px 18px}
   .ncard .nh{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .ncard .nh .lab{font-size:12px;font-weight:700;padding:2px 9px;border-radius:7px}
   .ncard .hand{font-family:'Caveat',cursive;font-size:20px;line-height:1.5;color:#222;outline:none}
-  .ncard .hand:focus{background:#fffef9}
-  .ncard .hand b{font-weight:700}
-  .ncard .hand .h{display:block;font-weight:700;font-size:22px;margin:8px 0 1px;color:#1a1a1a}
-  .ncard .hand ul{margin:2px 0 6px;padding-left:22px}
-  .ncard .hand li{margin-bottom:1px}
+  .ncard .hand .h{display:block;font-weight:700;font-size:22px;margin:8px 0 1px}
+  .ncard .hand ul{margin:2px 0 6px;padding-left:22px}.ncard .hand li{margin-bottom:1px}
   .ncard .tools{display:flex;gap:8px;margin-top:10px}
-  .btn{font-family:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);
-    background:var(--card);color:var(--ink);border-radius:9px;padding:7px 13px;cursor:pointer}
-  .btn:hover{background:var(--bg)}
-  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .btn.pri:hover{filter:brightness(1.05)}
+  .btn{font-family:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:7px 13px;cursor:pointer}
+  .btn:hover{background:var(--bg)}.btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
   .pastebox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
-
   /* alarm */
   .alarmgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .abox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
-  .abox h2{font-size:16px;margin:0 0 4px;font-weight:700}
-  .abox .hint{font-size:12.5px;color:var(--muted);margin:0 0 14px;font-weight:500}
-  .field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
-  .field label{font-size:12px;font-weight:600;color:var(--muted)}
+  .abox h2{font-size:16px;margin:0 0 4px;font-weight:700}.abox .hint{font-size:12.5px;color:var(--muted);margin:0 0 14px;font-weight:500}
+  .field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:12px;font-weight:600;color:var(--muted)}
   .field input{font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:9px}
   .presets{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
-  .preset{font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--card);
-    border-radius:20px;padding:5px 12px;cursor:pointer}
+  .preset{font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:5px 12px;cursor:pointer}
   .preset:hover{background:var(--bg)}
-  .alist{margin-top:6px}
-  .arow{display:flex;align-items:center;justify-content:space-between;gap:10px;
-    border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:13px}
+  .arow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:13px}
   .arow .x{cursor:pointer;color:var(--faint);font-weight:700}
-  .overlay{position:absolute;inset:0;background:rgba(15,17,22,.92);display:flex;align-items:center;
-    justify-content:center;z-index:50;border-radius:16px}
+  .overlay{position:absolute;inset:0;background:rgba(15,17,22,.92);display:flex;align-items:center;justify-content:center;z-index:50;border-radius:16px}
   .ovcard{background:#fff;border-radius:16px;padding:24px;max-width:380px;width:92%;text-align:center}
   .ovcard h3{margin:0 0 4px;font-size:19px;font-weight:800;color:var(--comp)}
   .ovcard p{font-size:13px;color:var(--muted);margin:0 0 14px;font-weight:500}
   .ovcard video,.ovcard canvas,.ovcard img.shot{width:100%;border-radius:12px;background:#000;margin-bottom:12px}
   .relhost{position:relative}
-
+  /* ironperson */
+  .iwrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ibox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .ibox.full{grid-column:1/3}
+  .ibox h2{font-size:16px;margin:0 0 3px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .ibox .hint{font-size:12px;color:var(--muted);margin:0 0 12px;font-weight:500}
+  .q{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:9px;cursor:pointer}
+  .q:hover{background:var(--bg)}
+  .q .qq{font-size:13px;font-weight:600}
+  .q .aa{font-size:12.5px;color:var(--debate);font-weight:600;margin-top:6px;display:none}
+  .q.open .aa{display:block}
+  .q .qn{color:var(--faint);font-weight:700;margin-right:6px}
+  .mlist{list-style:none;padding:0;margin:0}
+  .mlist li{font-size:13px;padding:8px 0 8px 24px;position:relative;border-bottom:1px dashed var(--line)}
+  .mlist li:last-child{border-bottom:none}
+  .mlist li::before{content:"⚖️";position:absolute;left:0;top:7px;font-size:13px}
+  .plist{list-style:none;padding:0;margin:0}
+  .plist li{font-size:13px;padding:7px 0 7px 22px;position:relative}
+  .plist li::before{content:"🎤";position:absolute;left:0;top:6px;font-size:12px}
+  .passage{font-size:13px;line-height:1.6;background:var(--bg);border-radius:11px;padding:13px 15px;margin-bottom:10px}
+  .reslist{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+  .reslist a{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:10px}
+  .reslist a:hover{background:var(--bg)}
+  .reslist .ic{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .reslist .rt{display:block;font-size:13px;font-weight:700;line-height:1.25}
+  .reslist .rd{display:block;font-size:11.5px;color:var(--muted);font-weight:500;line-height:1.35;margin-top:1px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:14px}
   .panel h2{font-size:15.5px;margin:0 0 10px;font-weight:700}
   .panel ul{margin:0;padding-left:2px;list-style:none}
   .panel li{font-size:13px;margin-bottom:9px;padding-left:18px;position:relative;line-height:1.5}
   .panel li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--line)}
   .panel li.ok::before{background:var(--earth)}
-  .reslist{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
-  .reslist a{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:inherit;
-    padding:9px 11px;border:1px solid var(--line);border-radius:10px}
-  .reslist a:hover{background:var(--bg)}
-  .reslist .ic{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
-  .reslist .rt{display:block;font-size:13px;font-weight:700;line-height:1.25}
-  .reslist .rd{display:block;font-size:11.5px;color:var(--muted);font-weight:500;line-height:1.35;margin-top:1px}
   .tag{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:6px;margin-right:5px;font-weight:700}
-  @media(max-width:820px){.alarmgrid{grid-template-columns:1fr}.reslist{grid-template-columns:1fr}body{padding:16px 11px 50px}}
+  @media(max-width:820px){.alarmgrid,.iwrap,.reslist{grid-template-columns:1fr}.ibox.full{grid-column:1}body{padding:16px 11px 50px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="toprow">
-    <h1>My summer plan</h1>
-    <span class="range">Mon 29 Jun – Sun 5 Jul 2026 · 7h study · 1h debate · 1h lunch+TV</span>
-  </div>
+  <div class="toprow"><h1>My summer plan</h1>
+    <span class="range">Mon 29 Jun – Sun 5 Jul 2026 · video-by-video · ticking saves your progress</span></div>
 
   <div class="cheer">
-    <svg class="ring" width="46" height="46" viewBox="0 0 46 46">
-      <circle cx="23" cy="23" r="19" fill="none" stroke="#eceef2" stroke-width="6"/>
-      <circle id="ringfg" cx="23" cy="23" r="19" fill="none" stroke="var(--accent)" stroke-width="6"
-        stroke-linecap="round" stroke-dasharray="119" stroke-dashoffset="119" transform="rotate(-90 23 23)"/>
-    </svg>
-    <div style="flex:1">
-      <div class="msg" id="cheerMsg">Let's get today started 💪</div>
-      <div class="sub" id="cheerSub">0 of 0 tasks done</div>
-    </div>
+    <svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="#eceef2" stroke-width="6"/>
+      <circle id="ringfg" cx="23" cy="23" r="19" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"
+        stroke-dasharray="119" stroke-dashoffset="119" transform="rotate(-90 23 23)"/></svg>
+    <div style="flex:1"><div class="msg" id="cheerMsg">Let's get today started 💪</div>
+      <div class="sub" id="cheerSub">0 of 0 tasks done</div></div>
   </div>
 
   <div class="tabs">
-    <button class="tab on" data-v="schedule"><span class="em">🗓️</span> Schedule</button>
-    <button class="tab" data-v="todo"><span class="em">✅</span> To-do</button>
-    <button class="tab" data-v="notes"><span class="em">✍️</span> Notes</button>
-    <button class="tab" data-v="alarm"><span class="em">⏰</span> Focus alarm</button>
+    <button class="tab on" data-v="schedule">🗓️ Schedule</button>
+    <button class="tab" data-v="todo">✅ To-do</button>
+    <button class="tab" data-v="notes">✍️ Notes</button>
+    <button class="tab" data-v="iron">🏆 Ironperson</button>
+    <button class="tab" data-v="alarm">⏰ Alarm</button>
   </div>
 
   <!-- SCHEDULE -->
   <div class="view on" id="v-schedule">
-    <div class="sect">Where you actually stand</div>
+    <div class="sect">Live progress — fills as you tick off videos in the To-do tab</div>
     <div class="pcards" id="pcards"></div>
     <div class="sect">This week — click a block to open that course</div>
     <div class="legend" id="legend"></div>
     <div class="calwrap"><div class="cal" id="cal"></div></div>
-
     <div class="panel">
       <h2>Honest notes</h2>
       <ul>
-        <li class="ok"><b>You're registered ✓</b> — <b>orientation tonight, Mon 29 Jun 7–8 PM IST</b> on Zoom (Meeting ID 850 3003 9661). It's on the calendar.</li>
-        <li><b>SDG Academy is the bottleneck</b> (7 modules from 9%) — it's front-loaded Mon–Fri. Its real exam is Jul 21, so it's the safe thing to let slip if needed.</li>
-        <li><b>Brilliant has no deadline</b> — Levels 5–9 are the overflow buffer, parked after the competition.</li>
-        <li><b>Comp morning (Sun) has no course work</b> — just rest, a light debate warm-up, and a tech check before 4 PM.</li>
+        <li class="ok"><b>Registered ✓</b> — <b>orientation tonight, Mon 29 Jun 7–8 PM IST</b> on Zoom (Meeting ID 850 3003 9661).</li>
+        <li><b>SDG is 35 videos (7 modules × 5)</b> — front-loaded Mon–Fri, video by video. You've done 1.1 and you're midway through 1.2.</li>
+        <li><b>Brilliant has no deadline</b> — Levels 5–9 are the overflow, parked after the competition.</li>
+        <li><b>Comp morning (Sun) = no course work</b> — rest, a light debate warm-up, and a tech check before 4 PM.</li>
       </ul>
-    </div>
-
-    <div class="panel">
-      <h2>Debate resources — click to open</h2>
-      <div class="reslist" id="reslist"></div>
     </div>
   </div>
 
   <!-- TODO -->
   <div class="view" id="v-todo">
-    <div class="sect">Tick things off as you go — it saves automatically</div>
+    <div class="sect">Tick each video as you finish — your bars and streak update live</div>
     <div id="todoList"></div>
   </div>
 
   <!-- NOTES -->
   <div class="view" id="v-notes">
-    <div class="pastebox">
-      <h2 style="margin:0 0 4px;font-size:16px;font-weight:700">How notes work here</h2>
-      <p style="font-size:13px;color:var(--muted);margin:0;font-weight:500">
-        Each card below holds short, handwritten-style notes you can edit right on the page (click and type) — then
-        <b>Save as image</b> to download. Want polished notes from a lesson? <b>Paste the video/lesson transcript into our chat</b>
-        and I'll turn it into short handwritten notes and drop them into the matching card here.
-      </p>
-    </div>
+    <div class="pastebox"><h2 style="margin:0 0 4px;font-size:16px;font-weight:700">How notes work here</h2>
+      <p style="font-size:13px;color:var(--muted);margin:0;font-weight:500">Edit these handwritten cards on the page, then
+      <b>Save as image</b>. For polished notes from a lesson, <b>paste the video/lesson transcript into our chat</b> and I'll turn it into short handwritten notes and drop them into the matching card.</p></div>
     <div class="ncards" id="ncards"></div>
+  </div>
+
+  <!-- IRONPERSON -->
+  <div class="view" id="v-iron">
+    <div class="sect">Everything to prep for the ISDS Ironperson Triathlon · 5 Jul, 4–7 PM IST</div>
+    <div class="iwrap">
+      <div class="ibox">
+        <h2>📝 Section 1 — Current-affairs quiz</h2>
+        <p class="hint">Tap a question to reveal the answer. Do all 10, then re-test tomorrow.</p>
+        <div id="quiz"></div>
+      </div>
+      <div class="ibox">
+        <h2>⚖️ Section 2 — Debate motions</h2>
+        <p class="hint">"THW" = This House Would. Pick one, take a side, prep 1 min, speak 3 min using PEEL.</p>
+        <ul class="mlist" id="motions"></ul>
+      </div>
+      <div class="ibox">
+        <h2>🎤 Extempore prompts</h2>
+        <p class="hint">1 min to plan, 3 min to speak. Record yourself and rewatch.</p>
+        <ul class="plist" id="prompts"></ul>
+      </div>
+      <div class="ibox">
+        <h2>📖 Section 3 — Comprehension drill</h2>
+        <p class="hint">Read once, then answer from memory. Tap to check.</p>
+        <div class="passage" id="passage"></div>
+        <div id="compQ"></div>
+      </div>
+      <div class="ibox full">
+        <h2>🧪 Full mock — do this Saturday under time (~50 min)</h2>
+        <p class="hint">A dry run of all three sections, just like the real thing.</p>
+        <ol style="font-size:13px;line-height:1.7;margin:0;padding-left:18px">
+          <li><b>15 min</b> — the 10-question current-affairs quiz above (no peeking at answers first).</li>
+          <li><b>10 min</b> — pick 1 debate motion, prep 1 min, deliver a 3-min speech, then a 2-min rebuttal to the other side.</li>
+          <li><b>10 min</b> — 1 extempore prompt: 1 min prep, 3 min speak.</li>
+          <li><b>10 min</b> — the comprehension passage: read once, then answer all questions from memory.</li>
+          <li><b>5 min</b> — review what felt hard and note 2 things to improve.</li>
+        </ol>
+      </div>
+      <div class="ibox full">
+        <h2>📰 Learn current affairs — short &amp; kid-readable</h2>
+        <p class="hint">10 minutes a day from these keeps Section 1 easy. Videos first, then articles.</p>
+        <div class="reslist" id="cares"></div>
+      </div>
+      <div class="ibox full">
+        <h2>📘 Debate skill guides</h2>
+        <div class="reslist" id="reslist"></div>
+      </div>
+    </div>
   </div>
 
   <!-- ALARM -->
@@ -244,338 +256,328 @@
       <div class="abox">
         <h2>New alarm</h2>
         <p class="hint">Pick a time today. When it rings, the only way to silence it is a webcam photo of you ready to study.</p>
-        <div class="field">
-          <label>What's this for?</label>
-          <input id="aLabel" type="text" placeholder="e.g. Study block 2 — SDG Module 3">
-        </div>
-        <div class="field">
-          <label>Ring at (today)</label>
-          <input id="aTime" type="time">
-        </div>
+        <div class="field"><label>What's this for?</label><input id="aLabel" type="text" placeholder="e.g. Study block 2 — SDG Module 3"></div>
+        <div class="field"><label>Ring at (today)</label><input id="aTime" type="time"></div>
         <div class="presets" id="presets"></div>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn pri" id="setAlarm">Set alarm</button>
-          <button class="btn" id="testAlarm">Test ring now</button>
-        </div>
-        <div class="alist" id="alist"></div>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn pri" id="setAlarm">Set alarm</button>
+          <button class="btn" id="testAlarm">Test ring now</button></div>
+        <div id="alist" style="margin-top:6px"></div>
       </div>
       <div class="abox relhost" id="alarmHost">
         <h2>How it works</h2>
-        <p class="hint">Your camera is only used to take one photo to dismiss the alarm. Nothing is uploaded or saved anywhere — it stays in your browser.</p>
-        <ul style="font-size:13px;color:var(--ink);padding-left:18px;margin:0;line-height:1.7">
-          <li>Set an alarm for each study block.</li>
-          <li>When it rings, a beep loops and an overlay appears.</li>
-          <li>Click <b>Open camera</b> → <b>Capture photo</b>.</li>
-          <li>The beep stops only after the photo is taken — so you're already at your desk. 📸</li>
-        </ul>
+        <p class="hint">The camera takes one photo to dismiss the alarm. Nothing is uploaded or saved — it stays in your browser.</p>
+        <ul style="font-size:13px;padding-left:18px;margin:0;line-height:1.7">
+          <li>Set an alarm for each study block.</li><li>When it rings, a beep loops and an overlay appears.</li>
+          <li>Click <b>Open camera → Capture photo</b>.</li><li>The beep stops only after the photo — so you're already at your desk 📸</li></ul>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-/* ---------- data ---------- */
-const COURSES={
-  sdg:{n:"SDG Academy",link:"https://learning.edx.org/course/course-v1:SDGAcademyX+SDG001+3T2025/home"},
-  stan:{n:"Stanford Math",link:"https://learning.edx.org/course/course-v1:StanfordOnline+GSE-YEDUC115-S+1T2020/home"},
-  agora:{n:"UNICEF Agora",link:"https://agora.unicef.org/course/view.php?id=7214"},
-  bril:{n:"Brilliant",link:"https://brilliant.org/courses/thinking-in-code/"},
-  earth:{n:"Earth School",link:"https://ed.ted.com/earth-school"},
-  smith:{n:"Smithsonian",link:"https://learninglab.si.edu/collections/human-evolution-early-human-diets/j63BHbKo54Mj7rjK"},
+const CO={
+  sdg:{n:"SDG Academy",link:"https://learning.edx.org/course/course-v1:SDGAcademyX+SDG001+3T2025/home",base:"Start: 9% on edX"},
+  stan:{n:"Stanford Math",link:"https://learning.edx.org/course/course-v1:StanfordOnline+GSE-YEDUC115-S+1T2020/home",base:"Lessons 1–2 already done"},
+  agora:{n:"UNICEF Agora",link:"https://agora.unicef.org/course/view.php?id=7214",base:"Intro + 5 modules"},
+  bril:{n:"Brilliant",link:"https://brilliant.org/courses/thinking-in-code/",base:"Level 2 of 9"},
+  earth:{n:"Earth School",link:"https://ed.ted.com/earth-school",base:"10 steps · public"},
+  smith:{n:"Smithsonian",link:"https://learninglab.si.edu/collections/human-evolution-early-human-diets/j63BHbKo54Mj7rjK",base:"1 collection · public"},
 };
-const progress=[
-  {v:"sdg",n:"SDG Academy",pct:9,left:"0 / 7 modules done"},
-  {v:"stan",n:"Stanford Math",pct:24,left:"2 / 6 sections done"},
-  {v:"agora",n:"UNICEF Agora",pct:2,left:"Intro + 5 modules left"},
-  {v:"bril",n:"Brilliant",pct:21,left:"Level 2 of 9"},
-  {v:"earth",n:"Earth School",pct:0,left:"10 steps · public"},
-  {v:"smith",n:"Smithsonian",pct:0,left:"1 collection · public"},
-];
-const resources=[
-  {ic:"📘",t:"ISDS Debating Guides",d:"Official WSDC & argument guides",u:"https://indianschoolsdebatingsociety.com/debating-guides/",v:"debate"},
-  {ic:"🦾",t:"How to be an Iron Person",d:"This event's exact skill",u:"https://www.debatingforeveryone.com/resources/how-to-debate/how-to-be-an-iron-person",v:"debate"},
-  {ic:"🎓",t:"Cambridge Union Intro to Debating",d:"PDF: argumentation basics",u:"http://cambridgeschools.cus.org/cambridge_schools_bp_debating_guide_2013.pdf",v:"debate"},
-  {ic:"🎤",t:"NSDA Self-Guided Learning",d:"Free extempore drills",u:"https://www.speechanddebate.org/self-guided-student-learning/",v:"debate"},
-  {ic:"🗂️",t:"NSDA Topics & Motions",d:"Practice motions — Section 2",u:"https://www.speechanddebate.org/topics/",v:"debate"},
-  {ic:"📰",t:"BBC News · The Hindu",d:"Current affairs — Section 1",u:"https://www.bbc.com/news",v:"sdg"},
-];
-
-/* lines: 11:30 = 2, +1 per 30 min, 21:00 = 21 */
+const NAMES={sdg:"SDG",stan:"Stanford",agora:"UNICEF",bril:"Brilliant",earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Break / rest",meal:"Meals",comp:"Live event"};
 function L(t){const[h,m]=t.split(":").map(Number);return 2+((h*60+m)-690)/30;}
-const C=(v,t,s,a,b,o={})=>({v,t,s,a:L(a),b:L(b),link:o.link,todo:o.todo,day:o.day});
-const lunch=()=>({v:"relax",t:"Lunch + TV",s:"Eat & watch one episode — your 1h break",a:L("14:00"),b:L("15:00")});
-const dinner=(a="19:30",b="20:00")=>({v:"meal",t:"Dinner",s:"",a:L(a),b:L(b)});
+/* video items: vid(id,label,status)  status: ''|'done'|'now' */
+const V=(id,label,st='')=>({id,label,st});
+function sdgVids(n,extra=[]){const a=[];for(let i=1;i<=5;i++)a.push(V('sdg'+n+'v'+i,'Video '+n+'.'+i,extra.find(e=>e.i===i)?extra.find(e=>e.i===i).st:''));
+  a.push(V('sdg'+n+'rq','Readings + module quiz'));return a;}
+function stanVids(n,t){return [V('stan'+n+'v1',t+' — video 1'),V('stan'+n+'v2',t+' — video 2'),V('stan'+n+'v3',t+' — video 3'),V('stan'+n+'r','Reflection questions')];}
+/* block: B(v,title,sub,a,b,{link,todo,items}) */
+const B=(v,t,s,a,b,o={})=>({v,t,s,a:L(a),b:L(b),link:o.link,todo:o.todo,items:o.items});
+const lunch=()=>B("relax","Lunch + TV","Eat & watch one episode — your 1h break","14:00","15:00");
+const dinner=(a="19:30",b="20:00")=>B("meal","Dinner","",a,b);
 
 const days=[
  {dn:"Mon",dd:"29 Jun",cls:"today",evs:[
-   C("sdg","SDG · Module 1","Watch the intro videos on the 17 SDGs & Agenda 2030 · read both readings · post 1 reply in the discussion","11:30","14:00",{link:COURSES.sdg.link,todo:1}),
+   B("sdg","SDG · Module 1 (finish)","Finish video 1.2, then 1.3–1.5 + readings & quiz","11:30","14:00",{link:CO.sdg.link,todo:1,
+     items:sdgVids(1,[{i:1,st:'done'},{i:2,st:'now'}])}),
    lunch(),
-   C("sdg","SDG · Module 2","Transformation Pathways: watch the 6-transformations videos · note each transformation + 1 example · take the module quiz","15:00","17:30",{link:COURSES.sdg.link,todo:1}),
-   C("debate","Debate · setup","Read the ISDS + Iron-Person guides so you know the 3 sections · skim BBC/The Hindu, note 3 issues with both-side arguments","17:30","18:30",{todo:1}),
-   C("meal","Dinner (early)","Eat before the orientation","18:30","19:00"),
-   C("comp","🎥 ISDS Orientation — LIVE","Zoom · 7–8 PM IST · Meeting ID 850 3003 9661 · click to join","19:00","20:00",{link:"https://us06web.zoom.us/j/85030039661"}),
-   C("bril","Brilliant · finish Level 2","Nesting Loops → Combining Loops → Loop Combo Challenge → Level Review","20:00","21:00",{link:COURSES.bril.link,todo:1}),
+   B("sdg","SDG · Module 2","Transformation Pathways — videos 2.1–2.5 + quiz","15:00","17:30",{link:CO.sdg.link,todo:1,items:sdgVids(2)}),
+   B("debate","Debate · setup","Read the ISDS + Iron-Person guides · skim BBC Newsround, note 3 issues with both-side arguments","17:30","18:30",{todo:1}),
+   B("meal","Dinner (early)","Eat before the orientation","18:30","19:00"),
+   B("comp","🎥 ISDS Orientation — LIVE","Zoom · 7–8 PM IST · Meeting ID 850 3003 9661 · click to join","19:00","20:00",{link:"https://us06web.zoom.us/j/85030039661"}),
+   B("bril","Brilliant · finish Level 2","Nesting → Combining Loops → Loop Combo Challenge → Level Review","20:00","21:00",{link:CO.bril.link,todo:1}),
  ]},
  {dn:"Tue",dd:"30 Jun",evs:[
-   C("sdg","SDG · Module 3","Government and the SDGs: watch the videos on national SDG policy & governance · note the government's role · take the quiz","11:30","14:00",{link:COURSES.sdg.link,todo:1}),
+   B("sdg","SDG · Module 3","Government & the SDGs — videos 3.1–3.5 + quiz","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(3)}),
    lunch(),
-   C("stan","Stanford · Mistakes and Speed","Watch Jo Boaler's videos: how mistakes grow your brain & why speed ≠ math ability · answer the 2 reflection questions","15:00","17:30",{link:COURSES.stan.link,todo:1}),
-   C("debate","Debate · Sec 2 Extempore","Learn PEEL (Point–Evidence–Explain–Link) · do 3 timed speeches: 1 min prep, 3 min speak · record & rewatch","17:30","18:30",{todo:1}),
-   C("bril","Brilliant · Level 3 (Branching)","Using if-statements → Preventing Errors → if-else → Branching Challenge","18:30","19:30",{link:COURSES.bril.link,todo:1}),
+   B("stan","Stanford · Mistakes & Speed","3 short videos: mistakes grow your brain · speed ≠ ability · + 2 reflection Qs","15:00","17:30",{link:CO.stan.link,todo:1,items:stanVids(3,'Mistakes & Speed')}),
+   B("debate","Debate · Sec 2 Extempore","Learn PEEL · 3 timed speeches (1m prep / 3m speak) · record & rewatch","17:30","18:30",{todo:1}),
+   B("bril","Brilliant · Level 3 (Branching)","if-statements → Preventing Errors → if-else → Branching Challenge","18:30","19:30",{link:CO.bril.link,todo:1}),
    dinner(),
-   C("smith","Smithsonian · part 1","Watch the 'Early Human Diets' webcast video · answer the discussion questions as you go","20:00","21:00",{link:COURSES.smith.link,todo:1}),
+   B("smith","Smithsonian · part 1","Watch the Early Human Diets webcast · answer the discussion questions","20:00","21:00",{link:CO.smith.link,todo:1}),
  ]},
  {dn:"Wed",dd:"1 Jul",evs:[
-   C("sdg","SDG · Module 4","SDG Financing: watch the videos on how the goals get funded (public, private, aid) · note 3 financing sources · take the quiz","11:30","14:00",{link:COURSES.sdg.link,todo:1}),
+   B("sdg","SDG · Module 4","SDG Financing — videos 4.1–4.5 + quiz · note 3 funding sources","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(4)}),
    lunch(),
-   C("agora","UNICEF · Intro + Module 1","Course intro + 'UNICEF and humanitarian action': read the pages, watch the clips, complete the module check","15:00","17:30",{link:COURSES.agora.link,todo:1}),
-   C("debate","Debate · Sec 1 Quiz","Drill 5 global topics — climate, conflicts, world economy, AI/tech, India & the world · self-quiz at the end","17:30","18:30",{todo:1}),
-   C("bril","Brilliant · Level 4","Designing Programs: Conditioning on History → Nesting Logic → Complex Branching → Level Review","18:30","19:30",{link:COURSES.bril.link,todo:1}),
+   B("agora","UNICEF · Intro + Module 1","Course intro + 'UNICEF and humanitarian action' · complete the module check","15:00","17:30",{link:CO.agora.link,todo:1}),
+   B("debate","Debate · Sec 1 Quiz","Use the Ironperson quiz + drill 5 topics: climate · conflicts · economy · AI/tech · India & the world","17:30","18:30",{todo:1}),
+   B("bril","Brilliant · Level 4","Designing Programs: Conditioning on History → Nesting Logic → Complex Branching","18:30","19:30",{link:CO.bril.link,todo:1}),
    dinner(),
-   C("earth","Earth School · Steps 1–2","Electrify Transportation + Decarbonize the Grid: watch the short videos & take both quizzes","20:00","21:00",{link:COURSES.earth.link,todo:1}),
+   B("earth","Earth School · Steps 1–2","Electrify Transportation + Decarbonize the Grid: videos + both quizzes","20:00","21:00",{link:CO.earth.link,todo:1}),
  ]},
  {dn:"Thu",dd:"2 Jul",evs:[
-   C("sdg","SDG · Module 5","Business Sector and the SDGs: watch the videos on corporate responsibility/ESG · note how business drives the goals · take the quiz","11:30","14:00",{link:COURSES.sdg.link,todo:1}),
+   B("sdg","SDG · Module 5","Business Sector & the SDGs — videos 5.1–5.5 + quiz","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(5)}),
    lunch(),
-   C("stan","Stanford · Number Flexibility","Number Flexibility, Reasoning & Connections: watch the number-sense videos · practice flexible thinking · do the reflection Qs","15:00","17:30",{link:COURSES.stan.link,todo:1}),
-   C("debate","Debate · Sec 3 Comprehension","Read 2 editorials + listen to 1 TED talk under time · take fast notes · write a 3-line summary of each","17:30","18:30",{todo:1}),
-   C("agora","UNICEF · Module 2","Principles guiding humanitarian action: humanity, neutrality, impartiality, independence · complete the module check","18:30","19:30",{link:COURSES.agora.link,todo:1}),
+   B("stan","Stanford · Number Flexibility","Number Flexibility, Reasoning & Connections: 3 videos + reflection","15:00","17:30",{link:CO.stan.link,todo:1,items:stanVids(4,'Number Flexibility')}),
+   B("debate","Debate · Sec 3 Comprehension","2 editorials + 1 TED talk under time · fast notes · 3-line summary each","17:30","18:30",{todo:1}),
+   B("agora","UNICEF · Module 2","Principles: humanity · neutrality · impartiality · independence · module check","18:30","19:30",{link:CO.agora.link,todo:1}),
    dinner(),
-   C("earth","Earth School · Steps 3–4","Watch the videos & take the quizzes for the next two steps","20:00","21:00",{link:COURSES.earth.link,todo:1}),
+   B("earth","Earth School · Steps 3–4","Watch the videos & take the quizzes","20:00","21:00",{link:CO.earth.link,todo:1}),
  ]},
  {dn:"Fri",dd:"3 Jul",evs:[
-   C("sdg","SDG · Module 6","Civil Society and the SDGs: watch the videos on NGOs & communities · note civil-society roles · take the quiz","11:30","14:00",{link:COURSES.sdg.link,todo:1}),
+   B("sdg","SDG · Module 6","Civil Society & the SDGs — videos 6.1–6.5 + quiz","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(6)}),
    lunch(),
-   C("sdg","SDG · Module 7 + End → FINISH","Global Partnerships (SDG 17): watch the videos · take the final module quiz · complete End of Course","15:00","17:30",{link:COURSES.sdg.link,todo:1}),
-   C("debate","Debate · Sec 2 + rebuttal","More extempore + rebuttal drills using NSDA practice motions · focus on answering the other side","17:30","18:30",{todo:1}),
-   C("stan","Stanford · Number Patterns","Number Patterns & Representations: watch the videos · do the pattern tasks + reflection","18:30","19:30",{link:COURSES.stan.link,todo:1}),
+   B("sdg","SDG · Module 7 + End → FINISH","Global Partnerships — videos 7.1–7.5 + final quiz + End of Course","15:00","17:30",{link:CO.sdg.link,todo:1,items:sdgVids(7)}),
+   B("debate","Debate · Sec 2 + rebuttal","Extempore + rebuttal drills on the debate motions · focus on answering the other side","17:30","18:30",{todo:1}),
+   B("stan","Stanford · Number Patterns","Number Patterns & Representations: 3 videos + reflection","18:30","19:30",{link:CO.stan.link,todo:1,items:stanVids(5,'Number Patterns')}),
    dinner(),
-   C("smith","Smithsonian · part 2 → FINISH","Finish the activities & the short independent-project notes in the collection","20:00","21:00",{link:COURSES.smith.link,todo:1}),
+   B("smith","Smithsonian · part 2 → FINISH","Finish the activities & short independent-project notes","20:00","21:00",{link:CO.smith.link,todo:1}),
  ]},
  {dn:"Sat",dd:"4 Jul",evs:[
-   C("agora","UNICEF · Modules 3 & 4","International humanitarian system & coordination + UNICEF emergency response: read + complete both module checks","11:30","14:00",{link:COURSES.agora.link,todo:1}),
+   B("agora","UNICEF · Modules 3 & 4","Intl humanitarian system & coordination + emergency response · both module checks","11:30","14:00",{link:CO.agora.link,todo:1}),
    lunch(),
-   C("agora","UNICEF · Module 5 + Final → FINISH","Emergency preparedness + the final evaluation & certificate","15:00","17:30",{link:COURSES.agora.link,todo:1}),
-   C("debate","Debate · FULL MOCK","Do all three under time: 20-min current-affairs quiz + 1 extempore + 1 comprehension passage · then rest","17:30","18:30",{todo:1}),
-   C("stan","Stanford · Math in Life → FINISH","Math in Life, Nature & Work: watch the videos · final reflection → course complete","18:30","19:30",{link:COURSES.stan.link,todo:1}),
+   B("agora","UNICEF · Module 5 + Final → FINISH","Emergency preparedness + final evaluation & certificate","15:00","17:30",{link:CO.agora.link,todo:1}),
+   B("debate","Debate · FULL MOCK","Do the full mock in the Ironperson tab under time · then rest","17:30","18:30",{todo:1}),
+   B("stan","Stanford · Math in Life → FINISH","Math in Life, Nature & Work: 3 videos + final reflection","18:30","19:30",{link:CO.stan.link,todo:1,items:stanVids(6,'Math in Life')}),
    dinner(),
-   C("earth","Earth School · Steps 5–7","Watch the videos & take the quizzes for the next three steps","20:00","21:00",{link:COURSES.earth.link,todo:1}),
+   B("earth","Earth School · Steps 5–7","Watch the videos & take the quizzes","20:00","21:00",{link:CO.earth.link,todo:1}),
  ]},
  {dn:"Sun",dd:"5 Jul",cls:"race",evs:[
-   C("relax","Rest + debate warm-up","NO course work today. Re-read your 3-issue notes, do 1 easy 3-min extempore, then relax & breathe","11:30","14:00"),
+   B("relax","Rest + debate warm-up","NO course work today. Re-read your 3-issue notes, do 1 easy extempore, relax & breathe","11:30","14:00"),
    lunch(),
-   C("relax","Calm time","Stay loose — a walk, music, no screens-heavy study","15:00","15:45"),
-   C("debate","Tech check","Test the proctoring software, internet, camera & a quiet space before the round","15:45","16:00",{todo:1}),
-   C("comp","🎤 ISDS Ironperson Triathlon","The real thing: Quiz · Extempore · Comprehension (4–7 PM IST)","16:00","19:00"),
-   C("relax","Decompress 🎉","You did it — celebrate, no matter how it went","19:00","19:30"),
+   B("relax","Calm time","A walk, music, no heavy study","15:00","15:45"),
+   B("debate","Tech check","Test the proctoring software, internet, camera & a quiet space","15:45","16:00",{todo:1}),
+   B("comp","🎤 ISDS Ironperson Triathlon","Quiz · Extempore · Comprehension (4–7 PM IST)","16:00","19:00"),
+   B("relax","Decompress 🎉","You did it — celebrate, no matter how it went","19:00","19:30"),
    dinner(),
-   C("earth","After-comp catch-up","Optional & only if you're up for it: Earth School steps 8–10 + any Brilliant Levels 5–9 (self-paced, no deadline)","20:00","21:00",{link:COURSES.earth.link,todo:1}),
+   B("earth","After-comp catch-up","Optional: Earth School steps 8–10 + Brilliant Levels 5–9 (self-paced)","20:00","21:00",{link:CO.earth.link,todo:1}),
  ]},
 ];
 
-const NAMES={sdg:"SDG Academy",stan:"Stanford Math",agora:"UNICEF Agora",bril:"Brilliant",
-  earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Break / rest",meal:"Meals",comp:"Live event"};
-
-/* ---------- tabs ---------- */
+/* tabs */
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');document.getElementById('v-'+b.dataset.v).classList.add('on');
-});
+  b.classList.add('on');document.getElementById('v-'+b.dataset.v).classList.add('on');});
 
-/* ---------- progress cards ---------- */
-const pc=document.getElementById('pcards');
-progress.forEach(p=>{const d=document.createElement('div');d.className='pcard';
-  d.innerHTML='<div class="nm"><span class="dot" style="background:var(--'+p.v+')"></span>'+p.n+'</div>'+
-    '<div class="pct" style="color:var(--'+p.v+')">'+p.pct+'%</div>'+
-    '<div class="bar"><i style="width:'+Math.max(p.pct,3)+'%;background:var(--'+p.v+')"></i></div>'+
-    '<div class="left">'+p.left+'</div>';pc.appendChild(d);});
-
-/* ---------- calendar ---------- */
+/* calendar */
 const cal=document.getElementById('cal');
 cal.appendChild(Object.assign(document.createElement('div'),{className:'corner'}));
-days.forEach((d,i)=>{const h=document.createElement('div');h.className='dayhead'+(d.cls?' '+d.cls:'');
-  h.style.gridColumn=i+2;
-  h.innerHTML='<span class="dn">'+d.dn+'</span>'+(d.cls==='today'?'<span class="badge">TODAY</span>':'<span class="dd">'+d.dd+'</span>')
-    +(d.cls==='race'?'':'');
-  if(d.cls==='today')h.innerHTML='<span class="dn">'+d.dn+'</span><span class="badge">TODAY · 29 Jun</span>';
+days.forEach((d,i)=>{const h=document.createElement('div');h.className='dayhead'+(d.cls?' '+d.cls:'');h.style.gridColumn=i+2;
+  h.innerHTML='<span class="dn">'+d.dn+'</span>'+(d.cls==='today'?'<span class="badge">TODAY · 29 Jun</span>':'<span class="dd">'+d.dd+'</span>');
   cal.appendChild(h);});
 ["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"].forEach(t=>{
   const lab=document.createElement('div');lab.className='tlabel';lab.style.gridRow=L(t);
   let[h]=t.split(':');h=+h;const ap=h>=12?'pm':'am';h=h%12||12;lab.textContent=h+' '+ap;cal.appendChild(lab);});
-for(let r=2;r<=21;r++){const ln=document.createElement('div');ln.className='slotline'+(r%2?' hr':'');
-  ln.style.gridRow=r+'/'+(r+1);cal.appendChild(ln);}
+for(let r=2;r<=21;r++){const ln=document.createElement('div');ln.className='slotline'+(r%2?' hr':'');ln.style.gridRow=r+'/'+(r+1);cal.appendChild(ln);}
 for(let c=2;c<=8;c++){const v=document.createElement('div');v.className='vline';v.style.gridColumn=c;cal.appendChild(v);}
-days.forEach((d,i)=>d.evs.forEach(e=>{
-  const el=document.createElement(e.link?'a':'div');el.className='ev';
-  el.style.gridColumn=i+2;el.style.gridRow=e.a+'/'+e.b;
-  el.style.background='var(--'+e.v+'bg)';el.style.color='var(--'+e.v+')';
+days.forEach((d,i)=>d.evs.forEach(e=>{const el=document.createElement(e.link?'a':'div');el.className='ev';
+  el.style.gridColumn=i+2;el.style.gridRow=e.a+'/'+e.b;el.style.background='var(--'+e.v+'bg)';el.style.color='var(--'+e.v+')';
   if(e.v==='comp')el.style.borderColor='var(--comp)';
-  let html='<span class="tt">'+e.t+'</span>';
-  if(e.s)html+='<span class="ss">'+e.s+'</span>';
+  let html='<span class="tt">'+e.t+'</span>';if(e.s)html+='<span class="ss">'+e.s+'</span>';
   if(e.link){el.href=e.link;el.target='_blank';el.rel='noopener';html+='<span class="lk">↗ open</span>';}
-  el.innerHTML=html;cal.appendChild(el);
-}));
-
-/* legend + resources */
+  el.innerHTML=html;cal.appendChild(el);}));
 const lg=document.getElementById('legend');
-["sdg","stan","agora","bril","earth","smith","debate","relax","meal","comp"].forEach(v=>{
-  const c=document.createElement('span');c.className='chip';
-  c.style.background='var(--'+v+'bg)';c.style.color='var(--'+v+')';c.textContent=NAMES[v];lg.appendChild(c);});
-const rl=document.getElementById('reslist');
-resources.forEach(r=>{const a=document.createElement('a');a.href=r.u;a.target='_blank';a.rel='noopener';
-  a.innerHTML='<span class="ic" style="background:var(--'+r.v+'bg);color:var(--'+r.v+')">'+r.ic+'</span>'+
-    '<span><span class="rt">'+r.t+'</span><span class="rd">'+r.d+'</span></span>';rl.appendChild(a);});
+["sdg","stan","agora","bril","earth","smith","debate","relax","meal","comp"].forEach(v=>{const c=document.createElement('span');
+  c.className='chip';c.style.background='var(--'+v+'bg)';c.style.color='var(--'+v+')';c.textContent=NAMES[v];lg.appendChild(c);});
 
-/* ---------- to-do (derived from schedule) ---------- */
-const tasks=[];
-days.forEach(d=>d.evs.forEach(e=>{if(e.todo)tasks.push({day:d.dn+' '+d.dd,cls:d.cls,v:e.v,t:e.t,s:e.s});}));
-const TKEY='summerplan_todo_v1';
-let doneState=JSON.parse(localStorage.getItem(TKEY)||'{}');
+/* ---- build units (the things you tick) ---- */
+const TKEY='summerplan_v2';
+let st=JSON.parse(localStorage.getItem(TKEY)||'{}');
+let auto=0;const units=[];
+days.forEach(d=>d.evs.forEach(bk=>{
+  if(bk.items){bk.items.forEach(it=>units.push({id:it.id,v:bk.v,label:it.label,now:it.st==='now',day:d.dn+' '+d.dd,block:bk.t}));
+    bk.items.forEach(it=>{if(it.st==='done'&&!(it.id in st))st[it.id]=true;});}
+  else if(bk.todo){const id='b'+(auto++);units.push({id,v:bk.v,label:bk.t,desc:bk.s,std:1,day:d.dn+' '+d.dd,block:null});}
+}));
+localStorage.setItem(TKEY,JSON.stringify(st));
+
+/* progress cards */
+const pc=document.getElementById('pcards');const cardEls={};
+Object.keys(CO).forEach(v=>{const d=document.createElement('div');d.className='pcard';
+  d.innerHTML='<div class="nm"><span class="dot" style="background:var(--'+v+')"></span>'+CO[v].n+'</div>'+
+    '<div class="pct" id="pct-'+v+'" style="color:var(--'+v+')">0%</div>'+
+    '<div class="bar"><i id="barf-'+v+'" style="width:3%;background:var(--'+v+')"></i></div>'+
+    '<div class="left" id="left-'+v+'">'+CO[v].base+'</div>';pc.appendChild(d);cardEls[v]=1;});
+
+/* to-do render grouped by day → block */
 const todoList=document.getElementById('todoList');
-const byDay={};tasks.forEach((t,i)=>{(byDay[t.day]=byDay[t.day]||[]).push({...t,i});});
-Object.keys(byDay).forEach(day=>{
+days.forEach(d=>{
+  const dayUnits=units.filter(u=>u.day===d.dn+' '+d.dd);if(!dayUnits.length)return;
   const box=document.createElement('div');box.className='tododay';
-  const total=byDay[day].length;
-  box.innerHTML='<h3>'+day+' <span class="cnt" data-day="'+day+'"></span></h3>';
-  byDay[day].forEach(t=>{
-    const row=document.createElement('label');row.className='todo'+(doneState[t.i]?' done':'');
-    row.innerHTML='<input type="checkbox" '+(doneState[t.i]?'checked':'')+'>'+
-      '<span class="body"><span class="ttl"><span class="pill" style="background:var(--'+t.v+'bg);color:var(--'+t.v+')">'+
-      NAMES[t.v]+'</span>'+t.t+'</span><br><span class="desc">'+(t.s||'')+'</span></span>';
-    const cb=row.querySelector('input');
-    cb.onchange=()=>{doneState[t.i]=cb.checked;localStorage.setItem(TKEY,JSON.stringify(doneState));
-      row.classList.toggle('done',cb.checked);updateCheer();};
-    box.appendChild(row);
+  box.innerHTML='<h3>'+d.dn+' '+d.dd+' <span class="cnt" id="cnt-'+d.dn+'"></span></h3>';
+  d.evs.forEach(bk=>{
+    if(bk.items){
+      const hdr=document.createElement('div');hdr.className='blockhdr';
+      hdr.innerHTML='<span class="pill" style="background:var(--'+bk.v+'bg);color:var(--'+bk.v+')">'+NAMES[bk.v]+'</span>'+bk.t;
+      box.appendChild(hdr);
+      bk.items.forEach(it=>box.appendChild(row(it.id,it.label,'',it.st==='now')));
+    }else if(bk.todo){
+      const u=units.find(x=>x.label===bk.t&&x.day===d.dn+' '+d.dd&&x.std);
+      box.appendChild(row(u.id,'<span class="pill" style="background:var(--'+bk.v+'bg);color:var(--'+bk.v+')">'+NAMES[bk.v]+'</span>'+bk.t,bk.s,false,true));
+    }
   });
   todoList.appendChild(box);
 });
-function updateCheer(){
-  const done=tasks.filter((t,i)=>doneState[i]).length,total=tasks.length;
-  const pct=total?done/total:0;
+function row(id,label,desc,now,std){
+  const r=document.createElement('label');r.className='todo'+(std?' std':'')+(st[id]?' done':'');
+  r.innerHTML='<input type="checkbox" '+(st[id]?'checked':'')+'>'+
+    '<span class="body"><span class="ttl">'+label+(now?'<span class="nowpill">IN PROGRESS</span>':'')+'</span>'+
+    (desc?'<br><span class="desc">'+desc+'</span>':'')+'</span>';
+  const cb=r.querySelector('input');
+  cb.onchange=()=>{st[id]=cb.checked;localStorage.setItem(TKEY,JSON.stringify(st));r.classList.toggle('done',cb.checked);refresh();};
+  return r;
+}
+function refresh(){
+  const done=units.filter(u=>st[u.id]).length,total=units.length,pct=total?done/total:0;
   document.getElementById('ringfg').style.strokeDashoffset=119*(1-pct);
   document.getElementById('cheerSub').textContent=done+' of '+total+' tasks done';
-  const msgs=done===0?"Let's get today started 💪":
-    pct<.25?"Great start — keep the momentum 🚀":
-    pct<.5?"You're building a real streak 🔥":
-    pct<.75?"More than halfway — proud of you 🌟":
-    pct<1?"So close, finish strong 💥":"Every task done — you're unstoppable! 🎉";
-  document.getElementById('cheerMsg').textContent=msgs;
-  Object.keys(byDay).forEach(day=>{
-    const items=byDay[day];const dd=items.filter(t=>doneState[t.i]).length;
-    const el=document.querySelector('.cnt[data-day="'+CSS.escape(day)+'"]');if(el)el.textContent=dd+' / '+items.length;
-  });
+  document.getElementById('cheerMsg').textContent=
+    done===0?"Let's get today started 💪":pct<.25?"Great start — keep going 🚀":pct<.5?"Building a real streak 🔥":
+    pct<.75?"More than halfway — proud of you 🌟":pct<1?"So close, finish strong 💥":"Everything done — unstoppable! 🎉";
+  Object.keys(CO).forEach(v=>{const us=units.filter(u=>u.v===v);const dd=us.filter(u=>st[u.id]).length;
+    const p=us.length?Math.round(dd/us.length*100):0;
+    document.getElementById('pct-'+v).textContent=p+'%';document.getElementById('barf-'+v).style.width=Math.max(p,3)+'%';
+    document.getElementById('left-'+v).textContent=CO[v].base+' · '+dd+'/'+us.length+' this week';});
+  days.forEach(d=>{const us=units.filter(u=>u.day===d.dn+' '+d.dd);const dd=us.filter(u=>st[u.id]).length;
+    const el=document.getElementById('cnt-'+d.dn);if(el)el.textContent=dd+' / '+us.length;});
 }
-updateCheer();
+refresh();
 
-/* ---------- notes ---------- */
-const NKEY='summerplan_notes_v1';
-let noteData=JSON.parse(localStorage.getItem(NKEY)||'{}');
+/* ---- notes ---- */
+const NKEY='summerplan_notes_v1';let noteData=JSON.parse(localStorage.getItem(NKEY)||'{}');
 const seed={
- sdg:{v:"sdg",title:"SDG Academy",html:"<span class='h'>SDGs — the basics</span><ul><li>17 goals, to hit by <b>2030</b></li><li>Part of <b>Agenda 2030</b> — adopted 25 Sep 2015 by 193 UN states</li><li>3 pillars: environment · economy · equity</li></ul><span class='h'>Key dates</span><ul><li>1987 Brundtland — defined sustainable dev</li><li>2000–15 MDGs → 2015 SDGs + Paris Agreement</li></ul><span class='h'>Sachs' 6 transformations</span><ul><li>education · health · energy · food/land · cities · digital</li></ul>"},
- stan:{v:"stan",title:"Stanford — How to Learn Math",html:"<span class='h'>Mindset</span><ul><li><b>Mistakes grow your brain</b> — every error sparks a synapse</li><li><b>Speed ≠ math ability</b> — deep slow thinking wins</li><li>Praise <b>effort</b>, not being 'smart'</li></ul><span class='h'>Big idea</span><ul><li>Math = creativity, patterns & connections, not memorising</li><li>There's no 'math person' gene — anyone can learn</li></ul>"},
- agora:{v:"agora",title:"UNICEF — Humanitarian Action",html:"<span class='h'>4 humanitarian principles</span><ul><li><b>Humanity</b> · <b>Neutrality</b></li><li><b>Impartiality</b> · <b>Independence</b></li></ul><span class='h'>Core ideas</span><ul><li>UNICEF = 'for every child' — protects kids in emergencies</li><li><b>Preparedness</b> reduces disaster impact; response comes after</li><li>Agencies coordinate via the cluster system</li></ul>"},
- bril:{v:"bril",title:"Brilliant — Thinking in Code",html:"<span class='h'>Loops</span><ul><li>Loops repeat actions; <b>nest</b> them for grids & patterns</li></ul><span class='h'>Branching</span><ul><li><b>if / if-else</b> = decisions in code</li></ul><span class='h'>Variables</span><ul><li>store & <b>update</b> values as the program runs</li></ul>"},
- earth:{v:"earth",title:"Earth School (TED-Ed)",html:"<span class='h'>The plan</span><ul><li><b>Net zero by 2050</b> — a 10-step action plan</li></ul><span class='h'>Steps so far</span><ul><li>Transport: EVs cut emissions; long history of electric cars</li><li>Grid: solar & wind decarbonise electricity</li></ul>"},
- smith:{v:"smith",title:"Smithsonian — Early Human Diets",html:"<span class='h'>Big idea</span><ul><li><b>Diet drove human evolution</b> — better food → bigger brains</li></ul><span class='h'>Evidence</span><ul><li>fossils · tooth wear · stone tools · isotopes</li><li>meat-eating + <b>cooking</b> were key shifts</li></ul>"},
+ sdg:{v:"sdg",title:"SDG Academy",html:"<span class='h'>SDGs — basics</span><ul><li>17 goals, by <b>2030</b></li><li><b>Agenda 2030</b> — adopted 25 Sep 2015 by 193 UN states</li><li>3 pillars: environment · economy · equity</li></ul><span class='h'>Key dates</span><ul><li>1987 Brundtland defined sustainable dev</li><li>2015 SDGs + Paris Agreement</li></ul>"},
+ stan:{v:"stan",title:"Stanford — How to Learn Math",html:"<span class='h'>Mindset</span><ul><li><b>Mistakes grow your brain</b></li><li><b>Speed ≠ math ability</b></li><li>Praise effort, not 'smart'</li></ul><span class='h'>Big idea</span><ul><li>Math = creativity, patterns, connections</li><li>No 'math person' gene</li></ul>"},
+ agora:{v:"agora",title:"UNICEF — Humanitarian Action",html:"<span class='h'>4 principles</span><ul><li><b>Humanity · Neutrality</b></li><li><b>Impartiality · Independence</b></li></ul><span class='h'>Core</span><ul><li>UNICEF = 'for every child'</li><li><b>Preparedness</b> reduces disaster impact</li></ul>"},
+ bril:{v:"bril",title:"Brilliant — Thinking in Code",html:"<span class='h'>Loops</span><ul><li>Repeat actions; <b>nest</b> for grids</li></ul><span class='h'>Branching</span><ul><li><b>if / if-else</b> = decisions</li></ul><span class='h'>Variables</span><ul><li>store & <b>update</b> values</li></ul>"},
+ earth:{v:"earth",title:"Earth School (TED-Ed)",html:"<span class='h'>The plan</span><ul><li><b>Net zero by 2050</b> — 10 steps</li></ul><span class='h'>So far</span><ul><li>EVs cut transport emissions</li><li>Solar & wind decarbonise the grid</li></ul>"},
+ smith:{v:"smith",title:"Smithsonian — Early Human Diets",html:"<span class='h'>Big idea</span><ul><li><b>Diet drove human evolution</b> — better food → bigger brains</li></ul><span class='h'>Evidence</span><ul><li>fossils · tooth wear · tools · isotopes</li><li>meat + <b>cooking</b> were key shifts</li></ul>"},
 };
 const nc=document.getElementById('ncards');
-Object.keys(seed).forEach(k=>{
-  const s=seed[k];const card=document.createElement('div');card.className='ncard';
-  const inner=noteData[k]||s.html;
+Object.keys(seed).forEach(k=>{const s=seed[k];const card=document.createElement('div');card.className='ncard';
   card.innerHTML='<div class="nh"><span class="lab" style="background:var(--'+s.v+'bg);color:var(--'+s.v+')">'+s.title+'</span></div>'+
-    '<div class="hand" id="note-'+k+'" contenteditable="true">'+inner+'</div>'+
-    '<div class="tools"><button class="btn" data-save="'+k+'">Save as image</button>'+
-    '<button class="btn" data-reset="'+k+'">Reset</button></div>';
+    '<div class="hand" id="note-'+k+'" contenteditable="true">'+(noteData[k]||s.html)+'</div>'+
+    '<div class="tools"><button class="btn" data-save="'+k+'">Save as image</button><button class="btn" data-reset="'+k+'">Reset</button></div>';
   nc.appendChild(card);
-  const hand=card.querySelector('#note-'+k);
-  hand.addEventListener('input',()=>{noteData[k]=hand.innerHTML;localStorage.setItem(NKEY,JSON.stringify(noteData));});
-});
-nc.addEventListener('click',e=>{
-  const sv=e.target.dataset.save,rs=e.target.dataset.reset;
-  if(sv){const node=document.getElementById('note-'+sv).parentElement;
-    html2canvas(node,{backgroundColor:'#fffdf5',scale:2}).then(cv=>{
-      const a=document.createElement('a');a.download=sv+'-notes.png';a.href=cv.toDataURL();a.click();});}
-  if(rs){const hand=document.getElementById('note-'+rs);hand.innerHTML=seed[rs].html;
-    noteData[rs]=seed[rs].html;localStorage.setItem(NKEY,JSON.stringify(noteData));}
-});
+  card.querySelector('#note-'+k).addEventListener('input',function(){noteData[k]=this.innerHTML;localStorage.setItem(NKEY,JSON.stringify(noteData));});});
+nc.addEventListener('click',e=>{const sv=e.target.dataset.save,rs=e.target.dataset.reset;
+  if(sv)html2canvas(document.getElementById('note-'+sv).parentElement,{backgroundColor:'#fffdf5',scale:2}).then(cv=>{const a=document.createElement('a');a.download=sv+'-notes.png';a.href=cv.toDataURL();a.click();});
+  if(rs){document.getElementById('note-'+rs).innerHTML=seed[rs].html;noteData[rs]=seed[rs].html;localStorage.setItem(NKEY,JSON.stringify(noteData));}});
 
-/* ---------- focus alarm ---------- */
+/* ---- ironperson content ---- */
+const quizData=[
+ ["How many Sustainable Development Goals (SDGs) are there?","17"],
+ ["By what year are the SDGs meant to be achieved?","2030"],
+ ["Which organisation created the SDGs?","The United Nations (UN)"],
+ ["What does 'COP' stand for at climate summits?","Conference of the Parties"],
+ ["The 2015 Paris Agreement mainly tackles what problem?","Climate change — limiting global warming"],
+ ["Which gas is the main driver of human-caused climate change?","Carbon dioxide (CO₂)"],
+ ["What does 'net zero' mean?","Cutting greenhouse emissions and removing an equal amount — aimed for ~2050"],
+ ["Which UN body is responsible for international peace & security?","The UN Security Council"],
+ ["What are the four humanitarian principles?","Humanity, Neutrality, Impartiality, Independence"],
+ ["Which country is the world's most populous (since 2023)?","India"],
+];
+const motions=[
+ "THW ban junk food in school canteens","THW require AI-generated schoolwork to be clearly labelled",
+ "THW ban homework in middle school","THW make school uniforms compulsory","THW ban single-use plastics",
+ "THW lower the voting age to 16","THW ban smartphones in classrooms","THW prioritise online privacy even if it slows new technology",
+ "THBT social media does more harm than good for teenagers","THW ban keeping animals in zoos","THW make a second language compulsory in school",
+];
+const prompts=["A world without the internet","Should kids have less homework?","The most important invention ever",
+ "Plastic: friend or foe?","If I were Prime Minister for a day","Why reading still matters","Robots in the classroom"];
+const passage="Around the world, more electricity now comes from the sun and the wind than ever before. These are called renewable sources because they do not run out, unlike coal, oil and gas. Burning those fuels releases carbon dioxide, which warms the planet. Many countries have promised to reach 'net zero' by 2050, meaning they will not add more greenhouse gases to the air than they take out. Switching to clean energy, planting trees, and using electric cars are three big ways to get there. The change is not easy or cheap, but scientists say it is needed to protect our future.";
+const compData=[
+ ["Why are sun and wind called 'renewable'?","Because they do not run out (unlike coal, oil and gas)."],
+ ["What does burning coal, oil and gas release?","Carbon dioxide, which warms the planet."],
+ ["What does 'net zero by 2050' mean?","Not adding more greenhouse gases to the air than you take out, by the year 2050."],
+ ["Name two ways to reach net zero from the passage.","Any two: clean/renewable energy, planting trees, electric cars."],
+];
+const careRes=[
+ {ic:"📺",t:"CNN 10",d:"10-min daily world news for students",u:"https://www.cnn.com/cnn10",v:"sdg"},
+ {ic:"📺",t:"BBC Newsround",d:"World news written & filmed for kids",u:"https://www.bbc.co.uk/newsround",v:"agora"},
+ {ic:"📺",t:"TED-Ed",d:"Short animated explainers on big topics",u:"https://ed.ted.com/",v:"earth"},
+ {ic:"📺",t:"Kurzgesagt – In a Nutshell",d:"Fun, clear videos on world issues",u:"https://www.youtube.com/@kurzgesagt",v:"stan"},
+ {ic:"📰",t:"DOGO News",d:"Current-events articles for kids",u:"https://www.dogonews.com/",v:"smith"},
+ {ic:"📰",t:"News for Kids",d:"Daily news told simply, words explained",u:"https://newsforkids.net/",v:"bril"},
+ {ic:"📰",t:"The Week Junior",d:"Weekly current-affairs magazine for kids",u:"https://theweekjunior.com/",v:"comp"},
+ {ic:"📰",t:"Newsahoot (India)",d:"Child-friendly news, India + world",u:"https://newsahoot.com/",v:"debate"},
+];
+const guideRes=[
+ {ic:"📘",t:"ISDS Debating Guides",d:"Official WSDC & argument guides",u:"https://indianschoolsdebatingsociety.com/debating-guides/",v:"debate"},
+ {ic:"🦾",t:"How to be an Iron Person",d:"This event's exact skill",u:"https://www.debatingforeveryone.com/resources/how-to-debate/how-to-be-an-iron-person",v:"debate"},
+ {ic:"🎤",t:"NSDA Self-Guided Learning",d:"Free extempore drills + champion breakdowns",u:"https://www.speechanddebate.org/self-guided-student-learning/",v:"sdg"},
+ {ic:"🗂️",t:"NSDA Topics & Motions",d:"More practice motions",u:"https://www.speechanddebate.org/topics/",v:"agora"},
+];
+const quizEl=document.getElementById('quiz');
+quizData.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="qq"><span class="qn">Q'+(i+1)+'</span>'+q[0]+'</div><div class="aa">✅ '+q[1]+'</div>';
+  d.onclick=()=>d.classList.toggle('open');quizEl.appendChild(d);});
+const ml=document.getElementById('motions');motions.forEach(m=>{const li=document.createElement('li');li.textContent=m;ml.appendChild(li);});
+const pl=document.getElementById('prompts');prompts.forEach(p=>{const li=document.createElement('li');li.textContent='"'+p+'"';pl.appendChild(li);});
+document.getElementById('passage').textContent=passage;
+const cq=document.getElementById('compQ');
+compData.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="qq"><span class="qn">'+(i+1)+'</span>'+q[0]+'</div><div class="aa">✅ '+q[1]+'</div>';
+  d.onclick=()=>d.classList.toggle('open');cq.appendChild(d);});
+function resInto(elid,arr){const host=document.getElementById(elid);arr.forEach(r=>{const a=document.createElement('a');
+  a.href=r.u;a.target='_blank';a.rel='noopener';
+  a.innerHTML='<span class="ic" style="background:var(--'+r.v+'bg);color:var(--'+r.v+')">'+r.ic+'</span>'+
+    '<span><span class="rt">'+r.t+'</span><span class="rd">'+r.d+'</span></span>';host.appendChild(a);});}
+resInto('cares',careRes);resInto('reslist',guideRes);
+
+/* ---- alarm ---- */
 const presetTimes=[["11:30","Block 1"],["15:00","Block 2"],["18:30","Block 3"],["20:00","Block 4"]];
 const ph=document.getElementById('presets');
-presetTimes.forEach(([t,l])=>{const b=document.createElement('button');b.className='preset';
-  b.textContent=l+' · '+to12(t);b.onclick=()=>{document.getElementById('aTime').value=t;
-    if(!document.getElementById('aLabel').value)document.getElementById('aLabel').value=l;};ph.appendChild(b);});
+presetTimes.forEach(([t,l])=>{const b=document.createElement('button');b.className='preset';b.textContent=l+' · '+to12(t);
+  b.onclick=()=>{document.getElementById('aTime').value=t;if(!document.getElementById('aLabel').value)document.getElementById('aLabel').value=l;};ph.appendChild(b);});
 function to12(t){let[h,m]=t.split(':');h=+h;const ap=h>=12?'PM':'AM';h=h%12||12;return h+':'+m+' '+ap;}
-
-let alarms=[];let ticker=setInterval(checkAlarms,1000);
-const alist=document.getElementById('alist');
-document.getElementById('setAlarm').onclick=()=>{
-  const label=document.getElementById('aLabel').value||'Study time';
-  const time=document.getElementById('aTime').value;if(!time){alert('Pick a time first');return;}
-  alarms.push({label,time,fired:false});renderAlarms();
-};
+let alarms=[];setInterval(checkAlarms,1000);const alist=document.getElementById('alist');
+document.getElementById('setAlarm').onclick=()=>{const label=document.getElementById('aLabel').value||'Study time';
+  const time=document.getElementById('aTime').value;if(!time){alert('Pick a time first');return;}alarms.push({label,time,fired:false});renderAlarms();};
 document.getElementById('testAlarm').onclick=()=>ringAlarm({label:document.getElementById('aLabel').value||'Test alarm'});
 function renderAlarms(){alist.innerHTML='';alarms.forEach((a,i)=>{const r=document.createElement('div');r.className='arow';
-  r.innerHTML='<span><b>'+to12(a.time)+'</b> · '+a.label+'</span><span class="x" data-i="'+i+'">remove</span>';
-  alist.appendChild(r);});
+  r.innerHTML='<span><b>'+to12(a.time)+'</b> · '+a.label+'</span><span class="x" data-i="'+i+'">remove</span>';alist.appendChild(r);});
   alist.querySelectorAll('.x').forEach(x=>x.onclick=()=>{alarms.splice(+x.dataset.i,1);renderAlarms();});}
-function checkAlarms(){const now=new Date();const hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+function checkAlarms(){const n=new Date();const hm=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
   alarms.forEach(a=>{if(!a.fired&&a.time===hm){a.fired=true;ringAlarm(a);}});}
-
 let audioCtx,beepTimer,stream;
-function ringAlarm(a){
-  try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();}catch(e){}
-  function beep(){if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();
-    o.frequency.value=880;o.connect(g);g.connect(audioCtx.destination);g.gain.value=.001;
-    g.gain.exponentialRampToValueAtTime(.25,audioCtx.currentTime+.02);
+function ringAlarm(a){try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();}catch(e){}
+  function beep(){if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=880;
+    o.connect(g);g.connect(audioCtx.destination);g.gain.value=.001;g.gain.exponentialRampToValueAtTime(.25,audioCtx.currentTime+.02);
     g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.4);o.start();o.stop(audioCtx.currentTime+.42);}
   beep();beepTimer=setInterval(beep,650);
-  const host=document.getElementById('alarmHost');
-  const ov=document.createElement('div');ov.className='overlay';
+  const host=document.getElementById('alarmHost');const ov=document.createElement('div');ov.className='overlay';
   ov.innerHTML='<div class="ovcard"><h3>⏰ '+(a.label||'Time to study')+'</h3>'+
-    '<p>The beeping stops only when you take a webcam photo at your laptop.</p>'+
-    '<div id="camArea"></div>'+
+    '<p>The beeping stops only when you take a webcam photo at your laptop.</p><div id="camArea"></div>'+
     '<button class="btn pri" id="openCam">Open camera</button>'+
-    '<p style="font-size:10.5px;color:var(--faint);margin:9px 0 0">No popup appears? Click <b>Allow</b> on the camera request under the address bar — or tap the 📷 / site-info icon in the address bar → Camera → Allow.</p></div>';
+    '<p style="font-size:10.5px;color:var(--faint);margin:9px 0 0">No popup? Click <b>Allow</b> on the camera request under the address bar.</p></div>';
   host.appendChild(ov);
-  ov.querySelector('#openCam').onclick=async()=>{
-    const area=ov.querySelector('#camArea');
-    try{
-      stream=await navigator.mediaDevices.getUserMedia({video:true});
-      const v=document.createElement('video');v.autoplay=true;v.playsInline=true;v.srcObject=stream;
-      area.innerHTML='';area.appendChild(v);
-      ov.querySelector('#openCam').textContent='Capture photo';
-      ov.querySelector('#openCam').onclick=()=>{
-        const cv=document.createElement('canvas');cv.width=v.videoWidth;cv.height=v.videoHeight;
-        cv.getContext('2d').drawImage(v,0,0);
-        stopRing();stream.getTracks().forEach(t=>t.stop());
-        const img=new Image();img.className='shot';img.src=cv.toDataURL();
-        area.innerHTML='';area.appendChild(img);
-        const done=ov.querySelector('#openCam');done.textContent='✓ Logged in — go study!';done.classList.remove('pri');
-        done.onclick=()=>ov.remove();
-        const p=document.createElement('p');p.textContent='Nice. Photo stays on your device. Tap to close.';
-        img.onclick=()=>ov.remove();
-      };
-    }catch(err){
-      const name=(err&&err.name)||'Error';let tip='';
-      if(name==='NotAllowedError'||name==='SecurityError')
-        tip="macOS is blocking Chrome's camera. Go to System Settings → Privacy &amp; Security → Camera, turn ON Google Chrome, then fully quit &amp; reopen Chrome.";
-      else if(name==='NotReadableError'||name==='AbortError'||name==='TrackStartError')
-        tip="Another app is using your camera (Zoom, FaceTime, Photo Booth…). Close it completely, then Try again.";
-      else if(name==='NotFoundError'||name==='OverconstrainedError'||name==='DevicesNotFoundError')
-        tip="No camera was found on this device.";
+  ov.querySelector('#openCam').onclick=async()=>{const area=ov.querySelector('#camArea');
+    try{stream=await navigator.mediaDevices.getUserMedia({video:true});
+      const v=document.createElement('video');v.autoplay=true;v.playsInline=true;v.srcObject=stream;area.innerHTML='';area.appendChild(v);
+      const btn=ov.querySelector('#openCam');btn.textContent='Capture photo';
+      btn.onclick=()=>{const cv=document.createElement('canvas');cv.width=v.videoWidth;cv.height=v.videoHeight;cv.getContext('2d').drawImage(v,0,0);
+        stopRing();stream.getTracks().forEach(t=>t.stop());const img=new Image();img.className='shot';img.src=cv.toDataURL();area.innerHTML='';area.appendChild(img);
+        btn.textContent='✓ Logged in — go study!';btn.classList.remove('pri');btn.onclick=()=>ov.remove();img.onclick=()=>ov.remove();};
+    }catch(err){const name=(err&&err.name)||'Error';let tip='';
+      if(name==='NotAllowedError'||name==='SecurityError')tip="macOS is blocking Chrome's camera. System Settings → Privacy & Security → Camera → turn ON Google Chrome, then restart Chrome.";
+      else if(name==='NotReadableError'||name==='AbortError')tip="Another app is using the camera (Zoom, FaceTime, Photo Booth). Close it, then Try again.";
+      else if(name==='NotFoundError')tip="No camera found — check it isn't disabled in Screen Time, and the laptop lid is open.";
       else tip="Couldn't start the camera.";
-      console.error('focus-alarm camera error:',name,err&&err.message);
       area.innerHTML='<p style="color:var(--comp);font-size:12.5px;line-height:1.5"><b>'+name+'</b><br>'+tip+'</p>';
-      const retry=ov.querySelector('#openCam');retry.textContent='Try again';
-      const esc=document.createElement('div');
-      esc.style.cssText='margin-top:10px;font-size:11px;color:var(--faint);cursor:pointer;text-decoration:underline';
-      esc.textContent='Stop alarm';
-      esc.onclick=()=>{stopRing();ov.remove();};
-      ov.querySelector('.ovcard').appendChild(esc);
-    }
-  };
+      const r=ov.querySelector('#openCam');r.textContent='Try again';
+      const esc=document.createElement('div');esc.style.cssText='margin-top:10px;font-size:11px;color:var(--faint);cursor:pointer;text-decoration:underline';
+      esc.textContent='Stop alarm';esc.onclick=()=>{stopRing();ov.remove();};ov.querySelector('.ovcard').appendChild(esc);}};
 }
 function stopRing(){clearInterval(beepTimer);}
 </script>
