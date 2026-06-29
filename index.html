@@ -558,11 +558,20 @@ function ringAlarm(a){
         img.onclick=()=>ov.remove();
       };
     }catch(err){
-      area.innerHTML='<p style="color:var(--comp);font-size:12.5px;line-height:1.5">No camera access yet. Click the <b>📷 camera icon</b> at the right of the address bar (or the site-info icon left of the URL → <b>Camera</b>), choose <b>Allow</b>, then hit <b>Try again</b>.</p>';
+      const name=(err&&err.name)||'Error';let tip='';
+      if(name==='NotAllowedError'||name==='SecurityError')
+        tip="macOS is blocking Chrome's camera. Go to System Settings → Privacy &amp; Security → Camera, turn ON Google Chrome, then fully quit &amp; reopen Chrome.";
+      else if(name==='NotReadableError'||name==='AbortError'||name==='TrackStartError')
+        tip="Another app is using your camera (Zoom, FaceTime, Photo Booth…). Close it completely, then Try again.";
+      else if(name==='NotFoundError'||name==='OverconstrainedError'||name==='DevicesNotFoundError')
+        tip="No camera was found on this device.";
+      else tip="Couldn't start the camera.";
+      console.error('focus-alarm camera error:',name,err&&err.message);
+      area.innerHTML='<p style="color:var(--comp);font-size:12.5px;line-height:1.5"><b>'+name+'</b><br>'+tip+'</p>';
       const retry=ov.querySelector('#openCam');retry.textContent='Try again';
       const esc=document.createElement('div');
       esc.style.cssText='margin-top:10px;font-size:11px;color:var(--faint);cursor:pointer;text-decoration:underline';
-      esc.textContent='No camera on this device? Stop alarm';
+      esc.textContent='Stop alarm';
       esc.onclick=()=>{stopRing();ov.remove();};
       ov.querySelector('.ovcard').appendChild(esc);
     }
