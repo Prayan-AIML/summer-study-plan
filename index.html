@@ -107,6 +107,28 @@
   .btn{font-family:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:7px 13px;cursor:pointer}
   .btn:hover{background:var(--bg)}.btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
   .pastebox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+  .folder{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .fhead{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer;font-weight:700;font-size:14px}
+  .fhead:hover{background:var(--bg)}
+  .ficon{margin-right:4px}
+  .fcount{color:var(--faint);font-size:12px;font-weight:600}
+  .fbody{padding:2px 14px 14px}
+  .notecard{border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:10px;background:#fffdf7}
+  .nctop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
+  .nctitle{font-weight:700;font-size:14px}
+  .ncacts{display:flex;gap:5px;flex:none}
+  .mini{font-family:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--card);border-radius:7px;padding:3px 8px;cursor:pointer}
+  .mini:hover{background:var(--bg)}
+  .ncbody{font-size:13px;line-height:1.5}
+  .ncbody h3{font-size:15px;margin:10px 0 3px;font-weight:700}
+  .ncbody h4{font-size:13px;margin:9px 0 2px;font-weight:700;color:var(--muted)}
+  .ncbody p{margin:5px 0}.ncbody ul{margin:4px 0;padding-left:20px}.ncbody li{margin-bottom:2px}
+  .ncbody blockquote{margin:6px 0;padding:5px 12px;border-left:3px solid var(--accent);background:var(--bg);border-radius:0 8px 8px 0;font-style:italic}
+  .addnote{margin-top:2px}
+  .noteform{border:1px dashed var(--line);border-radius:11px;padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
+  .noteform input,.noteform textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%}
+  .noteform textarea{min-height:130px;resize:vertical}
+  .nfacts{display:flex;gap:8px}
   /* alarm */
   .alarmgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .abox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
@@ -211,10 +233,8 @@
 
   <!-- NOTES -->
   <div class="view" id="v-notes">
-    <div class="pastebox"><h2 style="margin:0 0 4px;font-size:16px;font-weight:700">How notes work here</h2>
-      <p style="font-size:13px;color:var(--muted);margin:0;font-weight:500">Edit these handwritten cards on the page, then
-      <b>Save as image</b>. For polished notes from a lesson, <b>paste the video/lesson transcript into our chat</b> and I'll turn it into short handwritten notes and drop them into the matching card.</p></div>
-    <div class="ncards" id="ncards"></div>
+    <div class="sect">📒 Your notebook — folders by course · click one to open · Copy a note or + Add your own</div>
+    <div id="folders"></div>
   </div>
 
   <!-- IRONPERSON -->
@@ -466,26 +486,150 @@ function refresh(){
 }
 refresh();
 
-/* ---- notes ---- */
-const NKEY='summerplan_notes_v1';let noteData=JSON.parse(localStorage.getItem(NKEY)||'{}');
-const seed={
- sdg:{v:"sdg",title:"SDG Academy",html:"<span class='h'>SDGs — basics</span><ul><li>17 goals, by <b>2030</b></li><li><b>Agenda 2030</b> — adopted 25 Sep 2015 by 193 UN states</li><li>3 pillars: environment · economy · equity</li></ul><span class='h'>Key dates</span><ul><li>1987 Brundtland defined sustainable dev</li><li>2015 SDGs + Paris Agreement</li></ul>"},
- stan:{v:"stan",title:"Stanford — How to Learn Math",html:"<span class='h'>Mindset</span><ul><li><b>Mistakes grow your brain</b></li><li><b>Speed ≠ math ability</b></li><li>Praise effort, not 'smart'</li></ul><span class='h'>Big idea</span><ul><li>Math = creativity, patterns, connections</li><li>No 'math person' gene</li></ul>"},
- agora:{v:"agora",title:"UNICEF — Humanitarian Action",html:"<span class='h'>4 principles</span><ul><li><b>Humanity · Neutrality</b></li><li><b>Impartiality · Independence</b></li></ul><span class='h'>Core</span><ul><li>UNICEF = 'for every child'</li><li><b>Preparedness</b> reduces disaster impact</li></ul>"},
- bril:{v:"bril",title:"Brilliant — Thinking in Code",html:"<span class='h'>Loops</span><ul><li>Repeat actions; <b>nest</b> for grids</li></ul><span class='h'>Branching</span><ul><li><b>if / if-else</b> = decisions</li></ul><span class='h'>Variables</span><ul><li>store & <b>update</b> values</li></ul>"},
- earth:{v:"earth",title:"Earth School (TED-Ed)",html:"<span class='h'>The plan</span><ul><li><b>Net zero by 2050</b> — 10 steps</li></ul><span class='h'>So far</span><ul><li>EVs cut transport emissions</li><li>Solar & wind decarbonise the grid</li></ul>"},
- smith:{v:"smith",title:"Smithsonian — Early Human Diets",html:"<span class='h'>Big idea</span><ul><li><b>Diet drove human evolution</b> — better food → bigger brains</li></ul><span class='h'>Evidence</span><ul><li>fossils · tooth wear · tools · isotopes</li><li>meat + <b>cooking</b> were key shifts</li></ul>"},
+/* ---- notes notebook ---- */
+const FKEY='summerplan_folders_v1';
+const FOLD=[['sdg','SDG Academy'],['stan','Stanford Math'],['agora','UNICEF Agora'],['bril','Brilliant'],['earth','Earth School'],['smith','Smithsonian']];
+const seedNotes={
+ sdg:[
+  {title:'Origins of the SDGs (1.1)',body:`## Origins of the Sustainable Development Goals (SDGs)
+
+The SDGs give the world a **clear set of goals** to guide governments, businesses, and citizens toward a common future. They aim for **shared prosperity, social inclusion, and environmental sustainability**.
+
+### Early Beginnings (1972)
+- **Stockholm Conference** — first big meeting linking growth & environment.
+- **The Limits to Growth** — warned growth could overwhelm Earth's systems.
+
+### Sustainable Development
+- The **Brundtland Commission (1987)** defined it:
+> Development that meets the needs of the present without compromising the ability of future generations to meet their own needs.
+
+### Earth Summit (1992)
+- Adopted sustainable development globally; 3 agreements: **Climate Change**, **Biodiversity**, **Desertification**.
+
+### Rio+20 to the SDGs
+- **2012 Rio+20** — progress too slow, so build on the **MDGs (2000–2015)**.
+- ~300 proposed goals were simplified into **17 SDGs + 169 targets**, part of **Agenda 2030**.
+
+### Adoption
+- **25 Sept 2015** — 193 UN states adopt the SDGs & Agenda 2030.
+- **12 Dec 2015** — **Paris Climate Agreement** (linked to **SDG 13, Climate Action**).
+
+### Key Dates
+- **1972** Stockholm & Limits to Growth
+- **1987** Brundtland defines sustainable development
+- **1992** Earth Summit, Rio
+- **2000–2015** MDGs
+- **2012** Rio+20 proposes SDGs
+- **25 Sept 2015** SDGs + Agenda 2030 adopted
+- **12 Dec 2015** Paris Agreement`},
+  {title:'Transformation Challenges (1.3)',body:`## Transformation Challenges (SDG 1.3)
+
+Agenda 2030 is about **transforming how economies function**. The global economy creates **growth & wealth** but fails at **social inclusion**, **ending extreme poverty**, and **protecting the environment**.
+
+### Three Mega Environmental Crises
+- **Climate change** (fossil fuels)
+- **Biodiversity loss** (species & ecosystems)
+- **Mega-pollution** (air, water, ocean microplastics)
+
+### A Universal Agenda
+- The 17 SDGs call on **every** government to act.
+- **No country is fully sustainable yet.**
+
+### The Six Big Transformations
+- **1. Education**, skills & jobs
+- **2. Health** & wellbeing
+- **3. Energy & climate** — fossil fuels to wind, solar, hydro, nuclear
+- **4. Sustainable land & food** — farming, forests, fisheries
+- **5. Sustainable cities** — smart, livable, green
+- **6. Digital revolution** — AI & internet for good, but with perils (cyber warfare, surveillance, privacy)
+
+### What All Six Share
+> Not quick fixes — deep, systemic change.
+- Major **systemic changes**
+- **Long-term** investment (beyond 2030)
+- **Public + private** action together
+- **Financing** (budgets, borrowing, private capital)
+- Many **tools**: tax, pricing, institutions, ethics`},
+ ],
+ stan:[{title:'How to Learn Math — key ideas',body:`## Mindset
+- **Mistakes grow your brain**
+- **Speed is not math ability**
+- Praise **effort**, not being 'smart'
+
+## Big idea
+- Math = creativity, patterns, connections
+- There is no 'math person' gene`}],
+ agora:[{title:'Humanitarian Action — basics',body:`## 4 humanitarian principles
+- **Humanity**
+- **Neutrality**
+- **Impartiality**
+- **Independence**
+
+## Core ideas
+- UNICEF = 'for every child'
+- **Preparedness** reduces disaster impact`}],
+ bril:[{title:'Thinking in Code — basics',body:`## Loops
+- Repeat actions; **nest** them for grids
+
+## Branching
+- **if / if-else** = decisions
+
+## Variables
+- store & **update** values`}],
+ earth:[{title:'Earth School — basics',body:`## The plan
+- **Net zero by 2050** — a 10-step plan
+
+## So far
+- EVs cut transport emissions
+- Solar & wind decarbonise the grid`}],
+ smith:[{title:'Early Human Diets — basics',body:`## Big idea
+- **Diet drove human evolution** — better food, bigger brains
+
+## Evidence
+- fossils, tooth wear, tools, isotopes
+- meat + **cooking** were key shifts`}],
 };
-const nc=document.getElementById('ncards');
-Object.keys(seed).forEach(k=>{const s=seed[k];const card=document.createElement('div');card.className='ncard';
-  card.innerHTML='<div class="nh"><span class="lab" style="background:var(--'+s.v+'bg);color:var(--'+s.v+')">'+s.title+'</span></div>'+
-    '<div class="hand" id="note-'+k+'" contenteditable="true">'+(noteData[k]||s.html)+'</div>'+
-    '<div class="tools"><button class="btn" data-save="'+k+'">Save as image</button><button class="btn" data-reset="'+k+'">Reset</button></div>';
-  nc.appendChild(card);
-  card.querySelector('#note-'+k).addEventListener('input',function(){noteData[k]=this.innerHTML;localStorage.setItem(NKEY,JSON.stringify(noteData));});});
-nc.addEventListener('click',e=>{const sv=e.target.dataset.save,rs=e.target.dataset.reset;
-  if(sv)html2canvas(document.getElementById('note-'+sv).parentElement,{backgroundColor:'#fffdf5',scale:2}).then(cv=>{const a=document.createElement('a');a.download=sv+'-notes.png';a.href=cv.toDataURL();a.click();});
-  if(rs){document.getElementById('note-'+rs).innerHTML=seed[rs].html;noteData[rs]=seed[rs].html;localStorage.setItem(NKEY,JSON.stringify(noteData));}});
+let folders=JSON.parse(localStorage.getItem(FKEY)||'null')||JSON.parse(JSON.stringify(seedNotes));
+const openSet={};
+function saveF(){localStorage.setItem(FKEY,JSON.stringify(folders));}
+function mdToHtml(src){const lines=(src||'').split('\n');let out='',inList=false;
+  const inl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>');
+  const close=()=>{if(inList){out+='</ul>';inList=false;}};
+  lines.forEach(raw=>{const l=raw.trim();
+    if(/^#### /.test(l)){close();out+='<h4>'+inl(l.slice(5))+'</h4>';}
+    else if(/^### /.test(l)){close();out+='<h4>'+inl(l.slice(4))+'</h4>';}
+    else if(/^## /.test(l)){close();out+='<h3>'+inl(l.slice(3))+'</h3>';}
+    else if(/^> /.test(l)){close();out+='<blockquote>'+inl(l.slice(2))+'</blockquote>';}
+    else if(/^[-*] /.test(l)){if(!inList){out+='<ul>';inList=true;}out+='<li>'+inl(l.slice(2))+'</li>';}
+    else if(l===''){close();}
+    else{close();out+='<p>'+inl(l)+'</p>';}});
+  close();return out;}
+function flash(btn,txt){const o=btn.textContent;btn.textContent=txt;setTimeout(()=>btn.textContent=o,1200);}
+function noteCard(k,i,n){const c=document.createElement('div');c.className='notecard';
+  c.innerHTML='<div class="nctop"><span class="nctitle">'+n.title+'</span><span class="ncacts">'+
+    '<button class="mini" data-a="copy">Copy</button><button class="mini" data-a="edit">Edit</button><button class="mini" data-a="del">✕</button></span></div>'+
+    '<div class="ncbody">'+mdToHtml(n.body)+'</div>';
+  c.querySelector('[data-a=copy]').onclick=()=>navigator.clipboard.writeText(n.body).then(()=>flash(c.querySelector('[data-a=copy]'),'Copied!'));
+  c.querySelector('[data-a=edit]').onclick=()=>c.replaceWith(formEl(k,n,i));
+  c.querySelector('[data-a=del]').onclick=()=>{if(confirm('Delete "'+n.title+'"?')){folders[k].splice(i,1);saveF();renderFolders();}};
+  return c;}
+function formEl(k,n,i){const f=document.createElement('div');f.className='noteform';
+  f.innerHTML='<input class="nfT" placeholder="Note title"><textarea class="nfB" placeholder="Write or paste your note. Markdown works: ## heading, **bold**, - list, > quote"></textarea><div class="nfacts"><button class="btn pri nfS">Save</button><button class="btn nfC">Cancel</button></div>';
+  if(n){f.querySelector('.nfT').value=n.title;f.querySelector('.nfB').value=n.body;}
+  f.querySelector('.nfS').onclick=()=>{const t=f.querySelector('.nfT').value.trim()||'Untitled';const b=f.querySelector('.nfB').value;
+    if(n){folders[k][i]={title:t,body:b};}else{(folders[k]=folders[k]||[]).push({title:t,body:b});}saveF();openSet[k]=true;renderFolders();};
+  f.querySelector('.nfC').onclick=()=>renderFolders();
+  return f;}
+function renderFolders(){const host=document.getElementById('folders');host.innerHTML='';
+  FOLD.forEach(([k,name])=>{const arr=folders[k]||[];const open=!!openSet[k];const f=document.createElement('div');f.className='folder';
+    f.innerHTML='<div class="fhead"><span><span class="ficon" style="color:var(--'+k+')">📁</span> '+name+'</span><span class="fcount">'+arr.length+' note'+(arr.length===1?'':'s')+' '+(open?'▾':'▸')+'</span></div><div class="fbody"></div>';
+    const body=f.querySelector('.fbody');body.style.display=open?'block':'none';
+    arr.forEach((n,i)=>body.appendChild(noteCard(k,i,n)));
+    const add=document.createElement('button');add.className='btn addnote';add.textContent='+ Add note';
+    add.onclick=()=>body.insertBefore(formEl(k,null,-1),add);body.appendChild(add);
+    f.querySelector('.fhead').onclick=()=>{openSet[k]=!openSet[k];renderFolders();};
+    host.appendChild(f);});}
+renderFolders();
 
 /* ---- ironperson content ---- */
 const quizData=[
