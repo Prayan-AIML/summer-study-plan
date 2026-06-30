@@ -1470,15 +1470,20 @@ const ph=document.getElementById('presets');
 presetTimes.forEach(([t,l])=>{const b=document.createElement('button');b.className='preset';b.textContent=l+' · '+to12(t);
   b.onclick=()=>{document.getElementById('aTime').value=t;if(!document.getElementById('aLabel').value)document.getElementById('aLabel').value=l;};ph.appendChild(b);});
 function to12(t){let[h,m]=t.split(':');h=+h;const ap=h>=12?'PM':'AM';h=h%12||12;return h+':'+m+' '+ap;}
-let alarms=[];setInterval(checkAlarms,1000);const alist=document.getElementById('alist');
+const AKEY='summerplan_alarms_v1';
+let alarms=JSON.parse(localStorage.getItem(AKEY)||'[]');
+alarms.forEach(a=>a.fired=false);
+function saveAlarms(){localStorage.setItem(AKEY,JSON.stringify(alarms.map(a=>({label:a.label,time:a.time}))));}
+setInterval(checkAlarms,1000);const alist=document.getElementById('alist');
 document.getElementById('setAlarm').onclick=()=>{const label=document.getElementById('aLabel').value||'Study time';
-  const time=document.getElementById('aTime').value;if(!time){alert('Pick a time first');return;}alarms.push({label,time,fired:false});renderAlarms();};
+  const time=document.getElementById('aTime').value;if(!time){alert('Pick a time first');return;}alarms.push({label,time,fired:false});saveAlarms();renderAlarms();};
 document.getElementById('testAlarm').onclick=()=>ringAlarm({label:document.getElementById('aLabel').value||'Test alarm'});
 function renderAlarms(){alist.innerHTML='';alarms.forEach((a,i)=>{const r=document.createElement('div');r.className='arow';
   r.innerHTML='<span><b>'+to12(a.time)+'</b> · '+a.label+'</span><span class="x" data-i="'+i+'">remove</span>';alist.appendChild(r);});
-  alist.querySelectorAll('.x').forEach(x=>x.onclick=()=>{alarms.splice(+x.dataset.i,1);renderAlarms();});}
+  alist.querySelectorAll('.x').forEach(x=>x.onclick=()=>{alarms.splice(+x.dataset.i,1);saveAlarms();renderAlarms();});}
 function checkAlarms(){const n=new Date();const hm=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
   alarms.forEach(a=>{if(!a.fired&&a.time===hm){a.fired=true;ringAlarm(a);}});}
+renderAlarms();
 let audioCtx,beepTimer,stream;
 function ringAlarm(a){try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();}catch(e){}
   function beep(){if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=880;
