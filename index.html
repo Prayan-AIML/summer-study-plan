@@ -122,7 +122,7 @@
   .ncbody{font-size:13px;line-height:1.5}
   .ncbody h3{font-size:15px;margin:10px 0 3px;font-weight:700}
   .ncbody h4{font-size:13px;margin:9px 0 2px;font-weight:700;color:var(--muted)}
-  .ncbody p{margin:5px 0}.ncbody ul{margin:4px 0;padding-left:20px}.ncbody li{margin-bottom:2px}
+  .ncbody p{margin:5px 0}.ncbody ul,.ncbody ol{margin:4px 0;padding-left:22px}.ncbody li{margin-bottom:2px}
   .ncbody blockquote{margin:6px 0;padding:5px 12px;border-left:3px solid var(--accent);background:var(--bg);border-radius:0 8px 8px 0;font-style:italic}
   .addnote{margin-top:2px}
   .noteform{border:1px dashed var(--line);border-radius:11px;padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
@@ -487,69 +487,176 @@ function refresh(){
 refresh();
 
 /* ---- notes notebook ---- */
-const FKEY='summerplan_folders_v1';
+const FKEY='summerplan_folders_v2';
 const FOLD=[['sdg','SDG Academy'],['stan','Stanford Math'],['agora','UNICEF Agora'],['bril','Brilliant'],['earth','Earth School'],['smith','Smithsonian']];
 const seedNotes={
  sdg:[
-  {title:'Origins of the SDGs (1.1)',body:`## Origins of the Sustainable Development Goals (SDGs)
+  {title:'Scale & Scope of the SDGs (1.1)',body:`## Sustainable Development Goals (SDGs)
 
-The SDGs give the world a **clear set of goals** to guide governments, businesses, and citizens toward a common future. They aim for **shared prosperity, social inclusion, and environmental sustainability**.
+**Jeffrey Sachs**, a professor at **Columbia University**, serves as Special Advisor to **António Guterres** on the SDGs. He also leads the **United Nations Sustainable Development Solutions Network**, a network of over 700 universities and research organizations working to help achieve the Sustainable Development Goals.
+
+The SDGs are a set of **17 global goals** adopted by all **193 UN member states** in 2015. They provide a framework for global cooperation and development from **2015–2030**. The goals were created because the world faces serious challenges such as poverty, hunger, inequality, climate change, and environmental degradation.
+
+### Purpose of the SDGs
+
+The SDGs aim to shift the world onto a path of **sustainable development**, where:
+
+* Prosperity is shared by everyone.
+* Societies are inclusive and fair.
+* The environment is protected.
+* Future generations can meet their own needs.
+
+Countries recognized that while modern technology can solve many problems, current economic growth is also causing environmental damage and increasing inequality.
+
+### Important SDGs
+
+Many goals focus on ending deprivation:
+
+* **SDG 1:** End extreme poverty.
+* **SDG 2:** End hunger.
+* **SDG 3:** Good health and well-being.
+* **SDG 4:** Quality education for all.
+
+Other goals focus on equality and environmental protection:
+
+* **SDG 5:** Gender equality.
+* **SDG 10:** Reduced inequalities.
+* **SDG 13:** Climate action.
+* **SDG 14:** Protect oceans and marine life.
+* **SDG 15:** Protect land ecosystems.
+* **SDG 17:** Global partnerships to achieve all goals.
+
+### Agenda 2030
+
+The SDGs are part of **"Transforming the World: The 2030 Agenda for Sustainable Development."** It is described as a plan of action for:
+
+* **People** – improving well-being and social inclusion.
+* **Planet** – protecting the environment.
+* **Prosperity** – ensuring economic growth benefits everyone.
+
+A key message of Agenda 2030 is that **eradicating poverty is the greatest global challenge** and is essential for sustainable development.
+
+### Leave No One Behind
+
+The member states pledged that development should benefit everyone. This principle, known as **"Leave No One Behind,"** means that no person, community, or country should be excluded from progress. Special attention should be given to vulnerable and disadvantaged groups.
+
+### Achieving the SDGs
+
+Achieving the goals will require major changes in society, including:
+
+* Cleaner energy and sustainable industries.
+* Better healthcare and education systems.
+* Reduced inequality and discrimination.
+* Protection of ecosystems and biodiversity.
+* Strong international cooperation.
+
+The SDG framework includes:
+
+* **17 Goals**
+* **169 Targets**
+* **230 Indicators** used to measure progress.
+
+Achieving these goals requires cooperation among governments, businesses, civil society, universities, and citizens around the world.`},
+  {title:'History of the SDGs (1.2)',body:`## Origins of the Sustainable Development Goals (SDGs)
+
+The SDGs were created to give the world a **clear set of goals** that can guide governments, businesses, and citizens toward a common future. The idea is that when people know exactly what they are working toward, progress becomes easier. As **John F. Kennedy** said, clear goals help people see hope and move toward a shared objective. The SDGs aim to guide the world toward **shared prosperity, social inclusion, and environmental sustainability**.
 
 ### Early Beginnings (1972)
-- **Stockholm Conference** — first big meeting linking growth & environment.
-- **The Limits to Growth** — warned growth could overwhelm Earth's systems.
 
-### Sustainable Development
-- The **Brundtland Commission (1987)** defined it:
+The origins of the SDGs can be traced back to **1972**, when the United Nations held the **United Nations Conference on the Human Environment** in Stockholm. This was the first major international meeting to recognize that economic growth and environmental protection were becoming increasingly connected. Countries realized that human activities were putting growing pressure on the planet.
+
+The same year, a famous book called **The Limits to Growth** was published. Using computer models, it warned that continued economic growth with existing technologies could eventually overwhelm Earth's natural systems.
+
+### The Idea of Sustainable Development
+
+Fifteen years later, the **Brundtland Commission** introduced the concept of **sustainable development**. It defined sustainable development as:
+
 > Development that meets the needs of the present without compromising the ability of future generations to meet their own needs.
 
-### Earth Summit (1992)
-- Adopted sustainable development globally; 3 agreements: **Climate Change**, **Biodiversity**, **Desertification**.
+This introduced the idea of **intergenerational responsibility**—the current generation must use resources wisely so future generations can also meet their needs.
 
-### Rio+20 to the SDGs
-- **2012 Rio+20** — progress too slow, so build on the **MDGs (2000–2015)**.
-- ~300 proposed goals were simplified into **17 SDGs + 169 targets**, part of **Agenda 2030**.
+### The Earth Summit (1992)
 
-### Adoption
-- **25 Sept 2015** — 193 UN states adopt the SDGs & Agenda 2030.
-- **12 Dec 2015** — **Paris Climate Agreement** (linked to **SDG 13, Climate Action**).
+In 1992, world leaders met at the **Earth Summit** in Rio de Janeiro. The summit officially adopted sustainable development as a global goal and produced three major environmental agreements:
 
-### Key Dates
-- **1972** Stockholm & Limits to Growth
-- **1987** Brundtland defines sustainable development
-- **1992** Earth Summit, Rio
-- **2000–2015** MDGs
-- **2012** Rio+20 proposes SDGs
-- **25 Sept 2015** SDGs + Agenda 2030 adopted
-- **12 Dec 2015** Paris Agreement`},
+* **United Nations Framework Convention on Climate Change** (Climate Change)
+* **Convention on Biological Diversity** (Biodiversity Protection)
+* **United Nations Convention to Combat Desertification** (Combating Desertification)
+
+These agreements aimed to protect the environment on a global scale.
+
+### Rio+20 and the Birth of the SDGs
+
+By 2012, at the **Rio+20 Conference**, governments realized that progress had been slower than expected. Many environmental problems were worsening, and the earlier agreements were not being fully implemented.
+
+At the same time, countries had experience with the **Millennium Development Goals** (MDGs), which focused mainly on reducing poverty from 2000–2015. Governments decided to build on this idea by creating a broader set of goals that would include economic, social, and environmental issues. This led to the proposal for the Sustainable Development Goals.
+
+### Creating the 17 Goals
+
+After Rio+20, countries spent three years negotiating the new goals. Initially, there were around **300 proposed goals**, but these were gradually combined and simplified.
+
+By 2015, countries agreed on:
+
+* **17 Sustainable Development Goals**
+* **169 Targets**
+
+These goals became part of **Agenda 2030**, the global plan for sustainable development from 2015–2030.
+
+### Agenda 2030 and the Paris Climate Agreement
+
+On **25 September 2015**, all **193 UN member states** adopted the SDGs and Agenda 2030. A few months later, on **12 December 2015**, countries adopted the **Paris Climate Agreement**.
+
+The Paris Agreement is closely linked to **SDG 13 (Climate Action)** and aims to tackle human-induced climate change. Together, **Agenda 2030**, the **17 SDGs**, and the **Paris Climate Agreement** form the main framework for global cooperation on sustainable development.
+
+### Key Dates to Remember
+
+* **1972** – Stockholm Conference & *Limits to Growth*
+* **1987** – Brundtland Commission defines sustainable development
+* **1992** – Earth Summit in Rio de Janeiro
+* **2000–2015** – Millennium Development Goals (MDGs)
+* **2012** – Rio+20 Conference proposes SDGs
+* **25 Sept 2015** – SDGs and Agenda 2030 adopted
+* **12 Dec 2015** – Paris Climate Agreement adopted`},
   {title:'Transformation Challenges (1.3)',body:`## Transformation Challenges (SDG 1.3)
 
-Agenda 2030 is about **transforming how economies function**. The global economy creates **growth & wealth** but fails at **social inclusion**, **ending extreme poverty**, and **protecting the environment**.
+Agenda 2030 is fundamentally about **transforming the world**—and at its heart, transforming **how our economies function**. The global economy, which links national economies through trade, finance, and technology, is good at creating **economic growth and wealth**. However, it does a poor job at three things: creating **social inclusion** (shared prosperity), **ending extreme poverty**, and **protecting the natural environment**.
 
 ### Three Mega Environmental Crises
-- **Climate change** (fossil fuels)
-- **Biodiversity loss** (species & ecosystems)
-- **Mega-pollution** (air, water, ocean microplastics)
+
+The world is currently facing three major environmental crises at the same time:
+
+* **Human-induced climate change** – caused by burning fossil fuels.
+* **Loss of biodiversity** – the destruction of species and the weakening of ecosystems.
+* **Mega-pollution** – polluted air and water, and oceans filled with litter and microplastics that now enter the marine food chain.
 
 ### A Universal Agenda
-- The 17 SDGs call on **every** government to act.
-- **No country is fully sustainable yet.**
+
+The **17 Sustainable Development Goals** are a **universal agenda**—they call on *every* government in the world to take transformative action, not just poor countries. The data shows that some countries do well across the economic, social, and environmental dimensions, while others do well on only one or two. **No country is fully achieving sustainable development yet**, and those in the most desperate shape need the most help.
 
 ### The Six Big Transformations
-- **1. Education**, skills & jobs
-- **2. Health** & wellbeing
-- **3. Energy & climate** — fossil fuels to wind, solar, hydro, nuclear
-- **4. Sustainable land & food** — farming, forests, fisheries
-- **5. Sustainable cities** — smart, livable, green
-- **6. Digital revolution** — AI & internet for good, but with perils (cyber warfare, surveillance, privacy)
 
-### What All Six Share
-> Not quick fixes — deep, systemic change.
-- Major **systemic changes**
-- **Long-term** investment (beyond 2030)
-- **Public + private** action together
-- **Financing** (budgets, borrowing, private capital)
-- Many **tools**: tax, pricing, institutions, ethics`},
+The course focuses on **six big transformations** needed to achieve the SDGs:
+
+1. **Education, Skills, and Jobs** – broad education (formal, adult, lifelong, and school-to-work) that builds well-educated, innovative societies and creates good jobs.
+2. **Health and Wellbeing** – physical *and* mental health, plus peaceful communities. Some places lack even basic healthcare (causing millions of under-5 deaths); others, like the US, spend heavily but unevenly and still face wellbeing crises (rising suicide, opioid addiction, depression).
+3. **Energy and Climate** – moving from fossil fuels (coal, oil, gas), which release **carbon dioxide** and other greenhouse gases (methane, nitrous oxide), to clean energy like **wind, solar, hydro, nuclear, geothermal, and ocean power**. Also turning waste into useful inputs and making biodegradable products.
+4. **Sustainable Land Use and Food** – transforming farming, forestry, and fishing. Clearing forests destroys habitats, and pesticides and fertilizer runoff cause major pollution at coastlines.
+5. **Sustainable Cities** – replacing polluted, sprawling, traffic-choked cities (with water scarcity, as seen in Cape Town and São Paulo) with **smart, livable, walkable, green cities** and good transport.
+6. **Harnessing the Digital Revolution** – using AI, robotics, 3D manufacturing, and genomics for good, while managing the **perils**: cyber warfare, autonomous weapons, surveillance, loss of privacy, and political manipulation (such as the 2016 US election).
+
+### What All Six Transformations Share
+
+> These are not quick fixes—they are deep, systemic changes.
+
+* They are major **systemic changes** to technology, practices, and investment in physical, skill, and knowledge capital.
+* They require **long-term investment**—nothing is solved in 1, 2, 5, or even 10 years; transformation continues beyond 2030.
+* They need both **public and private action** working together.
+* They all require **financing**—a complex mix of budgets, borrowing, private capital, and household investment.
+* They need **many complementary tools**: taxation, pricing, institutions, and even new ethics. There is no single policy that fixes everything.
+
+### Key Takeaway
+
+Achieving the SDGs means **deep, long-term, systemic transformation** across six areas—education, health, energy, land & food, cities, and digital. Each one needs investment, public–private cooperation, and a mix of policy tools working together.`},
  ],
  stan:[{title:'How to Learn Math — key ideas',body:`## Mindset
 - **Mistakes grow your brain**
@@ -592,15 +699,16 @@ Agenda 2030 is about **transforming how economies function**. The global economy
 let folders=JSON.parse(localStorage.getItem(FKEY)||'null')||JSON.parse(JSON.stringify(seedNotes));
 const openSet={};
 function saveF(){localStorage.setItem(FKEY,JSON.stringify(folders));}
-function mdToHtml(src){const lines=(src||'').split('\n');let out='',inList=false;
+function mdToHtml(src){const lines=(src||'').split('\n');let out='',lt='';
   const inl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>');
-  const close=()=>{if(inList){out+='</ul>';inList=false;}};
-  lines.forEach(raw=>{const l=raw.trim();
+  const close=()=>{if(lt){out+=(lt==='ol'?'</ol>':'</ul>');lt='';}};
+  lines.forEach(raw=>{const l=raw.trim();let m;
     if(/^#### /.test(l)){close();out+='<h4>'+inl(l.slice(5))+'</h4>';}
     else if(/^### /.test(l)){close();out+='<h4>'+inl(l.slice(4))+'</h4>';}
     else if(/^## /.test(l)){close();out+='<h3>'+inl(l.slice(3))+'</h3>';}
     else if(/^> /.test(l)){close();out+='<blockquote>'+inl(l.slice(2))+'</blockquote>';}
-    else if(/^[-*] /.test(l)){if(!inList){out+='<ul>';inList=true;}out+='<li>'+inl(l.slice(2))+'</li>';}
+    else if(/^[-*] /.test(l)){if(lt!=='ul'){close();out+='<ul>';lt='ul';}out+='<li>'+inl(l.slice(2))+'</li>';}
+    else if(m=l.match(/^\d+\.\s+/)){if(lt!=='ol'){close();out+='<ol>';lt='ol';}out+='<li>'+inl(l.slice(m[0].length))+'</li>';}
     else if(l===''){close();}
     else{close();out+='<p>'+inl(l)+'</p>';}});
   close();return out;}
