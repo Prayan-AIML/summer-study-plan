@@ -66,7 +66,7 @@
   .legend{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 14px}
   .chip{font-size:11.5px;padding:3px 11px;border-radius:20px;font-weight:600}
   .calwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px;overflow-x:auto}
-  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(158px,1fr));grid-template-rows:52px repeat(20,42px);min-width:1180px}
+  .cal{display:grid;grid-template-columns:58px repeat(7,minmax(158px,1fr));grid-template-rows:52px repeat(24,42px);min-width:1180px}
   .corner{grid-column:1;grid-row:1}
   .dayhead{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;border-bottom:1px solid var(--line);gap:2px}
   .dayhead .dn{font-weight:800}.dayhead .dd{color:var(--faint);font-size:11.5px;font-weight:600}
@@ -75,7 +75,7 @@
   .dayhead.race .dn{color:var(--comp)}.dayhead.race .dd{color:var(--comp)}
   .tlabel{grid-column:1;font-size:11px;color:var(--muted);font-weight:600;text-align:right;padding-right:9px;transform:translateY(-8px)}
   .slotline{grid-column:2/9;border-top:1px solid #f0f1f4}.slotline.hr{border-top:1px solid #e4e6ea}
-  .vline{border-left:1px solid #f0f1f4;grid-row:2/22}
+  .vline{border-left:1px solid #f0f1f4;grid-row:2/26}
   .ev{margin:2px 4px;border-radius:9px;padding:6px 9px 7px;overflow:hidden;font-size:11.5px;display:block;text-decoration:none;color:inherit;border:1px solid transparent}
   a.ev{cursor:pointer}a.ev:hover{box-shadow:0 4px 14px rgba(20,24,33,.15);z-index:5;position:relative}
   .ev .tt{font-weight:700;line-height:1.2;display:block}.ev .ss{font-size:10px;line-height:1.32;display:block;margin-top:2px;opacity:.95}
@@ -332,22 +332,16 @@ const lunch=()=>B("relax","Lunch + TV","Eat & watch one episode — your 1h brea
 const dinner=(a="19:30",b="20:00")=>B("meal","Dinner","",a,b);
 
 const days=[
- {dn:"Mon",dd:"29 Jun",cls:"today",evs:[
-   B("sdg","SDG · Module 1 (start now)","Pick up right here: finish video 1.2, then 1.3–1.5 + readings & quiz","17:30","18:30",{link:CO.sdg.link,todo:1,
-     items:sdgVids(1,[{i:1,st:'done'},{i:2,st:'now'}])}),
-   B("meal","Dinner (early)","Eat before the 7 PM orientation","18:30","19:00"),
-   B("comp","🎥 ISDS Orientation — LIVE","Zoom · 7–8 PM IST · Meeting ID 850 3003 9661 · click to join","19:00","20:00",{link:"https://us06web.zoom.us/j/85030039661"}),
-   B("sdg","SDG · Module 2","Transformation Pathways — videos 2.1–2.5 + quiz (do what you can tonight)","20:00","21:00",{link:CO.sdg.link,todo:1,items:sdgVids(2)}),
-   B("bril","Brilliant · Level 2 (if energy)","Optional tonight: finish Level 2 — Nesting → Combining Loops → Level Review","21:00","21:30",{link:CO.bril.link,todo:1}),
+ {dn:"Mon",dd:"29 Jun",evs:[
+   B("relax","Slow start — only the orientation got done","Yesterday the SDG work didn't happen — it rolled into today & this week. No guilt, just move forward.","11:30","19:00"),
+   B("comp","🎥 ISDS Orientation — attended ✓","Zoom · 7–8 PM IST · done","19:00","20:00"),
  ]},
- {dn:"Tue",dd:"30 Jun",evs:[
-   B("sdg","SDG · Module 3","Government & the SDGs — videos 3.1–3.5 + quiz","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(3)}),
-   lunch(),
-   B("stan","Stanford · Mistakes & Speed","3 short videos: mistakes grow your brain · speed ≠ ability · + 2 reflection Qs","15:00","17:30",{link:CO.stan.link,todo:1,items:stanVids(3,'Mistakes & Speed')}),
-   B("debate","Debate · Sec 2 Extempore","Learn PEEL · 3 timed speeches (1m prep / 3m speak) · record & rewatch","17:30","18:30",{todo:1}),
-   B("bril","Brilliant · Level 3 (Branching)","if-statements → Preventing Errors → if-else → Branching Challenge","18:30","19:30",{link:CO.bril.link,todo:1}),
-   dinner(),
-   B("smith","Smithsonian · part 1","Watch the Early Human Diets webcast · answer the discussion questions","20:00","21:00",{link:CO.smith.link,todo:1}),
+ {dn:"Tue",dd:"30 Jun",cls:"today",evs:[
+   B("sdg","SDG Academy · Modules 1–3 (catch-up till 8pm)","Finish video 1.2, then M1 1.3–1.5, all of Module 2 (2.1–2.5) and Module 3 (3.1–3.5) + quizzes","14:00","20:00",{link:CO.sdg.link,todo:1,
+     items:[...sdgVids(1,[{i:1,st:'done'},{i:2,st:'now'}]),...sdgVids(2),...sdgVids(3)]}),
+   B("meal","Dinner","","20:00","20:30"),
+   B("stan","Stanford · Mistakes & Speed","Watch the 3 short videos (mistakes grow your brain · speed ≠ ability) + 2 reflection Qs","20:30","22:00",{link:CO.stan.link,todo:1,items:stanVids(3,'Mistakes & Speed')}),
+   B("agora","UNICEF · Intro + Module 1","Course intro + 'UNICEF and humanitarian action' + module check","22:00","23:30",{link:CO.agora.link,todo:1}),
  ]},
  {dn:"Wed",dd:"1 Jul",evs:[
    B("sdg","SDG · Module 4","SDG Financing — videos 4.1–4.5 + quiz · note 3 funding sources","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(4)}),
@@ -406,12 +400,12 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.v
 const cal=document.getElementById('cal');
 cal.appendChild(Object.assign(document.createElement('div'),{className:'corner'}));
 days.forEach((d,i)=>{const h=document.createElement('div');h.className='dayhead'+(d.cls?' '+d.cls:'');h.style.gridColumn=i+2;
-  h.innerHTML='<span class="dn">'+d.dn+'</span>'+(d.cls==='today'?'<span class="badge">TODAY · 29 Jun</span>':'<span class="dd">'+d.dd+'</span>');
+  h.innerHTML='<span class="dn">'+d.dn+'</span>'+(d.cls==='today'?'<span class="badge">TODAY · '+d.dd+'</span>':'<span class="dd">'+d.dd+'</span>');
   cal.appendChild(h);});
-["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"].forEach(t=>{
+["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"].forEach(t=>{
   const lab=document.createElement('div');lab.className='tlabel';lab.style.gridRow=L(t);
   let[h]=t.split(':');h=+h;const ap=h>=12?'pm':'am';h=h%12||12;lab.textContent=h+' '+ap;cal.appendChild(lab);});
-for(let r=2;r<=21;r++){const ln=document.createElement('div');ln.className='slotline'+(r%2?' hr':'');ln.style.gridRow=r+'/'+(r+1);cal.appendChild(ln);}
+for(let r=2;r<=25;r++){const ln=document.createElement('div');ln.className='slotline'+(r%2?' hr':'');ln.style.gridRow=r+'/'+(r+1);cal.appendChild(ln);}
 for(let c=2;c<=8;c++){const v=document.createElement('div');v.className='vline';v.style.gridColumn=c;cal.appendChild(v);}
 days.forEach((d,i)=>d.evs.forEach(e=>{const el=document.createElement(e.link?'a':'div');el.className='ev';
   el.style.gridColumn=i+2;el.style.gridRow=e.a+'/'+e.b;el.style.background='var(--'+e.v+'bg)';el.style.color='var(--'+e.v+')';
