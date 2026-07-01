@@ -180,6 +180,19 @@
   .panel li.ok::before{background:var(--earth)}
   .tag{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:6px;margin-right:5px;font-weight:700}
   @media(max-width:820px){.alarmgrid,.iwrap,.reslist{grid-template-columns:1fr}.ibox.full{grid-column:1}body{padding:16px 11px 50px}}
+  /* schedule edit modal */
+  .schedit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;display:flex;align-items:center;justify-content:center}
+  .schedit-box{background:#fff;border-radius:18px;padding:24px 26px;width:360px;max-width:94vw;box-shadow:0 8px 40px rgba(0,0,0,.18)}
+  .schedit-box h3{margin:0 0 16px;font-size:16px;font-weight:800}
+  .schedit-box label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:3px;margin-top:10px}
+  .schedit-box input,.schedit-box textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:7px 10px;font-family:inherit;font-size:13.5px;outline:none}
+  .schedit-box input:focus,.schedit-box textarea:focus{border-color:var(--accent)}
+  .schedit-box textarea{resize:vertical;min-height:60px}
+  .schedit-row{display:flex;gap:10px;margin-top:10px}
+  .schedit-row>div{flex:1}
+  .schedit-acts{display:flex;gap:8px;margin-top:18px;justify-content:space-between}
+  .ev{cursor:pointer;position:relative}
+  .ev:hover::after{content:'✏️';position:absolute;top:4px;right:5px;font-size:11px;opacity:.7}
 </style>
 </head>
 <body>
@@ -323,7 +336,7 @@ const CO={
   smith:{n:"Smithsonian",link:"https://learninglab.si.edu/collections/human-evolution-early-human-diets/j63BHbKo54Mj7rjK",base:"1 collection · public"},
 };
 const NAMES={sdg:"SDG",stan:"Stanford",agora:"UNICEF",bril:"Brilliant",earth:"Earth School",smith:"Smithsonian",debate:"Debate prep",relax:"Break / rest",meal:"Meals",comp:"Live event"};
-function L(t){const[h,m]=t.split(":").map(Number);return 2+((h*60+m)-690)/30;}
+function L(t){const[h,m]=t.split(":").map(Number);return Math.round(2+((h*60+m)-690)/30);}
 /* video items: vid(id,label,status)  status: ''|'done'|'now' */
 const V=(id,label,st='')=>({id,label,st});
 function sdgVids(n,extra=[]){const a=[];for(let i=1;i<=5;i++)a.push(V('sdg'+n+'v'+i,'Video '+n+'.'+i,extra.find(e=>e.i===i)?extra.find(e=>e.i===i).st:''));
@@ -349,13 +362,12 @@ const days=[
  {dn:"Wed",dd:"1 Jul",evs:[
    B("sdg","SDG · Module 4","SDG Financing — videos 4.1–4.5 + quiz · note 3 funding sources","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(4)}),
    lunch(),
-   B("debate","Debating Class","Live debating class","15:00","16:00",{todo:1}),
-   B("comp","WSC Class","Live WSC class","16:30","17:15",{todo:1}),
-   B("agora","UNICEF · Intro + Module 1","Course intro + 'UNICEF and humanitarian action' · complete the module check","17:15","17:50",{link:CO.agora.link,todo:1}),
-   B("debate","Debating Class","Live debating class","17:50","19:00",{todo:1}),
-   B("bril","Brilliant · Level 4","Designing Programs: Conditioning on History → Nesting Logic → Complex Branching","19:00","19:45",{link:CO.bril.link,todo:1}),
-   dinner(),
-   B("earth","Earth School · Steps 1–2","Electrify Transportation + Decarbonize the Grid: videos + both quizzes","20:30","21:30",{link:CO.earth.link,todo:1}),
+   B("comp","WSC Class","Live WSC class","16:30","17:30",{todo:1}),
+   B("agora","UNICEF · Intro + Module 1","Course intro + 'UNICEF and humanitarian action' · complete the module check","17:30","18:00",{link:CO.agora.link,todo:1}),
+   B("debate","Debating Class","Live debating class","18:00","19:00",{todo:1}),
+   B("bril","Brilliant · Level 4","Designing Programs: Conditioning on History → Nesting Logic → Complex Branching","19:00","19:30",{link:CO.bril.link,todo:1}),
+   dinner("19:30","20:00"),
+   B("earth","Earth School · Steps 1–2","Electrify Transportation + Decarbonize the Grid: videos + both quizzes","20:00","21:00",{link:CO.earth.link,todo:1}),
  ]},
  {dn:"Thu",dd:"2 Jul",evs:[
    B("sdg","SDG · Module 5","Business Sector & the SDGs — videos 5.1–5.5 + quiz","11:30","14:00",{link:CO.sdg.link,todo:1,items:sdgVids(5)}),
@@ -412,12 +424,53 @@ days.forEach((d,i)=>{const h=document.createElement('div');h.className='dayhead'
   let[h]=t.split(':');h=+h;const ap=h>=12?'pm':'am';h=h%12||12;lab.textContent=h+' '+ap;cal.appendChild(lab);});
 for(let r=2;r<=25;r++){const ln=document.createElement('div');ln.className='slotline'+(r%2?' hr':'');ln.style.gridRow=r+'/'+(r+1);cal.appendChild(ln);}
 for(let c=2;c<=8;c++){const v=document.createElement('div');v.className='vline';v.style.gridColumn=c;cal.appendChild(v);}
-days.forEach((d,i)=>d.evs.forEach(e=>{const el=document.createElement(e.link?'a':'div');el.className='ev';
-  el.style.gridColumn=i+2;el.style.gridRow=e.a+'/'+e.b;el.style.background='var(--'+e.v+'bg)';el.style.color='var(--'+e.v+')';
-  if(e.v==='comp')el.style.borderColor='var(--comp)';
-  let html='<span class="tt">'+e.t+'</span>';if(e.s)html+='<span class="ss">'+e.s+'</span>';
-  if(e.link){el.href=e.link;el.target='_blank';el.rel='noopener';html+='<span class="lk">↗ open</span>';}
-  el.innerHTML=html;cal.appendChild(el);}));
+const SKEY='summerplan_sched_edits';
+let schedEdits=JSON.parse(localStorage.getItem(SKEY)||'{}');
+function saveSchedEdits(){localStorage.setItem(SKEY,JSON.stringify(schedEdits));}
+function rowToTime(r){const mins=690+(r-2)*30;const h=Math.floor(mins/60),m=mins%60;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');}
+function openBlockEdit(di,ei,e){
+  const eid=di+'-'+ei;
+  const ov=document.createElement('div');ov.className='schedit-overlay';
+  const aStr=rowToTime(e.a),bStr=rowToTime(e.b);
+  ov.innerHTML='<div class="schedit-box">'+
+    '<h3>Edit block</h3>'+
+    '<label>Title</label><input id="se-t" value="'+e.t.replace(/"/g,'&quot;')+'">'+
+    '<label>Description</label><textarea id="se-s">'+e.s+'</textarea>'+
+    '<div class="schedit-row"><div><label>Start time</label><input id="se-a" type="time" value="'+aStr+'"></div>'+
+    '<div><label>End time</label><input id="se-b" type="time" value="'+bStr+'"></div></div>'+
+    '<div class="schedit-acts">'+
+    '<button class="btn" id="se-del" style="color:#dc2626;border-color:#dc2626">Delete block</button>'+
+    '<div style="display:flex;gap:8px"><button class="btn" id="se-cancel">Cancel</button>'+
+    '<button class="btn pri" id="se-save">Save</button></div></div></div>';
+  document.body.appendChild(ov);
+  ov.querySelector('#se-cancel').onclick=()=>ov.remove();
+  ov.onclick=ev=>{if(ev.target===ov)ov.remove();};
+  ov.querySelector('#se-save').onclick=()=>{
+    const t=ov.querySelector('#se-t').value.trim()||e.t;
+    const s=ov.querySelector('#se-s').value;
+    const a=L(ov.querySelector('#se-a').value||aStr);
+    const b=L(ov.querySelector('#se-b').value||bStr);
+    schedEdits[eid]={t,s,a,b,deleted:false};saveSchedEdits();ov.remove();buildCal();};
+  ov.querySelector('#se-del').onclick=()=>{if(confirm('Delete this block?')){schedEdits[eid]={deleted:true};saveSchedEdits();ov.remove();buildCal();}};
+}
+function buildCal(){
+  // remove old ev elements
+  cal.querySelectorAll('.ev').forEach(el=>el.remove());
+  days.forEach((d,i)=>d.evs.forEach((e,ei)=>{
+    const eid=i+'-'+ei;const ov=schedEdits[eid]||{};
+    if(ov.deleted)return;
+    const t=ov.t||e.t,s=ov.s!=null?ov.s:e.s,a=ov.a!=null?ov.a:e.a,b=ov.b!=null?ov.b:e.b;
+    const el=document.createElement('div');el.className='ev';
+    el.style.gridColumn=i+2;el.style.gridRow=a+'/'+b;el.style.background='var(--'+e.v+'bg)';el.style.color='var(--'+e.v+')';
+    if(e.v==='comp')el.style.borderColor='var(--comp)';
+    let html='<span class="tt">'+t+'</span>';if(s)html+='<span class="ss">'+s+'</span>';
+    if(e.link)html+='<a href="'+e.link+'" target="_blank" rel="noopener" class="lk" onclick="event.stopPropagation()">↗ open</a>';
+    el.innerHTML=html;
+    el.onclick=()=>openBlockEdit(i,ei,{t,s,a,b,v:e.v});
+    cal.appendChild(el);
+  }));
+}
+buildCal();
 const lg=document.getElementById('legend');
 ["sdg","stan","agora","bril","earth","smith","debate","relax","meal","comp"].forEach(v=>{const c=document.createElement('span');
   c.className='chip';c.style.background='var(--'+v+'bg)';c.style.color='var(--'+v+')';c.textContent=NAMES[v];lg.appendChild(c);});
