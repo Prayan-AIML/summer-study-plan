@@ -539,7 +539,7 @@ function refresh(){
 refresh();
 
 /* ---- notes notebook ---- */
-const FKEY='summerplan_folders_v7';
+const FKEY='summerplan_folders_v8';
 const UKEY='summerplan_user_notes';
 const FOLD=[['sdg','SDG Academy'],['stan','Stanford Math'],['agora','UNICEF Agora'],['bril','Brilliant'],['earth','Earth School'],['smith','Smithsonian']];
 const seedNotes={
@@ -982,6 +982,54 @@ To achieve health and well-being for all, countries should focus on:
 * Protecting the environment and reducing pollution and climate-related health risks.
 
 Together, these measures create a healthier, more resilient society and improve the overall well-being of the population.`},
+  {title:'Sustainable Food & Land Use (2.4)',body:`## Sustainable Food and Land Use (SDG 2.4)
+
+The **fourth of the six transformations**: shifting to sustainable food systems and land use. Agriculture is probably the **most important human driver of environmental degradation** — it contributes to all three great environmental crises simultaneously.
+
+### How Agriculture Damages the Environment
+
+* **Climate change** — energy inputs emit CO₂; fertilisers emit **nitrous oxide**; livestock (cows) and rice paddies emit **methane**.
+* **Biodiversity loss** — forests cleared for farms, pasture, logging, cattle ranches, and palm oil plantations (Amazon, Congo Basin, Indonesian rainforests).
+* **Pollution** — biomass burning adds particulate matter; pesticides; nitrogen/phosphorus fertilisers run into rivers → reach estuaries → **eutrophication → dead zones**.
+* **Water** — agriculture uses ~**70% of all fresh water**, often by pumping groundwater faster than it recharges (unsustainable).
+* **Health** — processed food directly drives obesity, metabolic disorders, cardiovascular disease.
+* **Self-threat** — climate change (caused partly by agriculture) destroys crops via intense storms, flooding, and sea-level rise.
+
+**Relevant SDGs:** SDG 2 (food), SDG 6 (fresh water), SDG 14 (marine ecosystems), SDG 15 (terrestrial ecosystems).
+
+---
+
+### The 5 Pillars of Transformation
+
+**Pillar 1 — Sustainable food systems**
+* Higher-yield crop varieties → no need to clear forests for more land.
+* Reduce post-harvest losses (low-income countries lose 20–30% of food before it reaches market).
+* Restore degraded lands and **reforest** previously cleared areas to recapture CO₂.
+
+**Pillar 2 — Protected areas (draw hard boundaries)**
+* Identify and legally protect high-biodiversity zones from agricultural encroachment.
+* E.O. Wilson (Harvard biologist): protect **half the Earth** to stop human-caused biodiversity collapse.
+* Includes both **terrestrial** and **marine** protected areas (coral reefs, fisheries).
+* Fisheries: use **tradable permits and quotas** to prevent overfishing and stock collapse.
+
+**Pillar 3 — Shift diets**
+* Heavy beef consumption is extremely land-intensive: **10–15 kg of feed grain per 1 kg of beef**.
+* Reducing meat consumption → healthier diets + lower environmental footprint.
+
+**Pillar 4 — Govern global supply chains**
+* Food is traded globally — e.g. China imports soybeans from Brazil → Amazon cleared for soy farms; imports tropical hardwood from Malaysia → Malaysian rainforests destroyed.
+* Right now: **nobody is accountable** for environmental damage in supply chains.
+* Policy answer: **the entire supply chain must be responsible** — producers, traders, and consumers.
+
+**Pillar 5 — Land use planning**
+* Any parcel of land can serve multiple purposes: farming, cities, natural resources, ecosystem services, carbon storage, biodiversity habitat.
+* Need **systematic land-use planning** that sets priorities, draws limits, and gives incentives — deciding deliberately: grow food here, protect habitat there, store carbon here.
+
+---
+
+### Key Message
+
+Agriculture is both a major **cause** of environmental crisis and a major **victim** of it. Fixing food and land use requires sustainable farming, hard biodiversity boundaries, diet shifts, supply chain accountability, and serious land-use planning — all at once.`},
  ],
  stan:[
   {title:'How People Feel About Math (1.1)',body:`### Short Notes: Attitudes Toward Math
@@ -2087,18 +2135,26 @@ function blockStart(b){return 690+(b.a-2)*30;}
 function blockEnd(b){return 690+(b.b-2)*30;}
 function fmtMin(min){let h=Math.floor(min/60),m=min%60;const ap=h>=12?'pm':'am';h=h%12||12;return h+(m?':'+String(m).padStart(2,'0'):'')+ap;}
 function parseDay(dd){const[a,mon]=dd.split(' ');return new Date(2026,{Jun:5,Jul:6}[mon],+a);}
+function effectiveEvs(di){
+  return days[di].evs.map((e,ei)=>{
+    const ov=schedEdits[di+'-'+ei]||{};
+    if(ov.deleted)return null;
+    return Object.assign({},e,{t:ov.t||e.t,s:ov.s!=null?ov.s:e.s,a:ov.a!=null?ov.a:e.a,b:ov.b!=null?ov.b:e.b});
+  }).filter(Boolean);
+}
 function renderNow(){
   const host=document.getElementById('v-now');const n=new Date();const nm=n.getHours()*60+n.getMinutes();
   let idx=days.findIndex(d=>{const t=parseDay(d.dd);return t.getMonth()===n.getMonth()&&t.getDate()===n.getDate();});
   let mode='live';
   if(idx<0){if(n<parseDay(days[0].dd)){idx=0;mode='preview';}else{idx=days.length-1;mode='after';}}
-  const day=days[idx];
-  const cur=mode==='live'?day.evs.find(b=>nm>=blockStart(b)&&nm<blockEnd(b)):null;
-  const next=mode==='after'?null:day.evs.find(b=>blockStart(b)>nm);
+  const evs=effectiveEvs(idx);
+  const cur=mode==='live'?evs.find(b=>nm>=blockStart(b)&&nm<blockEnd(b)):null;
+  const next=mode==='after'?null:evs.find(b=>blockStart(b)>nm);
   let mainBlock=null,lab='',note='';
-  if(mode==='preview'){mainBlock=day.evs[0];lab='Your week starts soon';note='first block on Monday';}
+  if(mode==='preview'){mainBlock=evs[0];lab='Your week starts soon';note='first block on Monday';}
   else if(cur){mainBlock=cur;lab='Happening now';}
   else if(next){mainBlock=next;lab='Up next';note='starts '+fmtMin(blockStart(next));}
+  const day=days[idx];
   let html='<div class="sect">⭐ Right now · '+day.dn+' '+day.dd+' · '+fmtMin(nm)+'</div>';
   if(!mainBlock){html+='<div class="nowbig"><div class="lab">All done</div><div class="bt">That\'s a wrap 🎉</div><div class="bs">No more blocks today — rest up, you earned it.</div></div>';}
   else{const b=mainBlock;const range=fmtMin(blockStart(b))+'–'+fmtMin(blockEnd(b));
@@ -2110,7 +2166,7 @@ function renderNow(){
       '<button class="btn" id="nowTodoBtn">✅ Today\'s checklist</button></div></div>';}
   if(next&&mainBlock!==next){html+='<div class="nowsmall"><div class="lab">Then</div><div class="bt">'+next.t+'</div>'+
     '<div class="bs" style="font-size:13px;color:var(--muted)">'+fmtMin(blockStart(next))+' · '+(next.s||'')+'</div></div>';}
-  const rest=mode==='after'?[]:day.evs.filter(b=>blockStart(b)>=nm);
+  const rest=mode==='after'?[]:evs.filter(b=>blockStart(b)>=nm);
   if(rest.length){html+='<div class="sect">Rest of '+(mode==='preview'?'Monday':'today')+'</div><div class="nowsmall restlist">';
     rest.forEach(b=>html+='<div class="ri"><b style="color:var(--'+b.v+')">'+fmtMin(blockStart(b))+'</b> · '+b.t+'</div>');html+='</div>';}
   host.innerHTML=html;
