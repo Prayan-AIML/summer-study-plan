@@ -233,7 +233,10 @@
 
   <!-- NOTES -->
   <div class="view" id="v-notes">
-    <div class="sect">📒 Your notebook — folders by course · click one to open · Copy a note or + Add your own</div>
+    <div class="sect" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>📒 Your notebook — folders by course · click one to open · Copy a note or + Add your own</span>
+      <button class="btn" id="linkFolderBtn" onclick="pickNotesFolder()" style="font-size:12px;padding:5px 12px">📂 Link notes folder</button>
+    </div>
     <div id="folders"></div>
   </div>
 
@@ -483,6 +486,7 @@ refresh();
 
 /* ---- notes notebook ---- */
 const FKEY='summerplan_folders_v7';
+const UKEY='summerplan_user_notes';
 const FOLD=[['sdg','SDG Academy'],['stan','Stanford Math'],['agora','UNICEF Agora'],['bril','Brilliant'],['earth','Earth School'],['smith','Smithsonian']];
 const seedNotes={
  sdg:[
@@ -1779,9 +1783,94 @@ Important questions:
 - fossils, tooth wear, tools, isotopes
 - meat + **cooking** were key shifts`}],
 };
-let folders=JSON.parse(localStorage.getItem(FKEY)||'null')||JSON.parse(JSON.stringify(seedNotes));
+/* ---- notes storage: seed + user notes merged, user notes never wiped ---- */
+function loadFolders(){
+  const seed=JSON.parse(JSON.stringify(seedNotes));
+  const user=JSON.parse(localStorage.getItem(UKEY)||'{}');
+  // merge: seed is base, user notes appended (deduped by title per folder)
+  const merged={};
+  Object.keys(seed).forEach(k=>{
+    const seedTitles=new Set(seed[k].map(n=>n.title));
+    const extras=(user[k]||[]).filter(n=>!seedTitles.has(n.title));
+    merged[k]=[...seed[k],...extras];
+  });
+  // also carry over any user notes in folders not in seed
+  Object.keys(user).forEach(k=>{if(!merged[k])merged[k]=user[k];});
+  return merged;
+}
+let folders=loadFolders();
 const openSet={};
-function saveF(){localStorage.setItem(FKEY,JSON.stringify(folders));}
+function saveF(){
+  // only persist user-added notes (not seed) to UKEY
+  const seed=seedNotes;
+  const user={};
+  Object.keys(folders).forEach(k=>{
+    const seedTitles=new Set((seed[k]||[]).map(n=>n.title));
+    user[k]=folders[k].filter(n=>!seedTitles.has(n.title));
+  });
+  localStorage.setItem(UKEY,JSON.stringify(user));
+}
+
+/* ---- File System Access API: auto-save notes as .md to desktop notes/ folder ---- */
+let notesDir=null;
+async function getNotesDir(){
+  if(notesDir)return notesDir;
+  // try to restore from IndexedDB
+  return new Promise(resolve=>{
+    const req=indexedDB.open('summerplan_fs',1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore('handles');
+    req.onsuccess=e=>{
+      const db=e.target.result;
+      const tx=db.transaction('handles','readonly');
+      const get=tx.objectStore('handles').get('notesDir');
+      get.onsuccess=async()=>{
+        if(get.result){
+          try{
+            const perm=await get.result.requestPermission({mode:'readwrite'});
+            if(perm==='granted'){notesDir=get.result;resolve(notesDir);return;}
+          }catch(e){}
+        }
+        resolve(null);
+      };
+      get.onerror=()=>resolve(null);
+    };
+    req.onerror=()=>resolve(null);
+  });
+}
+async function saveDirHandle(handle){
+  return new Promise(resolve=>{
+    const req=indexedDB.open('summerplan_fs',1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore('handles');
+    req.onsuccess=e=>{
+      const db=e.target.result;
+      const tx=db.transaction('handles','readwrite');
+      tx.objectStore('handles').put(handle,'notesDir');
+      tx.oncomplete=()=>{notesDir=handle;resolve();};
+      tx.onerror=()=>resolve();
+    };
+    req.onerror=()=>resolve();
+  });
+}
+async function pickNotesFolder(){
+  if(!('showDirectoryPicker' in window)){alert('Your browser does not support folder access. Use Chrome.');return;}
+  try{
+    const handle=await window.showDirectoryPicker({mode:'readwrite',startIn:'desktop'});
+    await saveDirHandle(handle);
+    alert('✅ Notes folder linked! New notes will auto-save here as .md files.');
+  }catch(e){if(e.name!=='AbortError')alert('Could not link folder: '+e.message);}
+}
+async function saveNoteToDesktop(folderKey,title,body){
+  const dir=await getNotesDir();
+  if(!dir)return;
+  try{
+    const slug=folderKey+'-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const fname=slug+'.md';
+    const fh=await dir.getFileHandle(fname,{create:true});
+    const w=await fh.createWritable();
+    await w.write(body);
+    await w.close();
+  }catch(e){console.warn('Desktop save failed:',e);}
+}
 function mdToHtml(src){const lines=(src||'').split('\n');let out='',lt='';
   const inl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>');
   const close=()=>{if(lt){out+=(lt==='ol'?'</ol>':'</ul>');lt='';}};
@@ -1810,7 +1899,10 @@ function formEl(k,n,i){const f=document.createElement('div');f.className='notefo
   f.innerHTML='<input class="nfT" placeholder="Note title"><textarea class="nfB" placeholder="Write or paste your note. Markdown works: ## heading, **bold**, - list, > quote"></textarea><div class="nfacts"><button class="btn pri nfS">Save</button><button class="btn nfC">Cancel</button></div>';
   if(n){f.querySelector('.nfT').value=n.title;f.querySelector('.nfB').value=n.body;}
   f.querySelector('.nfS').onclick=()=>{const t=f.querySelector('.nfT').value.trim()||'Untitled';const b=f.querySelector('.nfB').value;
-    if(n){folders[k][i]={title:t,body:b};}else{(folders[k]=folders[k]||[]).push({title:t,body:b});}saveF();openSet[k]=true;renderFolders();};
+    const isNew=!n;
+    if(n){folders[k][i]={title:t,body:b};}else{(folders[k]=folders[k]||[]).push({title:t,body:b});}
+    saveF();openSet[k]=true;renderFolders();
+    saveNoteToDesktop(k,t,b);};
   f.querySelector('.nfC').onclick=()=>renderFolders();
   return f;}
 function renderFolders(){const host=document.getElementById('folders');host.innerHTML='';
