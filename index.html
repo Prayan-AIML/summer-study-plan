@@ -539,7 +539,7 @@ function refresh(){
 refresh();
 
 /* ---- notes notebook ---- */
-const FKEY='summerplan_folders_v8';
+const FKEY='summerplan_folders_v9';
 const UKEY='summerplan_user_notes';
 const FOLD=[['sdg','SDG Academy'],['stan','Stanford Math'],['agora','UNICEF Agora'],['bril','Brilliant'],['earth','Earth School'],['smith','Smithsonian']];
 const seedNotes={
@@ -793,47 +793,6 @@ Being **rich is not the same as being sustainable**, and poor countries need bas
 ### Key Message
 
 No one is in charge, but **we all have the same sheet music**. The SDGs only work if every sector — government, business, civil society, and the UN — understands its comparative role and watches all the others to make sure they're doing their part.`},
-  {title:'Clean Energy & Industry (2.3)',body:`## Clean Energy and Industry (SDG 2.3)
-
-The **third of the six transformations**: shift from a fossil-fuel economy to **clean, safe energy** + **ecologically sound industry** (the circular economy). Central to **SDG 13** (climate), **SDG 7** (modern energy for all), and **SDG 12** (sustainable production).
-
-**The scale of the problem:** ~**85% of primary energy** still comes from fossil fuels. That releases roughly **40 billion tonnes of CO₂** per year — mainly from energy and industrial processes.
-
----
-
-### The 3-Pillar Approach to Decarbonising Energy
-
-**Pillar 1 — Zero-carbon electricity**
-* Electricity will be the dominant energy carrier of the 21st century: powers the digital world, vehicles, and heating (heat pumps replacing furnaces).
-* Zero-carbon sources: **wind, solar, hydroelectric, geothermal, biofuels, ocean power, nuclear**.
-* Each country picks based on its geography: sunny deserts → solar; windy coastlines → wind; mountains → hydro.
-* Challenge: **intermittency** (solar only when sunny, wind only when blowing).
-  * Solutions: **long-distance transmission grids** (balancing across regions) + **storage** (pumped hydro = use surplus electricity to pump water uphill, release through turbines later).
-
-**Pillar 2 — Electrification of energy users**
-* Replace fossil fuels *at the point of use*:
-  * **Cars** → battery EVs or hydrogen fuel cells.
-  * **Heavy shipping/aviation** → hydrogen combustion or synthetic liquid hydrocarbons (captured from the air using renewable energy — not dug up).
-* Technologies largely exist already.
-
-**Pillar 3 — Energy efficiency**
-* Less energy needed = easier transition.
-* How: **smart appliances**, better **building insulation** (reduce heating/cooling demand).
-
----
-
-### The Circular Economy (SDG 12)
-
-Industrial processes must **clean up after themselves** — "closing the loop":
-* **Green chemistry**: redesign plastics so they can be recycled; use biodegradable materials.
-* **Waste as input**: use industrial waste as raw material for the next process rather than dumping in landfills (landfills emit methane, a potent greenhouse gas).
-* **Recycling + energy recovery**: waste → energy or direct recycling, not landfill.
-
----
-
-### Key Message
-
-Decarbonising the energy system = **zero-carbon electricity** + **electrification** + **energy efficiency**. Combine that with the **circular economy** to clean up industrial waste, and you get a sustainable development path that protects the climate and human health simultaneously.`},
   {title:'Education, Inclusion, Jobs & Growth (2.1)',body:`## Transformation 1: Education, Inclusion, Jobs and Growth
 
 To achieve the SDGs and the **Paris Climate Agreement**, society must undergo major transformations. A **transformation** means making long-term investments in infrastructure, research, education, healthcare, and people's skills. These changes require cooperation between governments, businesses, and civil society, as well as significant financial investment.
@@ -982,6 +941,47 @@ To achieve health and well-being for all, countries should focus on:
 * Protecting the environment and reducing pollution and climate-related health risks.
 
 Together, these measures create a healthier, more resilient society and improve the overall well-being of the population.`},
+  {title:'Clean Energy & Industry (2.3)',body:`## Clean Energy and Industry (SDG 2.3)
+
+The **third of the six transformations**: shift from a fossil-fuel economy to **clean, safe energy** + **ecologically sound industry** (the circular economy). Central to **SDG 13** (climate), **SDG 7** (modern energy for all), and **SDG 12** (sustainable production).
+
+**The scale of the problem:** ~**85% of primary energy** still comes from fossil fuels. That releases roughly **40 billion tonnes of CO₂** per year — mainly from energy and industrial processes.
+
+---
+
+### The 3-Pillar Approach to Decarbonising Energy
+
+**Pillar 1 — Zero-carbon electricity**
+* Electricity will be the dominant energy carrier of the 21st century: powers the digital world, vehicles, and heating (heat pumps replacing furnaces).
+* Zero-carbon sources: **wind, solar, hydroelectric, geothermal, biofuels, ocean power, nuclear**.
+* Each country picks based on its geography: sunny deserts → solar; windy coastlines → wind; mountains → hydro.
+* Challenge: **intermittency** (solar only when sunny, wind only when blowing).
+  * Solutions: **long-distance transmission grids** (balancing across regions) + **storage** (pumped hydro = use surplus electricity to pump water uphill, release through turbines later).
+
+**Pillar 2 — Electrification of energy users**
+* Replace fossil fuels *at the point of use*:
+  * **Cars** → battery EVs or hydrogen fuel cells.
+  * **Heavy shipping/aviation** → hydrogen combustion or synthetic liquid hydrocarbons (captured from the air using renewable energy — not dug up).
+* Technologies largely exist already.
+
+**Pillar 3 — Energy efficiency**
+* Less energy needed = easier transition.
+* How: **smart appliances**, better **building insulation** (reduce heating/cooling demand).
+
+---
+
+### The Circular Economy (SDG 12)
+
+Industrial processes must **clean up after themselves** — "closing the loop":
+* **Green chemistry**: redesign plastics so they can be recycled; use biodegradable materials.
+* **Waste as input**: use industrial waste as raw material for the next process rather than dumping in landfills (landfills emit methane, a potent greenhouse gas).
+* **Recycling + energy recovery**: waste → energy or direct recycling, not landfill.
+
+---
+
+### Key Message
+
+Decarbonising the energy system = **zero-carbon electricity** + **electrification** + **energy efficiency**. Combine that with the **circular economy** to clean up industrial waste, and you get a sustainable development path that protects the climate and human health simultaneously.`},
   {title:'Sustainable Food & Land Use (2.4)',body:`## Sustainable Food and Land Use (SDG 2.4)
 
 The **fourth of the six transformations**: shifting to sustainable food systems and land use. Agriculture is probably the **most important human driver of environmental degradation** — it contributes to all three great environmental crises simultaneously.
@@ -1885,25 +1885,26 @@ Important questions:
 - fossils, tooth wear, tools, isotopes
 - meat + **cooking** were key shifts`}],
 };
-/* ---- notes storage: seed + user notes merged, user notes never wiped ---- */
+/* ---- notes storage: seed + user notes merged, deletions and user notes persisted ---- */
+const DKEY='summerplan_deleted_notes';
 function loadFolders(){
   const seed=JSON.parse(JSON.stringify(seedNotes));
   const user=JSON.parse(localStorage.getItem(UKEY)||'{}');
-  // merge: seed is base, user notes appended (deduped by title per folder)
+  const deleted=JSON.parse(localStorage.getItem(DKEY)||'{}');
   const merged={};
   Object.keys(seed).forEach(k=>{
+    const del=new Set(deleted[k]||[]);
     const seedTitles=new Set(seed[k].map(n=>n.title));
-    const extras=(user[k]||[]).filter(n=>!seedTitles.has(n.title));
-    merged[k]=[...seed[k],...extras];
+    const seedFiltered=seed[k].filter(n=>!del.has(n.title));
+    const extras=(user[k]||[]).filter(n=>!seedTitles.has(n.title)&&!del.has(n.title));
+    merged[k]=[...seedFiltered,...extras];
   });
-  // also carry over any user notes in folders not in seed
   Object.keys(user).forEach(k=>{if(!merged[k])merged[k]=user[k];});
   return merged;
 }
 let folders=loadFolders();
 const openSet={};
 function saveF(){
-  // only persist user-added notes (not seed) to UKEY
   const seed=seedNotes;
   const user={};
   Object.keys(folders).forEach(k=>{
@@ -1911,6 +1912,12 @@ function saveF(){
     user[k]=folders[k].filter(n=>!seedTitles.has(n.title));
   });
   localStorage.setItem(UKEY,JSON.stringify(user));
+}
+function recordDeletion(k,title){
+  const deleted=JSON.parse(localStorage.getItem(DKEY)||'{}');
+  deleted[k]=deleted[k]||[];
+  if(!deleted[k].includes(title))deleted[k].push(title);
+  localStorage.setItem(DKEY,JSON.stringify(deleted));
 }
 
 /* ---- File System Access API: auto-save notes as .md to desktop notes/ folder ---- */
@@ -1995,7 +2002,7 @@ function noteCard(k,i,n){const c=document.createElement('div');c.className='note
     '<div class="ncbody">'+mdToHtml(n.body)+'</div>';
   c.querySelector('[data-a=copy]').onclick=()=>navigator.clipboard.writeText(n.body).then(()=>flash(c.querySelector('[data-a=copy]'),'Copied!'));
   c.querySelector('[data-a=edit]').onclick=()=>c.replaceWith(formEl(k,n,i));
-  c.querySelector('[data-a=del]').onclick=()=>{if(confirm('Delete "'+n.title+'"?')){folders[k].splice(i,1);saveF();renderFolders();}};
+  c.querySelector('[data-a=del]').onclick=()=>{if(confirm('Delete "'+n.title+'"?')){recordDeletion(k,n.title);folders[k].splice(i,1);saveF();renderFolders();}};
   return c;}
 function formEl(k,n,i){const f=document.createElement('div');f.className='noteform';
   f.innerHTML='<input class="nfT" placeholder="Note title"><textarea class="nfB" placeholder="Write or paste your note. Markdown works: ## heading, **bold**, - list, > quote"></textarea><div class="nfacts"><button class="btn pri nfS">Save</button><button class="btn nfC">Cancel</button></div>';
